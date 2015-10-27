@@ -2,9 +2,11 @@ package cz.fi.muni.pa165.entity;
 
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -14,7 +16,6 @@ import javax.validation.constraints.NotNull;
  * @author JaroslavDavidek
  */
 @Entity
-@Table(name="SONG")
 public class Song {
     
 
@@ -24,13 +25,17 @@ public class Song {
 
     private String title;
     
-    @OneToOne
+    @ManyToOne
     @NotNull
     private Album album;
     
-    @OneToOne
+    @ManyToOne
     @NotNull
     private Genre genre;
+    
+    @ManyToOne
+    @NotNull
+    private Musician musician;
     
     private int bitrate;
     
@@ -73,6 +78,14 @@ public class Song {
         this.genre = genreToSet;
     }
     
+    public Musician getMusician() {
+        return this.musician;
+    }
+    
+    public void setMusician(Musician musicianToSet) {
+        this.musician = musicianToSet;
+    }
+    
     public int getBitrate() {
         return this.bitrate;
     }
@@ -102,10 +115,13 @@ public class Song {
         int hashCode;
         final int primeOne = 89;
         final int primeTwo = 43;   
+        
         hashCode = Objects.hash(title, bitrate, albumPosition, commentary);
         hashCode *=  primeOne;
         hashCode += album.hashCode() * primeTwo;
         hashCode += genre.hashCode() * primeTwo;
+        hashCode += musician.hashCode() * primeTwo;
+        
         return hashCode;
     }
 
@@ -117,18 +133,20 @@ public class Song {
         if (!(object instanceof Song)){
             return false;
         } 
+        
         Song other = (Song) object;
         return Objects.equals(this.title, other.title)
             && Objects.equals(this.bitrate, other.bitrate)
             && Objects.equals(this.albumPosition, other.albumPosition)
-                && Objects.equals(this.commentary, other.commentary)
-                && this.album.equals(other.album)
-                && this.genre.equals(other.genre);
+            && Objects.equals(this.commentary, other.commentary)
+            && this.album.equals(other.album)
+            && this.genre.equals(other.genre)
+            && this.musician.equals(other.musician);
     }
 
     @Override
     public String toString() {
-        return title + " " + album.toString() + " @" + bitrate + " Kbps";
+        return title + " " + album.getTitle() + " " + musician.toString() + " @" + bitrate + " Kbps";
     }
     
 }

@@ -1,14 +1,16 @@
 package cz.fi.muni.pa165.entity;
 
+import java.sql.Date;
 import java.util.Objects;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
-public class Album  {
+@Entity
+public class Album {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,10 +18,13 @@ public class Album  {
     
     @NotNull
     private String title;
+    
     @OneToOne
     @NotNull
     private Musician musician;
-    private DateTime releaseDate;
+    
+    @NotNull
+    private Date releaseDate;
     private String commentary;
     private Byte[] cover;
 
@@ -29,7 +34,7 @@ public class Album  {
     public Long getId() {
         return id;
     }
-
+    
     public String getTitle() {
         return title;
     }
@@ -46,11 +51,11 @@ public class Album  {
         this.musician = musician;
     }
 
-    public DateTime getReleaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(DateTime releaseDate) {
+    public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
 

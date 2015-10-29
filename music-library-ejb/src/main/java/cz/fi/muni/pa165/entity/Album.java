@@ -2,28 +2,26 @@ package cz.fi.muni.pa165.entity;
 
 import java.sql.Date;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Album {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @NotNull
+    @Column(nullable=false, unique=true)
     private String title;
     
-    @OneToOne
     @NotNull
-    private Musician musician;
-    
-    @NotNull
+    @Column(nullable=false)
     private Date releaseDate;
     private String commentary;
     private Byte[] cover;
@@ -41,14 +39,6 @@ public class Album {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Musician getMusician() {
-        return musician;
-    }
-
-    public void setMusician(Musician musician) {
-        this.musician = musician;
     }
 
     public Date getReleaseDate() {
@@ -79,7 +69,6 @@ public class Album {
     public int hashCode() {
         int hash = 7;
         hash = 89 * hash + Objects.hashCode(this.title);
-        hash = 89 * hash + Objects.hashCode(this.musician);
         hash = 89 * hash + Objects.hashCode(this.releaseDate);
         return hash;
     }
@@ -96,9 +85,6 @@ public class Album {
         if (!Objects.equals(this.title, other.title)) {
             return false;
         }
-        if (!Objects.equals(this.musician, other.musician)) {
-            return false;
-        }
         if (!Objects.equals(this.releaseDate, other.releaseDate)) {
             return false;
         }
@@ -107,7 +93,7 @@ public class Album {
 
     @Override
     public String toString() {
-        return "Album{" + "title=" + title + ", musician=" + musician + ", releaseDate=" + releaseDate + '}';
+        return "Album{" + "title=" + title + ", releaseDate=" + releaseDate + '}';
     }
     
 }

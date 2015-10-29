@@ -9,11 +9,13 @@ import cz.fi.muni.pa165.entity.Album;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Peter Franek
  */
+@Repository
 public class AlbumDaoImplementation implements AlbumDao {
 
     @PersistenceContext
@@ -47,6 +49,11 @@ public class AlbumDaoImplementation implements AlbumDao {
     @Override
     public void delete(Album album) {
         em.remove(album);
+    }
+    
+    @Override
+    public void update(Album album) {
+        em.merge(album);
     }
     
 }

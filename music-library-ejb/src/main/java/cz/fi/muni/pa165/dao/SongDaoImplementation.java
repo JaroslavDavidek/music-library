@@ -29,9 +29,6 @@ public class SongDaoImplementation implements SongDao {
 
     @Override
     public Song findByTitle(String songTitle) {
-        if(songTitle == null){
-            throw new IllegalArgumentException("SongDao - findByTitle - songTitle must not be null");
-        }
         return em.createQuery(
                 "SELECT s FROM Song s WHERE s.title= :songTitle", Song.class)
                 .setParameter("songTitle", songTitle)

@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -45,6 +46,8 @@ public class SongDaoImplementationTest extends AbstractTransactionalTestNGSpring
     private Song backInBlackSong;
     
     private Song hellBellsSong;
+    
+    private Song haveADrinkOnMeSong;
     
     private Album backInBlackAlbum;
     
@@ -78,6 +81,15 @@ public class SongDaoImplementationTest extends AbstractTransactionalTestNGSpring
         shootToThrillSong.setBitrate(320);
         songDao.create(shootToThrillSong);
         
+        haveADrinkOnMeSong = new Song();
+        haveADrinkOnMeSong.setTitle("Have A Drink On Me");
+        haveADrinkOnMeSong.setAlbum(backInBlackAlbum);      
+        //haveADrinkOnMeSong.setGenre(hardRock);
+        //haveADrinkOnMeSong.setMusician(acdc);
+        haveADrinkOnMeSong.setAlbumPosition(8);
+        haveADrinkOnMeSong.setBitrate(320);
+        songDao.create(haveADrinkOnMeSong);
+        
         backInBlackSong = new Song();
         backInBlackSong.setTitle("Back In Black");
         backInBlackSong.setAlbum(backInBlackAlbum);
@@ -98,15 +110,11 @@ public class SongDaoImplementationTest extends AbstractTransactionalTestNGSpring
 
     @Transactional
     @Test
-    public void testFindById() {
-        /*
+    public void testFindById() {      
         System.out.println("findById");
-        Long id = null;
-        SongDaoImplementation instance = new SongDaoImplementation();
-        Song expResult = null;
-        Song result = instance.findById(id);
-        Assert.assertEquals(expResult, result);
-        */
+        Song foundSong = songDao.findById(shootToThrillSong.getId());
+        boolean result = shootToThrillSong.equals(foundSong);
+        Assert.assertEquals(true, result);
     }
 
     /**
@@ -115,14 +123,12 @@ public class SongDaoImplementationTest extends AbstractTransactionalTestNGSpring
     @Test
     @Transactional
     public void testFindByTitle() {
-        /*
         System.out.println("findByTitle");
-        String songTitle = "";
-        SongDaoImplementation instance = new SongDaoImplementation();
-        Song expResult = null;
-        Song result = instance.findByTitle(songTitle);
-        Assert.assertEquals(expResult, result);
-        */
+        
+        String songTitle = shootToThrillSong.getTitle();
+        Song foundSong = songDao.findByTitle(songTitle);
+        boolean result = shootToThrillSong.equals(foundSong);
+        Assert.assertEquals(true, result);
     }
 
     /**
@@ -131,13 +137,18 @@ public class SongDaoImplementationTest extends AbstractTransactionalTestNGSpring
     @Test
     @Transactional
     public void testFindAll() {
-        /*
         System.out.println("findAll");
-        SongDaoImplementation instance = new SongDaoImplementation();
-        List<Song> expResult = null;
-        List<Song> result = instance.findAll();
-        Assert.assertEquals(expResult, result);
-        */
+        List<Song> foundSongs = songDao.findAll();
+       
+        List<Song> expectedResult = new ArrayList();
+        expectedResult.add(shootToThrillSong);
+        expectedResult.add(haveADrinkOnMeSong);
+        
+        Assert.assertEquals(expectedResult.size(), foundSongs.size());
+        for(int i = 0; i < expectedResult.size(); i++)
+        {
+            Assert.assertEquals(expectedResult.get(i), foundSongs.get(i));
+        }
     }
 
     
@@ -182,14 +193,16 @@ public class SongDaoImplementationTest extends AbstractTransactionalTestNGSpring
     @Test
     @Transactional
     public void testFindAllByAlbum() {
-        /*
         System.out.println("findAllByAlbum");
-        Album songAlbum = null;
-        SongDaoImplementation instance = new SongDaoImplementation();
-        List<Song> expResult = null;
-        List<Song> result = instance.findAllByAlbum(songAlbum);
-        Assert.assertEquals(expResult, result);
-        */
+        List<Song> expectedResult = new ArrayList();
+        expectedResult.add(shootToThrillSong);
+        expectedResult.add(haveADrinkOnMeSong);      
+        List<Song> foundSongs = songDao.findAllByAlbum(backInBlackAlbum);
+        Assert.assertEquals(expectedResult.size(), foundSongs.size());
+        for(int i = 0; i < expectedResult.size(); i++)
+        {
+            Assert.assertEquals(expectedResult.get(i), foundSongs.get(i));
+        }
     }
     
 
@@ -201,11 +214,12 @@ public class SongDaoImplementationTest extends AbstractTransactionalTestNGSpring
      * Second assert expects create method to return false, since shootToThrill was already persisted
      * 
      * Third assert expects create method to return true, since backInBlack was not persisted yet
-     */
-    
+     */   
     @Transactional
     @Test
-    public void testCreate() {        
+    public void testCreate() {    
+        System.out.println("create");
+        
         boolean result01 = songDao.create(this.shootToThrillSong);
         Assert.assertEquals(false, result01);
         
@@ -218,8 +232,7 @@ public class SongDaoImplementationTest extends AbstractTransactionalTestNGSpring
      */
     @Test
     @Transactional
-    public void testDelete() {
-       
+    public void testDelete() {       
         System.out.println("delete");
         
         boolean result01 = songDao.delete(this.shootToThrillSong);

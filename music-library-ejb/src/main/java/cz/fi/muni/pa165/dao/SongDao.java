@@ -59,6 +59,13 @@ public interface SongDao {
     public boolean create(Song song);
 
     /**
+     * Merges song entity
+     * @param song song to update
+     * @return
+     */
+    public Song update(Song song);
+    
+    /**
      * Removes song entity in case it is stored
      * @param song to remove
      * @return true if deletion was successful, otherwise returns false

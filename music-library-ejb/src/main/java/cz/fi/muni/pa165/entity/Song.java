@@ -109,16 +109,23 @@ public class Song {
     
     @Override
     public int hashCode() {
-        int hashCode;
         final int primeOne = 89;
         final int primeTwo = 43;   
         
-        hashCode = Objects.hash(title, bitrate, albumPosition, commentary);
+        int hashCode = Objects.hash(title, bitrate, albumPosition, commentary);
         hashCode *=  primeOne;
-        hashCode += album.hashCode() * primeTwo;
-        //hashCode += genre.hashCode() * primeTwo;
-        //hashCode += musician.hashCode() * primeTwo;
         
+        if(this.album != null){
+            hashCode += album.hashCode() * primeTwo;
+        }
+        /*
+        if(this.genre != null){
+            hashCode += genre.hashCode() * primeTwo;
+        }
+        if(this.musician != null){
+            hashCode += musician.hashCode() * primeTwo;
+        }
+        */
         return hashCode;
     }
 
@@ -127,18 +134,32 @@ public class Song {
         if (object == this){
             return true;
         }
-        if (!(object instanceof Song)){
+        if (object == null || !(object instanceof Song)){
             return false;
-        } 
-        
-        Song other = (Song) object;
-        return Objects.equals(this.getTitle(), other.getTitle())
-            && Objects.equals(this.getBitrate(), other.getBitrate())
-            && Objects.equals(this.getAlbumPosition(), other.getAlbumPosition())
-            && Objects.equals(this.getCommentary(), other.getCommentary())
-            && this.getAlbum().equals(other.getAlbum());
-            //&& this.getGenre().equals(other.getGenre())
-            //&& this.getMusician().equals(other.getMusician());
+        }       
+        Song other = (Song) object;       
+        if (this.getTitle() != null ? !Objects.equals(this.getTitle(), other.getTitle()) : other.getTitle() != null){
+            return false;
+        }
+        if(this.getBitrate() != other.getBitrate()){
+            return false;
+        }
+        if(this.getAlbumPosition() != other.getAlbumPosition()){
+            return false;
+        }
+        if(this.getCommentary() != null ? !Objects.equals(this.getCommentary(), other.getCommentary()) : other.getCommentary() != null){
+            return false;
+        }
+        /*
+        if(this.getAlbum() != null ? !this.getAlbum().equals(other.getAlbum()) : other.getAlbum() != null){
+            return false;
+        }
+        if(this.getGenre() != null ? !this.getGenre().equals(other.getGenre()) : other.getGenre() != null){
+            return false;
+        }
+        return this.getMusician() != null ? !this.getMusician().equals(other.getMusician()) : other.getMusician() != null;
+        */
+        return this.getAlbum() != null ? !this.getAlbum().equals(other.getAlbum()) : other.getAlbum() != null;
     }
 
     @Override

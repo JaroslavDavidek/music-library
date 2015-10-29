@@ -1,1 +1,14 @@
+cz\fi\muni\pa165\entity\Album.class
+cz\fi\muni\pa165\MusicLibraryPersistenceContext.class
+cz\fi\muni\pa165\entity\Musician_.class
+cz\fi\muni\pa165\dao\SongDaoImplementation.class
+cz\fi\muni\pa165\entity\Song_.class
+cz\fi\muni\pa165\entity\Song.class
 cz\fi\muni\pa165\NewSessionBean.class
+cz\fi\muni\pa165\dao\AlbumDaoImplementation.class
+cz\fi\muni\pa165\dao\SongDao.class
+cz\fi\muni\pa165\dao\AlbumDao.class
+cz\fi\muni\pa165\entity\Genre.class
+cz\fi\muni\pa165\entity\Genre_.class
+cz\fi\muni\pa165\entity\Album_.class
+cz\fi\muni\pa165\entity\Musician.class

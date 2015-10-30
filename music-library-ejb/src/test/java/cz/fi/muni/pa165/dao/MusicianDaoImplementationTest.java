@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.PersistenceAplicationContext;
@@ -10,20 +5,15 @@ import cz.fi.muni.pa165.entity.Musician;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
+import org.testng.annotations.BeforeMethod;
 
 /**
  *
@@ -31,13 +21,10 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @ContextConfiguration(classes = PersistenceAplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
-public class MusicianDaoImplementationTest {
+public class MusicianDaoImplementationTest extends AbstractTransactionalTestNGSpringContextTests{
     
     @Autowired
     public MusicianDao musicianDao;
-    
-    @PersistenceContext
-    private EntityManager em;
     
     private Musician metallica;
     
@@ -49,7 +36,7 @@ public class MusicianDaoImplementationTest {
     
 
     
-    @BeforeClass
+    @BeforeMethod
     public void setUpClass() {
         metallica = new Musician();
         acdc = new Musician();
@@ -77,21 +64,12 @@ public class MusicianDaoImplementationTest {
         musicianDao.create(avicii);
     }
     
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
+
 
     /**
      * Test of findById method, of class MusicianDaoImplementation.
      */
+ 
     @Test
     @Transactional
     public void testFindById() {
@@ -104,6 +82,7 @@ public class MusicianDaoImplementationTest {
     /**
      * Test of findAll method, of class MusicianDaoImplementation.
      */
+
     @Test
     @Transactional
     public void testFindAll() {
@@ -125,6 +104,7 @@ public class MusicianDaoImplementationTest {
     /**
      * Test of findByRealName method, of class MusicianDaoImplementation.
      */
+ 
     @Test
     @Transactional
     public void testFindByRealName() {
@@ -138,6 +118,7 @@ public class MusicianDaoImplementationTest {
     /**
      * Test of findByArtistName method, of class MusicianDaoImplementation.
      */
+  
     @Test
     @Transactional
     public void testFindByArtistName() {
@@ -151,6 +132,7 @@ public class MusicianDaoImplementationTest {
     /**
      * Test of create method, of class MusicianDaoImplementation.
      */
+  
     @Test
     @Transactional
     public void testCreate() {
@@ -166,6 +148,7 @@ public class MusicianDaoImplementationTest {
     /**
      * Test of delete method, of class MusicianDaoImplementation.
      */
+   
     @Test
     @Transactional
     public void testDelete() {

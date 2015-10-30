@@ -133,8 +133,8 @@ public class SongDaoImplementationTest extends AbstractTransactionalTestNGSpring
     @Transactional
     public void testFindAll() {
         System.out.println("findAll");
-        List<Song> foundSongs = songDao.findAll();
-       
+        
+        List<Song> foundSongs = songDao.findAll();      
         List<Song> expectedResult = new ArrayList();
         expectedResult.add(shootToThrillSong);
         expectedResult.add(haveADrinkOnMeSong);
@@ -203,12 +203,6 @@ public class SongDaoImplementationTest extends AbstractTransactionalTestNGSpring
 
     /**
      * Test of create method, of class SongDaoImplementation.
-     * 
-     * First assert expects create method to return false, since parameter is null
-     * 
-     * Second assert expects create method to return false, since shootToThrill was already persisted
-     * 
-     * Third assert expects create method to return true, since backInBlack was not persisted yet
      */   
     @Transactional
     @Test
@@ -220,6 +214,21 @@ public class SongDaoImplementationTest extends AbstractTransactionalTestNGSpring
         
         boolean result02 = songDao.create(this.backInBlackSong);
         Assert.assertEquals(true, result02);
+    }
+    
+    /**
+     * Test of update method, of class GenreDaoImplementation.
+     */
+    @Test
+    public void testUpdate() {
+        System.out.println("update");
+        
+        songDao.create(this.backInBlackSong);
+        this.backInBlackSong.setBitrate(256);
+        songDao.update(backInBlackSong);     
+        Song mergedSong = songDao.findById(this.backInBlackSong.getId());
+        boolean result = this.backInBlackSong.equals(mergedSong);
+        Assert.assertEquals(true, result);
     }
 
     /**

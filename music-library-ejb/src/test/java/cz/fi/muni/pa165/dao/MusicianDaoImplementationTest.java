@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.PersistenceAplicationContext;
@@ -10,15 +5,8 @@ import cz.fi.muni.pa165.entity.Musician;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -37,9 +25,6 @@ public class MusicianDaoImplementationTest extends AbstractTransactionalTestNGSp
     
     @Autowired
     public MusicianDao musicianDao;
-    
-    @PersistenceContext
-    private EntityManager em;
     
     private Musician metallica;
     
@@ -80,9 +65,11 @@ public class MusicianDaoImplementationTest extends AbstractTransactionalTestNGSp
     }
     
 
+
     /**
      * Test of findById method, of class MusicianDaoImplementation.
      */
+ 
     @Test
     @Transactional
     public void testFindById() {
@@ -95,6 +82,7 @@ public class MusicianDaoImplementationTest extends AbstractTransactionalTestNGSp
     /**
      * Test of findAll method, of class MusicianDaoImplementation.
      */
+
     @Test
     @Transactional
     public void testFindAll() {
@@ -116,6 +104,7 @@ public class MusicianDaoImplementationTest extends AbstractTransactionalTestNGSp
     /**
      * Test of findByRealName method, of class MusicianDaoImplementation.
      */
+ 
     @Test
     @Transactional
     public void testFindByRealName() {
@@ -129,6 +118,7 @@ public class MusicianDaoImplementationTest extends AbstractTransactionalTestNGSp
     /**
      * Test of findByArtistName method, of class MusicianDaoImplementation.
      */
+  
     @Test
     @Transactional
     public void testFindByArtistName() {
@@ -142,6 +132,7 @@ public class MusicianDaoImplementationTest extends AbstractTransactionalTestNGSp
     /**
      * Test of create method, of class MusicianDaoImplementation.
      */
+  
     @Test
     @Transactional
     public void testCreate() {
@@ -157,6 +148,7 @@ public class MusicianDaoImplementationTest extends AbstractTransactionalTestNGSp
     /**
      * Test of delete method, of class MusicianDaoImplementation.
      */
+   
     @Test
     @Transactional
     public void testDelete() {

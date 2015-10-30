@@ -18,6 +18,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author JJ
  */
+@Entity
 public class Musician {
     
     @Id

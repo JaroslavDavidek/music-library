@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="cz.fi.muni.pa165_music-library-ejb_ejb_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
-    <jta-data-source>jdbc/sample</jta-data-source>
-    <class>cz.fi.muni.pa165.entity.Album</class>
-    <class>cz.fi.muni.pa165.entity.Song</class>
-    <class>cz.fi.muni.pa165.entity.Genre</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
-    </properties>
-  </persistence-unit>
+
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             version="1.0">
+
+
+    <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <class>cz.fi.muni.pa165.entity.Album</class>
+        <class>cz.fi.muni.pa165.entity.Song</class>
+        <class>cz.fi.muni.pa165.entity.Genre</class>
+        <class>cz.fi.muni.pa165.entity.Musician</class>
+
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:derby:memory:testdb" />
+            <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver" />
+            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
+        </properties>
+    </persistence-unit>
+
+
 </persistence>

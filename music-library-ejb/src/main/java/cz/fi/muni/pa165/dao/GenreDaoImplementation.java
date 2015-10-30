@@ -7,7 +7,8 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 /**
- *
+ * Genre DAO - supports basic operations over Genre Entity
+ * 
  * @author JaroslavDavidek
  */
 @Repository

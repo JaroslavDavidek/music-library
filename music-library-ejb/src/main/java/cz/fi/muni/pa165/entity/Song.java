@@ -15,7 +15,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Song {
     
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -25,7 +24,7 @@ public class Song {
     @ManyToOne
     @NotNull
     private Album album;
-    /*
+    
     @ManyToOne
     @NotNull
     private Genre genre;
@@ -33,7 +32,7 @@ public class Song {
     @ManyToOne
     @NotNull
     private Musician musician;
-    */
+    
     private int bitrate;
     
     private int albumPosition;
@@ -66,7 +65,7 @@ public class Song {
     public void setAlbum(Album albumToSet) {
         this.album = albumToSet;
     }
-    /*
+    
     public Genre getGenre() {
         return this.genre;
     }
@@ -82,7 +81,7 @@ public class Song {
     public void setMusician(Musician musicianToSet) {
         this.musician = musicianToSet;
     }
-    */
+
     public int getBitrate() {
         return this.bitrate;
     }
@@ -126,14 +125,14 @@ public class Song {
         if(this.album != null){
             hashCode += album.hashCode() * primeTwo;
         }
-        /*
+        
         if(this.genre != null){
             hashCode += genre.hashCode() * primeTwo;
         }
         if(this.musician != null){
             hashCode += musician.hashCode() * primeTwo;
         }
-        */
+
         return hashCode;
     }
 
@@ -157,28 +156,19 @@ public class Song {
         }
         if(this.getCommentary() != null ? !Objects.equals(this.getCommentary(), other.getCommentary()) : other.getCommentary() != null){
             return false;
-        }
-        /*
+        }      
         if(this.getAlbum() != null ? !this.getAlbum().equals(other.getAlbum()) : other.getAlbum() != null){
             return false;
         }
         if(this.getGenre() != null ? !this.getGenre().equals(other.getGenre()) : other.getGenre() != null){
             return false;
         }
-        if(this.getMusician() != null ? !this.getMusician().equals(other.getMusician()) : other.getMusician() != null){
-            return false;
-        }
-        return true;
-        */
-        if(this.getAlbum() != null ? !this.getAlbum().equals(other.getAlbum()) : other.getAlbum() != null){
-            return false;
-        }
-        return true;
+        return !(this.getMusician() != null ? !this.getMusician().equals(other.getMusician()) : other.getMusician() != null);
     }
 
     @Override
     public String toString() {
-        return title + " " + album.getTitle() + " " + /*musician.toString() +*/ " @" + bitrate + " Kbps";
+        return title + " from " + album.getTitle() + " by " + musician.toString() + " @" + bitrate + " Kbps";
     }
     
 }

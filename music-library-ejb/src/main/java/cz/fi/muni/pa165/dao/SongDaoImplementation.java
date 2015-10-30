@@ -1,6 +1,8 @@
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.entity.Album;
+import cz.fi.muni.pa165.entity.Genre;
+import cz.fi.muni.pa165.entity.Musician;
 //import cz.fi.muni.pa165.entity.Genre;
 //import cz.fi.muni.pa165.entity.Musician;
 import cz.fi.muni.pa165.entity.Song;
@@ -41,7 +43,7 @@ public class SongDaoImplementation implements SongDao {
                 "SELECT s FROM Song s", Song.class)
                 .getResultList();
     }
-/*
+
     @Override
     public List<Song> findAllByMusician(Musician songAuthor) {
         if(songAuthor == null){
@@ -63,7 +65,6 @@ public class SongDaoImplementation implements SongDao {
                 .setParameter("songGenre", songGenre)
                 .getResultList();
     }
-    */
     
     @Override
     public List<Song> findAllByAlbum(Album songAlbum) {

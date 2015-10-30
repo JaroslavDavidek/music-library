@@ -1,12 +1,12 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.PersistenceAplicationContext;
 import cz.fi.muni.pa165.entity.Musician;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
-import org.junit.Assert;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -14,6 +14,11 @@ import org.springframework.test.context.testng.AbstractTransactionalTestNGSpring
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.Assert;
 
 /**
  *
@@ -21,8 +26,7 @@ import org.testng.annotations.BeforeMethod;
  */
 @ContextConfiguration(classes = PersistenceAplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
-public class MusicianDaoImplementationTest extends AbstractTransactionalTestNGSpringContextTests{
-    
+public class MusicianDaoImplementationTest extends AbstractTransactionalTestNGSpringContextTests {
     @Autowired
     public MusicianDao musicianDao;
     

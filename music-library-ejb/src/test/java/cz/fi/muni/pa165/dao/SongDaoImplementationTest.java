@@ -39,9 +39,6 @@ public class SongDaoImplementationTest extends AbstractTransactionalTestNGSpring
     
     @Autowired
     public MusicianDao musicianDao;
-    
-    @PersistenceContext
-    private EntityManager em;
 
     private Song shootToThrillSong;
     

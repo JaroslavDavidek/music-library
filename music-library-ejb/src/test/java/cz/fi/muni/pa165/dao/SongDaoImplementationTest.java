@@ -71,7 +71,7 @@ public class SongDaoImplementationTest extends AbstractTransactionalTestNGSpring
         musicianDao.create(acdc);
                
         backInBlackAlbum = new Album();
-        //backInBlackAlbum.setMusician(acdc);
+        backInBlackAlbum.setMusician(acdc);
         backInBlackAlbum.setReleaseDate(Date.valueOf("1980-7-25"));
         backInBlackAlbum.setTitle("Back In Black");
         albumDao.create(backInBlackAlbum);

@@ -22,8 +22,10 @@ import static org.junit.Assert.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
+import org.testng.annotations.BeforeMethod;
 
 /**
  *
@@ -31,7 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @ContextConfiguration(classes = PersistenceAplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
-public class MusicianDaoImplementationTest {
+public class MusicianDaoImplementationTest extends AbstractTransactionalTestNGSpringContextTests{
     
     @Autowired
     public MusicianDao musicianDao;
@@ -49,7 +51,7 @@ public class MusicianDaoImplementationTest {
     
 
     
-    @BeforeClass
+    @BeforeMethod
     public void setUpClass() {
         metallica = new Musician();
         acdc = new Musician();
@@ -77,17 +79,6 @@ public class MusicianDaoImplementationTest {
         musicianDao.create(avicii);
     }
     
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
 
     /**
      * Test of findById method, of class MusicianDaoImplementation.

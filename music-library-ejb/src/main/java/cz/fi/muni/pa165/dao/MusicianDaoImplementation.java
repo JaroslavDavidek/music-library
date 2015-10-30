@@ -9,11 +9,13 @@ import cz.fi.muni.pa165.entity.Musician;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Jergus Fasanek
  */
+@Repository
 public class MusicianDaoImplementation implements MusicianDao{
     
     @PersistenceContext

@@ -61,7 +61,7 @@ public interface SongDao {
     /**
      * Merges song entity
      * @param song song to update
-     * @return
+     * @return merged song
      */
     public Song update(Song song);
     

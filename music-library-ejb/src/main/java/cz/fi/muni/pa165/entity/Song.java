@@ -112,8 +112,16 @@ public class Song {
         final int primeOne = 89;
         final int primeTwo = 43;   
         
-        int hashCode = Objects.hash(title, bitrate, albumPosition, commentary);
+        int hashCode = Objects.hash(bitrate, albumPosition);
         hashCode *=  primeOne;
+        
+        if(this.title != null){
+            hashCode += Objects.hash(title) * primeTwo;
+        }
+        
+        if(this.commentary != null){
+            hashCode += Objects.hash(commentary) * primeTwo;
+        }
         
         if(this.album != null){
             hashCode += album.hashCode() * primeTwo;
@@ -157,9 +165,15 @@ public class Song {
         if(this.getGenre() != null ? !this.getGenre().equals(other.getGenre()) : other.getGenre() != null){
             return false;
         }
-        return this.getMusician() != null ? !this.getMusician().equals(other.getMusician()) : other.getMusician() != null;
+        if(this.getMusician() != null ? !this.getMusician().equals(other.getMusician()) : other.getMusician() != null){
+            return false;
+        }
+        return true;
         */
-        return this.getAlbum() != null ? !this.getAlbum().equals(other.getAlbum()) : other.getAlbum() != null;
+        if(this.getAlbum() != null ? !this.getAlbum().equals(other.getAlbum()) : other.getAlbum() != null){
+            return false;
+        }
+        return true;
     }
 
     @Override

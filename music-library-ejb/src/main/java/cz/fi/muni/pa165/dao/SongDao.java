@@ -1,5 +1,7 @@
 package cz.fi.muni.pa165.dao;
 import cz.fi.muni.pa165.entity.Album;
+import cz.fi.muni.pa165.entity.Genre;
+import cz.fi.muni.pa165.entity.Musician;
 import cz.fi.muni.pa165.entity.Song;
 import java.util.List;
 
@@ -35,7 +37,7 @@ public interface SongDao {
      * @param musician author according to which songs are listed
      * @return list of all stored songs according to its author
      */
-    //public List<Song> findAllByMusician(Musician musician);
+    public List<Song> findAllByMusician(Musician musician);
     
     /**
      * Lists all songs according to its Album
@@ -49,7 +51,7 @@ public interface SongDao {
      * @param songGenre genre according to which songs are listed
      * @return list of all stored songs according to its Genre
      */
-    //public List<Song> findAllByGenre(Genre songGenre);
+    public List<Song> findAllByGenre(Genre songGenre);
     
     /**
      * Persists song entity in case it is not stored yet

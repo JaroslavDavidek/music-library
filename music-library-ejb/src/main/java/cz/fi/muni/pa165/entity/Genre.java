@@ -56,12 +56,10 @@ public class Genre {
         final int primeTwo = 43;   
         
         int hashCode = Objects.hash(yearOfOrigin) * primeOne;
-       
-        if(this.title != null){
-            hashCode += this.title.hashCode() * primeTwo;
-        }
+        
+        // title is never null
+        hashCode += this.title.hashCode() * primeTwo;
         return hashCode;
-      
     }
 
     @Override

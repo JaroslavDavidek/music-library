@@ -27,8 +27,7 @@ public interface GenreDao {
      * @return list of all stored genres
      */
     public List<Genre> findAll();
-    
-    
+        
     /**
      * Persists genre entity in case it is not stored yet
      * @param genre to persist

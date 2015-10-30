@@ -7,13 +7,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Album {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @NotNull
@@ -26,6 +27,10 @@ public class Album {
     private String commentary;
     private Byte[] cover;
 
+    @OneToOne
+    @NotNull
+    private Musician musician;
+    
     public Album() {
     }
 
@@ -65,11 +70,20 @@ public class Album {
         this.cover = cover;
     }
 
+    public Musician getMusician() {
+        return musician;
+    }
+
+    public void setMusician(Musician musician) {
+        this.musician = musician;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.title);
-        hash = 89 * hash + Objects.hashCode(this.releaseDate);
+        int hash = 5;
+        hash = 17 * hash + Objects.hashCode(getTitle());
+        hash = 17 * hash + Objects.hashCode(getReleaseDate());
+        hash = 17 * hash + Objects.hashCode(getMusician());
         return hash;
     }
 
@@ -82,14 +96,19 @@ public class Album {
             return false;
         }
         final Album other = (Album) obj;
-        if (!Objects.equals(this.title, other.title)) {
+        if (!Objects.equals(this.getTitle(), other.getTitle())) {
             return false;
         }
-        if (!Objects.equals(this.releaseDate, other.releaseDate)) {
+        if (!Objects.equals(this.getReleaseDate(), other.getReleaseDate())) {
+            return false;
+        }
+        if (!Objects.equals(this.getMusician(), other.getMusician())) {
             return false;
         }
         return true;
     }
+    
+    
 
     @Override
     public String toString() {

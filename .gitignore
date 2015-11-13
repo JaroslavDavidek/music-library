@@ -1,1 +1,4 @@
 /music-library-ejb/target/
+/DAO-layer/target/
+/Service-layer/target/
+/API-layer/target/

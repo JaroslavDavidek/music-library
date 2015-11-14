@@ -170,42 +170,42 @@ public class SongCreateDTO {
     /**
      * @return the realName
      */
-    public String getRealName() {
+    public String getMusicianRealName() {
         return this.musicianRealName;
     }
 
     /**
      * @param realName the realName to set
      */
-    public void setRealName(String realName) {
+    public void setMusicianRealName(String realName) {
         this.musicianRealName = realName;
     }
 
     /**
      * @return the artistName
      */
-    public String getArtistName() {
+    public String getMusicianArtistName() {
         return this.musicianArtistName;
     }
 
     /**
      * @param artistName the artistName to set
      */
-    public void setArtistName(String artistName) {
+    public void setMusicianArtistName(String artistName) {
         this.musicianArtistName = artistName;
     }
 
     /**
      * @return the dateOfBirth
      */
-    public Date getDateOfBirth() {
+    public Date getMusicianDateOfBirth() {
         return this.musicianDateOfBirth;
     }
 
     /**
      * @param dateOfBirth the dateOfBirth to set
      */
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setMusicianDateOfBirth(Date dateOfBirth) {
         this.musicianDateOfBirth = dateOfBirth;
     }
     
@@ -216,7 +216,7 @@ public class SongCreateDTO {
     @Override
     public int hashCode() {
         final int primeOne = 89;
-        final int primeTwo = 43;   
+        final int primeTwo = 43;
         
         int hashCode = Objects.hash(bitrate, albumPosition);
         hashCode *=  primeOne;
@@ -229,19 +229,32 @@ public class SongCreateDTO {
             hashCode += Objects.hash(commentary) * primeTwo;
         }
         
-        /*
-        if(this.album != null){
-            hashCode += album.hashCode() * primeTwo;
+        if(this.albumTitle != null){
+            hashCode += Objects.hash(this.albumTitle) * primeTwo;
         }
         
-        if(this.genre != null){
-            hashCode += genre.hashCode() * primeTwo;
+        if(this.albumReleaseDate != null){
+            hashCode += Objects.hash(this.albumReleaseDate) * primeTwo;
         }
-        if(this.musician != null){
-            hashCode += musician.hashCode() * primeTwo;
+        
+        hashCode += Objects.hash(this.genreYearOfOrigin) * primeOne;
+        
+        if(this.genreTitle != null){
+            hashCode += Objects.hash(this.genreTitle) * primeTwo;
         }
-        */
 
+        if(this.musicianArtistName != null){
+            hashCode += Objects.hash(this.musicianArtistName) * primeTwo;
+        }
+        
+        if(this.musicianRealName != null){
+            hashCode += Objects.hash(this.musicianRealName) * primeTwo;
+        }
+        
+        if(this.musicianDateOfBirth != null){
+            hashCode += Objects.hash(this.musicianDateOfBirth) * primeTwo;
+        }
+        
         return hashCode;
     }
 
@@ -253,8 +266,9 @@ public class SongCreateDTO {
         if (object == null || !(object instanceof SongDTO)){
             return false;
         }       
-        SongDTO other = (SongDTO) object;       
-        if (this.getTitle() != null ? !Objects.equals(this.getTitle(), other.getTitle()) : other.getTitle() != null){
+        
+        SongCreateDTO other = (SongCreateDTO) object;    
+        if (!Objects.equals(this.getTitle(), other.getTitle())) {
             return false;
         }
         if(this.getBitrate() != other.getBitrate()){
@@ -263,22 +277,29 @@ public class SongCreateDTO {
         if(this.getAlbumPosition() != other.getAlbumPosition()){
             return false;
         }
-        if(this.getCommentary() != null ? !Objects.equals(this.getCommentary(), other.getCommentary()) : other.getCommentary() != null){
+        
+        if (!Objects.equals(this.getAlbumTitle(), other.getAlbumTitle())) {
+            return false;
+        }
+        if (!Objects.equals(this.getAlbumReleaseDate(), other.getAlbumReleaseDate())) {
             return false;
         }
         
-        // to be commented out
-        return true;
+        if (!Objects.equals(this.getGenreTitle(), other.getGenreTitle())) {
+            return false;
+        }
+        if(this.getGenreYearOfOrigin() != other.getGenreYearOfOrigin()){
+            return false;
+        }
         
-        /*
-        if(this.getAlbum() != null ? !this.getAlbum().equals(other.getAlbum()) : other.getAlbum() != null){
+        if (!Objects.equals(this.getMusicianRealName(), other.getMusicianRealName())) {
             return false;
         }
-        if(this.getGenre() != null ? !this.getGenre().equals(other.getGenre()) : other.getGenre() != null){
+        if(this.getMusicianArtistName() != null ? !this.getMusicianArtistName().equals(other.getMusicianArtistName()) : other.getMusicianArtistName() != null){
             return false;
         }
-        return !(this.getMusician() != null ? !this.getMusician().equals(other.getMusician()) : other.getMusician() != null);
-        */
+        
+        return !(this.getMusicianDateOfBirth() != null ? !this.getMusicianDateOfBirth().equals(other.getMusicianDateOfBirth()) : other.getMusicianDateOfBirth() != null);
     }
 
     @Override

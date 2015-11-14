@@ -1,51 +1,28 @@
-package cz.fi.muni.pa165.entity;
+package cz.fi.muni.pa165.api.layer.dto;
 
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author JaroslavDavidek
  */
-@Entity
-public class Song {
+public class SongDTO {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
     private String title;
     
-    @ManyToOne
-    @NotNull
-    private Album album;
+    //private AlbumDTO album;
     
-    @ManyToOne
-    @NotNull
-    private Genre genre;
+    //private GenreDTO genre;
     
-    @ManyToOne
-    @NotNull
-    private Musician musician;
+    //private MusicianDTO musician;
     
     private int bitrate;
     
     private int albumPosition;
     
     private String commentary;
-
-    public Song() {
-    }
-    
-    public Song(Long id) {
-	this.id=id;
-    }
     
     public Long getId() {
         return this.id;
@@ -59,6 +36,7 @@ public class Song {
         this.title = titleToSet;
     }
     
+    /*
     public Album getAlbum() {
         return this.album;
     }
@@ -82,7 +60,8 @@ public class Song {
     public void setMusician(Musician musicianToSet) {
         this.musician = musicianToSet;
     }
-
+    */ 
+    
     public int getBitrate() {
         return this.bitrate;
     }
@@ -123,6 +102,7 @@ public class Song {
             hashCode += Objects.hash(commentary) * primeTwo;
         }
         
+        /*
         if(this.album != null){
             hashCode += album.hashCode() * primeTwo;
         }
@@ -133,6 +113,7 @@ public class Song {
         if(this.musician != null){
             hashCode += musician.hashCode() * primeTwo;
         }
+        */
 
         return hashCode;
     }
@@ -142,10 +123,10 @@ public class Song {
         if (object == this){
             return true;
         }
-        if (object == null || !(object instanceof Song)){
+        if (object == null || !(object instanceof SongDTO)){
             return false;
         }       
-        Song other = (Song) object;       
+        SongDTO other = (SongDTO) object;       
         if (this.getTitle() != null ? !Objects.equals(this.getTitle(), other.getTitle()) : other.getTitle() != null){
             return false;
         }
@@ -157,7 +138,12 @@ public class Song {
         }
         if(this.getCommentary() != null ? !Objects.equals(this.getCommentary(), other.getCommentary()) : other.getCommentary() != null){
             return false;
-        }      
+        }
+        
+        // to be commented out
+        return true;
+        
+        /*
         if(this.getAlbum() != null ? !this.getAlbum().equals(other.getAlbum()) : other.getAlbum() != null){
             return false;
         }
@@ -165,11 +151,12 @@ public class Song {
             return false;
         }
         return !(this.getMusician() != null ? !this.getMusician().equals(other.getMusician()) : other.getMusician() != null);
+        */
     }
 
     @Override
     public String toString() {
-        return title + " from " + album.getTitle() + " by " + musician.toString() + " @" + bitrate + " Kbps";
+        return title /* + " from " + album.getTitle() + " by " + musician.toString() */ + " @" + bitrate + " Kbps";
     }
     
 }

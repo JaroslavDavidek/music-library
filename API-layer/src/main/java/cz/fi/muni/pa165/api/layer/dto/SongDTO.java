@@ -1,6 +1,10 @@
 package cz.fi.muni.pa165.api.layer.dto;
 
 import java.util.Objects;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -10,18 +14,26 @@ public class SongDTO {
     
     private Long id;
 
+    @NotNull
+    @Size(min = 1, max = 128)
     private String title;
     
+    //@Valid
     //private AlbumDTO album;
     
+    //@Valid
     //private GenreDTO genre;
     
+    //@Valid
     //private MusicianDTO musician;
     
+    @Min(0)
     private int bitrate;
     
+    @Min(0)
     private int albumPosition;
     
+    @Size(max = 512)
     private String commentary;
     
     public Long getId() {

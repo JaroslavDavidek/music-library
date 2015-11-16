@@ -11,12 +11,16 @@ import cz.fi.muni.pa165.service.layer.service.MappingService;
 import cz.fi.muni.pa165.service.layer.service.SongService;
 import java.util.List;
 import javax.inject.Inject;
+import org.springframework.transaction.annotation.Transactional;;
+import org.springframework.stereotype.Service;
 
 
 /**
  *
  * @author JaroslavDavidek
  */
+@Service
+@Transactional
 public class SongFacadeImplementation implements SongFacade {
 
     @Inject

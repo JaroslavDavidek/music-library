@@ -24,6 +24,7 @@ public class SongCreateDTO {
     @Min(0)
     private int albumPosition;
     
+    @Size(max = 512)
     private String commentary;
     
     // endregion Song properties

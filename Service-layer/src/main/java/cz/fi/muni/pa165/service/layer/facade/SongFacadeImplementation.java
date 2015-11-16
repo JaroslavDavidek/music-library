@@ -3,6 +3,9 @@ package cz.fi.muni.pa165.service.layer.facade;
 import cz.fi.muni.pa165.api.layer.dto.SongCreateDTO;
 import cz.fi.muni.pa165.api.layer.dto.SongDTO;
 import cz.fi.muni.pa165.api.layer.facade.SongFacade;
+import cz.fi.muni.pa165.dao.AlbumDao;
+import cz.fi.muni.pa165.dao.GenreDao;
+import cz.fi.muni.pa165.dao.MusicianDao;
 import cz.fi.muni.pa165.entity.Album;
 import cz.fi.muni.pa165.entity.Genre;
 import cz.fi.muni.pa165.entity.Musician;
@@ -29,21 +32,35 @@ public class SongFacadeImplementation implements SongFacade {
     @Inject
     private SongService songService;
     
+    /// region - following DAOs should be replaced by Services after they are created
+    
+    @Inject
+    private AlbumDao albumDao;
+    
+    @Inject
+    private MusicianDao musicianDao;
+    
+    @Inject
+    private GenreDao genreDao;
+    
+    /// endregion
     
     @Override
     public Long createSong(SongCreateDTO song) {
         Song mappedSong = mappingService.mapTo(song, Song.class);
         
+        Genre genre = new Genre();
+        genre.setTitle(song.getGenreTitle());
+        genre.setYearOfOrigin(song.getGenreYearOfOrigin());
+        genreDao.create(genre);
+        mappedSong.setGenre(genre);
+        
         Musician musician = new Musician();
         musician.setArtistName(song.getMusicianArtistName());
         musician.setRealName(song.getMusicianRealName());
         musician.setDateOfBirth(new java.sql.Date(song.getMusicianDateOfBirth().getTime()));
-        mappedSong.setMusician(musician);
-        
-        Genre genre = new Genre();
-        genre.setTitle(song.getGenreTitle());
-        genre.setYearOfOrigin(song.getGenreYearOfOrigin());
-        mappedSong.setGenre(genre);
+        musicianDao.create(musician);
+        mappedSong.setMusician(musician);       
         
         Album album = new Album();
         album.setTitle(song.getAlbumTitle());
@@ -51,6 +68,7 @@ public class SongFacadeImplementation implements SongFacade {
         album.setReleaseDate(new java.sql.Date(song.getAlbumReleaseDate().getTime()));
         album.setCover(song.getAlbumCover());
         album.setCommentary(song.getAlbumCommentary());
+        albumDao.create(album);
         mappedSong.setAlbum(album);
         
         return songService.createSong(mappedSong).getId();

@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.entity.Genre;
+import cz.fi.muni.pa165.exception.InvalidParamDataAccessExpection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,7 +21,7 @@ public class GenreDaoImplementation implements GenreDao {
     @Override
     public Genre findById(Long id) {
         if(id < 0){
-            throw new IllegalArgumentException("GenreDao - findById - invalid index param passed");
+            throw new InvalidParamDataAccessExpection("GenreDao - findById - invalid index param passed");
         }
         return em.find(Genre.class, id);
     }
@@ -28,7 +29,7 @@ public class GenreDaoImplementation implements GenreDao {
     @Override
     public Genre findByTitle(String genreTitle) {
         if(genreTitle == null){
-            throw new IllegalArgumentException("GenreDao - findByTitle - genreTitle must not be null");
+            throw new InvalidParamDataAccessExpection("GenreDao - findByTitle - genreTitle must not be null");
         }
         return em.createQuery(
                 "SELECT g FROM Genre g WHERE g.title= :genreTitle", Genre.class)
@@ -46,7 +47,7 @@ public class GenreDaoImplementation implements GenreDao {
     @Override
     public boolean create(Genre genre) {
         if(genre == null){
-            throw new IllegalArgumentException("GenreDao - create - genre must not be null");
+            throw new InvalidParamDataAccessExpection("GenreDao - create - genre must not be null");
         }
         if(em.contains(genre)) {
             return false;
@@ -58,7 +59,7 @@ public class GenreDaoImplementation implements GenreDao {
     @Override
     public Genre update(Genre genre) {
         if(genre == null){
-            throw new IllegalArgumentException("GenreDao - update - genre must not be null");
+            throw new InvalidParamDataAccessExpection("GenreDao - update - genre must not be null");
         }
         return em.merge(genre);
     }
@@ -66,7 +67,7 @@ public class GenreDaoImplementation implements GenreDao {
     @Override
     public boolean delete(Genre genre) {
         if(genre == null){
-            throw new IllegalArgumentException("GenreDao - delete - genre must not be null");
+            throw new InvalidParamDataAccessExpection("GenreDao - delete - genre must not be null");
         }
         if(!em.contains(genre)) {
             return false;

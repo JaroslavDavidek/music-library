@@ -68,9 +68,8 @@ public class SongCreateDTO {
     private Date musicianDateOfBirth;
     
     // endregion Musician atributte properties
-    
-    
-    
+
+
     // region Song getters/setters
     
     public String getTitle() {

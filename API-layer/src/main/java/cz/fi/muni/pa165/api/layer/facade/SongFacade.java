@@ -2,6 +2,9 @@ package cz.fi.muni.pa165.api.layer.facade;
 
 import cz.fi.muni.pa165.api.layer.dto.SongCreateDTO;
 import cz.fi.muni.pa165.api.layer.dto.SongDTO;
+import cz.fi.muni.pa165.entity.Album;
+import cz.fi.muni.pa165.entity.Genre;
+import cz.fi.muni.pa165.entity.Musician;
 import java.util.List;
 
 /**

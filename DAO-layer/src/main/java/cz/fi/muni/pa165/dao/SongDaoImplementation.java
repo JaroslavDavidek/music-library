@@ -6,9 +6,11 @@ import cz.fi.muni.pa165.entity.Musician;
 //import cz.fi.muni.pa165.entity.Genre;
 //import cz.fi.muni.pa165.entity.Musician;
 import cz.fi.muni.pa165.entity.Song;
+import cz.fi.muni.pa165.exception.InvalidParamDataAccessExpection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -24,7 +26,7 @@ public class SongDaoImplementation implements SongDao {
     @Override
     public Song findById(Long id) {
         if(id < 0){
-            throw new IllegalArgumentException("SongDao - findById - invalid index param passed");
+            throw new InvalidParamDataAccessExpection("SongDao - findById - invalid index param passed") {};
         }
         return em.find(Song.class, id);
     }
@@ -47,7 +49,7 @@ public class SongDaoImplementation implements SongDao {
     @Override
     public List<Song> findAllByMusician(Musician songAuthor) {
         if(songAuthor == null){
-            throw new IllegalArgumentException("SongDao - findAllByMusician - songAuthor must not be null");
+            throw new InvalidParamDataAccessExpection("SongDao - findAllByMusician - songAuthor must not be null") {};
         }
         return em.createQuery(
                 "SELECT s FROM Song s WHERE s.musician= :songAuthor", Song.class)
@@ -58,7 +60,7 @@ public class SongDaoImplementation implements SongDao {
     @Override
     public List<Song> findAllByGenre(Genre songGenre) {
         if(songGenre == null){
-            throw new IllegalArgumentException("SongDao - findAllByGenre - songGenre must not be null");
+            throw new InvalidParamDataAccessExpection("SongDao - findAllByGenre - songGenre must not be null") {};
         }
         return em.createQuery(
                 "SELECT s FROM Song s WHERE s.genre= :songGenre", Song.class)
@@ -69,7 +71,7 @@ public class SongDaoImplementation implements SongDao {
     @Override
     public List<Song> findAllByAlbum(Album songAlbum) {
         if(songAlbum == null){
-            throw new IllegalArgumentException("SongDao - findAllByAlbum - songAlbum must not be null");
+            throw new InvalidParamDataAccessExpection("SongDao - findAllByAlbum - songAlbum must not be null");
         }
         return em.createQuery(
                 "SELECT s FROM Song s WHERE s.album= :songAlbum", Song.class)
@@ -80,7 +82,7 @@ public class SongDaoImplementation implements SongDao {
     @Override
     public boolean create(Song song) {
         if(song == null){
-            throw new IllegalArgumentException("SongDao - create - song must not be null");
+            throw new InvalidParamDataAccessExpection("SongDao - create - song must not be null");
         }
         if(em.contains(song)) {
             return false;
@@ -92,7 +94,7 @@ public class SongDaoImplementation implements SongDao {
     @Override
     public Song update(Song song) {
         if(song == null){
-            throw new IllegalArgumentException("SongDao - update - song must not be null");
+            throw new InvalidParamDataAccessExpection("SongDao - update - song must not be null");
         }
         return em.merge(song);
     }
@@ -100,7 +102,7 @@ public class SongDaoImplementation implements SongDao {
     @Override
     public boolean delete(Song song) {
         if(song == null){
-            throw new IllegalArgumentException("SongDao - delete - song must not be null");
+            throw new InvalidParamDataAccessExpection("SongDao - delete - song must not be null");
         }
         if(!em.contains(song)) {
             return false;

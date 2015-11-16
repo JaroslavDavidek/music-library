@@ -3,7 +3,14 @@ package cz.fi.muni.pa165.service.layer.facade;
 import cz.fi.muni.pa165.api.layer.dto.SongCreateDTO;
 import cz.fi.muni.pa165.api.layer.dto.SongDTO;
 import cz.fi.muni.pa165.api.layer.facade.SongFacade;
+import cz.fi.muni.pa165.entity.Album;
+import cz.fi.muni.pa165.entity.Genre;
+import cz.fi.muni.pa165.entity.Musician;
+import cz.fi.muni.pa165.entity.Song;
+import cz.fi.muni.pa165.service.layer.service.MappingService;
+import cz.fi.muni.pa165.service.layer.service.SongService;
 import java.util.List;
+import javax.inject.Inject;
 
 
 /**
@@ -12,69 +19,107 @@ import java.util.List;
  */
 public class SongFacadeImplementation implements SongFacade {
 
+    @Inject
+    private MappingService mappingService;
+    
+    @Inject
+    private SongService songService;
+    
+    
     @Override
     public Long createSong(SongCreateDTO song) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Song mappedSong = mappingService.mapTo(song, Song.class);
+        
+        Musician musician = new Musician();
+        musician.setArtistName(song.getMusicianArtistName());
+        musician.setRealName(song.getMusicianRealName());
+        musician.setDateOfBirth(new java.sql.Date(song.getMusicianDateOfBirth().getTime()));
+        mappedSong.setMusician(musician);
+        
+        Genre genre = new Genre();
+        genre.setTitle(song.getGenreTitle());
+        genre.setYearOfOrigin(song.getGenreYearOfOrigin());
+        mappedSong.setGenre(genre);
+        
+        Album album = new Album();
+        album.setTitle(song.getAlbumTitle());
+        album.setMusician(musician);
+        album.setReleaseDate(new java.sql.Date(song.getAlbumReleaseDate().getTime()));
+        album.setCover(song.getAlbumCover());
+        album.setCommentary(song.getAlbumCommentary());
+        mappedSong.setAlbum(album);
+        
+        return songService.createSong(mappedSong).getId();
     }
 
     @Override
     public void deleteSong(Long songID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        songService.deleteSong(songService.findSongByID(songID));
     }
 
     @Override
     public void updateTitle(Long songID, String newTitle) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        songService.updateTitle(songService.findSongByID(songID), newTitle);
     }
 
     @Override
     public void updateBitrate(Long songID, int newBitrate) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        songService.updateBitrate(songService.findSongByID(songID), newBitrate);
     }
 
     @Override
     public void updateAlbumPosition(Long songID, int newAlbumPosition) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        songService.updateAlbumPosition(songService.findSongByID(songID), newAlbumPosition);
     }
 
     @Override
     public void updateCommentary(Long songID, String newCommentary) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        songService.updateCommentary(songService.findSongByID(songID), newCommentary);
     }
 
     @Override
     public void updateMusician(Long songID, Long musicianID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        songService.updateMusician(songService.findSongByID(songID), musicianID);
     }
 
     @Override
     public void updateGenre(Long songID, Long genreID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        songService.updateGenre(songService.findSongByID(songID), genreID);
     }
 
     @Override
     public void updateAlbum(Long songID, Long albumID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        songService.updateAlbum(songService.findSongByID(songID), albumID);
     }
 
     @Override
-    public SongDTO getSongByID(Long songID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public SongDTO findSongByID(Long songID) {
+        return mappingService.mapTo(songService.findSongByID(songID), SongDTO.class);
     }
 
     @Override
-    public List<SongDTO> getAllSongsByMusician(Long musicianID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<SongDTO> findAllSongsByMusician(Long musicianID) {
+        return mappingService.mapTo(songService.findAllSongsByMusician(musicianID), SongDTO.class);
     }
 
     @Override
-    public List<SongDTO> getAllSongsByGenre(Long genreID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<SongDTO> findAllSongsByGenre(Long genreID) {
+        return mappingService.mapTo(songService.findAllSongsByGenre(genreID), SongDTO.class);
     }
 
     @Override
-    public List<SongDTO> getAllSongsByAlbum(Long albumID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<SongDTO> findAllSongsByAlbum(Long albumID) {
+        return mappingService.mapTo(songService.findAllSongsByAlbum(albumID), SongDTO.class);
+    }
+
+    @Override
+    public List<SongDTO> findAllSongsByAlbumOrdered(Long albumID, boolean ascending) {
+        return mappingService.mapTo(songService.findAllSongsByAlbumOrdered(albumID, ascending), SongDTO.class);
+    }
+
+    @Override
+    public List<SongDTO> findAllSongsByMusicianAndReleaseYearRange(Long musicianID, int fromYear, int toYear) {
+        return mappingService.mapTo(songService.findAllSongsByMusicianAndReleaseYearRange(musicianID, fromYear, toYear), SongDTO.class);
     }
 
 }

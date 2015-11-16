@@ -1,5 +1,7 @@
 package cz.fi.muni.pa165.service.layer.service;
 
+import java.util.Collection;
+import java.util.List;
 import org.dozer.Mapper;
 
 /**
@@ -8,5 +10,6 @@ import org.dozer.Mapper;
  */
 public interface MappingService {   
     public Mapper getMapper();    
-    public  <T> T mapTo(Object objectToMap, Class<T> classToMapTo);  
+    public <T> T mapTo(Object objectToMap, Class<T> classToMapTo);
+    public <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass);
 }

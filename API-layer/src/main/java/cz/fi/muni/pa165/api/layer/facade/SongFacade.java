@@ -18,8 +18,10 @@ public interface SongFacade {
     public void updateMusician(Long songID, Long musicianID);
     public void updateGenre(Long songID, Long genreID);
     public void updateAlbum(Long songID, Long albumID);
-    public SongDTO getSongByID(Long songID);
-    public List<SongDTO> getAllSongsByMusician(Long musicianID);
-    public List<SongDTO> getAllSongsByGenre(Long genreID);
-    public List<SongDTO> getAllSongsByAlbum(Long albumID);
+    public SongDTO findSongByID(Long songID);
+    public List<SongDTO> findAllSongsByMusician(Long musicianID);
+    public List<SongDTO> findAllSongsByGenre(Long genreID);
+    public List<SongDTO> findAllSongsByAlbum(Long albumID);
+    public List<SongDTO> findAllSongsByAlbumOrdered(Long albumID, boolean ascending);
+    public List<SongDTO> findAllSongsByMusicianAndReleaseYearRange(Long musicianID, int fromYear, int toYear);
 }

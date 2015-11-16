@@ -38,7 +38,7 @@ public class SongFacadeImplementation implements SongFacade {
     }
 
     @Override
-    public void updateCommentary(Long songID, int newCommentary) {
+    public void updateCommentary(Long songID, String newCommentary) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -76,5 +76,5 @@ public class SongFacadeImplementation implements SongFacade {
     public List<SongDTO> getAllSongsByAlbum(Long albumID) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

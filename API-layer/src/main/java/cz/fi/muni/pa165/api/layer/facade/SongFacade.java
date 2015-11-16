@@ -14,7 +14,7 @@ public interface SongFacade {
     public void updateTitle(Long songID, String newTitle);
     public void updateBitrate(Long songID, int newBitrate);
     public void updateAlbumPosition(Long songID, int newAlbumPosition);
-    public void updateCommentary(Long songID, int newCommentary);
+    public void updateCommentary(Long songID, String newCommentary);
     public void updateMusician(Long songID, Long musicianID);
     public void updateGenre(Long songID, Long genreID);
     public void updateAlbum(Long songID, Long albumID);

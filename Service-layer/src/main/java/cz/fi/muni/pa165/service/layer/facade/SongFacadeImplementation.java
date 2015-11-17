@@ -3,9 +3,6 @@ package cz.fi.muni.pa165.service.layer.facade;
 import cz.fi.muni.pa165.api.layer.dto.SongCreateDTO;
 import cz.fi.muni.pa165.api.layer.dto.SongDTO;
 import cz.fi.muni.pa165.api.layer.facade.SongFacade;
-import cz.fi.muni.pa165.dao.AlbumDao;
-import cz.fi.muni.pa165.dao.GenreDao;
-import cz.fi.muni.pa165.dao.MusicianDao;
 import cz.fi.muni.pa165.entity.Album;
 import cz.fi.muni.pa165.entity.Genre;
 import cz.fi.muni.pa165.entity.Musician;
@@ -31,117 +28,113 @@ public class SongFacadeImplementation implements SongFacade {
     
     @Inject
     private SongService songService;
-    
-    /// region - following DAOs should be replaced by Services after they are created
-    
-    @Inject
-    private AlbumDao albumDao;
-    
-    @Inject
-    private MusicianDao musicianDao;
-    
-    @Inject
-    private GenreDao genreDao;
-    
-    /// endregion
-    
+   
     @Override
-    public Long createSong(SongCreateDTO song) {
-        Song mappedSong = mappingService.mapTo(song, Song.class);
+    public Long createSong(SongCreateDTO songCreateDTO) {
+        Song mappedSong = mappingService.mapTo(songCreateDTO, Song.class);
         
         Genre genre = new Genre();
-        genre.setTitle(song.getGenreTitle());
-        genre.setYearOfOrigin(song.getGenreYearOfOrigin());
-        genreDao.create(genre);
+        genre.setTitle(songCreateDTO.getGenreTitle());
+        genre.setYearOfOrigin(songCreateDTO.getGenreYearOfOrigin());
         mappedSong.setGenre(genre);
         
         Musician musician = new Musician();
-        musician.setArtistName(song.getMusicianArtistName());
-        musician.setRealName(song.getMusicianRealName());
-        musician.setDateOfBirth(new java.sql.Date(song.getMusicianDateOfBirth().getTime()));
-        musicianDao.create(musician);
+        musician.setArtistName(songCreateDTO.getMusicianArtistName());
+        musician.setRealName(songCreateDTO.getMusicianRealName());
+        musician.setDateOfBirth(new java.sql.Date(songCreateDTO.getMusicianDateOfBirth().getTime()));
         mappedSong.setMusician(musician);       
         
         Album album = new Album();
-        album.setTitle(song.getAlbumTitle());
+        album.setTitle(songCreateDTO.getAlbumTitle());
         album.setMusician(musician);
-        album.setReleaseDate(new java.sql.Date(song.getAlbumReleaseDate().getTime()));
-        album.setCover(song.getAlbumCover());
-        album.setCommentary(song.getAlbumCommentary());
-        albumDao.create(album);
+        album.setReleaseDate(new java.sql.Date(songCreateDTO.getAlbumReleaseDate().getTime()));
+        album.setCover(songCreateDTO.getAlbumCover());
+        album.setCommentary(songCreateDTO.getAlbumCommentary());
         mappedSong.setAlbum(album);
         
         return songService.createSong(mappedSong).getId();
     }
 
     @Override
-    public void deleteSong(Long songID) {
-        songService.deleteSong(songService.findSongByID(songID));
+    public boolean deleteSong(Long songID) {
+        return songService.deleteSong(songService.findSongByID(songID));
     }
 
     @Override
-    public void updateTitle(Long songID, String newTitle) {
-        songService.updateTitle(songService.findSongByID(songID), newTitle);
+    public SongDTO updateTitle(Long songID, String newTitle) {
+        return mappingService.mapTo(songService.updateTitle(songService.findSongByID(songID), newTitle), SongDTO.class);
     }
 
     @Override
-    public void updateBitrate(Long songID, int newBitrate) {
-        songService.updateBitrate(songService.findSongByID(songID), newBitrate);
+    public SongDTO updateBitrate(Long songID, int newBitrate) {
+        return mappingService.mapTo(songService.updateBitrate(songService.findSongByID(songID), newBitrate), SongDTO.class);
     }
 
     @Override
-    public void updateAlbumPosition(Long songID, int newAlbumPosition) {
-        songService.updateAlbumPosition(songService.findSongByID(songID), newAlbumPosition);
+    public SongDTO updateAlbumPosition(Long songID, int newAlbumPosition) {
+        return mappingService.mapTo(songService.updateAlbumPosition(songService.findSongByID(songID), newAlbumPosition), SongDTO.class);
     }
 
     @Override
-    public void updateCommentary(Long songID, String newCommentary) {
-        songService.updateCommentary(songService.findSongByID(songID), newCommentary);
+    public SongDTO updateCommentary(Long songID, String newCommentary) {
+        return mappingService.mapTo(songService.updateCommentary(songService.findSongByID(songID), newCommentary), SongDTO.class);
     }
 
     @Override
-    public void updateMusician(Long songID, Long musicianID) {
-        songService.updateMusician(songService.findSongByID(songID), musicianID);
+    public SongDTO updateMusician(Long songID, Long musicianID) {
+        return mappingService.mapTo(songService.updateMusician(songService.findSongByID(songID), musicianID), SongDTO.class);
     }
 
     @Override
-    public void updateGenre(Long songID, Long genreID) {
-        songService.updateGenre(songService.findSongByID(songID), genreID);
+    public SongDTO updateGenre(Long songID, Long genreID) {
+        return mappingService.mapTo(songService.updateGenre(songService.findSongByID(songID), genreID), SongDTO.class);
     }
 
     @Override
-    public void updateAlbum(Long songID, Long albumID) {
-        songService.updateAlbum(songService.findSongByID(songID), albumID);
+    public SongDTO updateAlbum(Long songID, Long albumID) {
+        return mappingService.mapTo(songService.updateAlbum(songService.findSongByID(songID), albumID), SongDTO.class);
     }
 
     @Override
     public SongDTO findSongByID(Long songID) {
         return mappingService.mapTo(songService.findSongByID(songID), SongDTO.class);
     }
+    
+    @Override
+    public SongDTO findSongByTitle(String songTitle) {
+        return mappingService.mapTo(songService.findSongByTitle(songTitle), SongDTO.class);
+    }
+
+    @Override
+    public List<SongDTO> findAll() {
+        return mappingService.mapToCollection(songService.findAll(), SongDTO.class);
+    }
 
     @Override
     public List<SongDTO> findAllSongsByMusician(Long musicianID) {
-        return mappingService.mapTo(songService.findAllSongsByMusician(musicianID), SongDTO.class);
+        return mappingService.mapToCollection(songService.findAllSongsByMusician(musicianID), SongDTO.class);
     }
 
     @Override
     public List<SongDTO> findAllSongsByGenre(Long genreID) {
-        return mappingService.mapTo(songService.findAllSongsByGenre(genreID), SongDTO.class);
+        return mappingService.mapToCollection(songService.findAllSongsByGenre(genreID), SongDTO.class);
     }
 
     @Override
     public List<SongDTO> findAllSongsByAlbum(Long albumID) {
-        return mappingService.mapTo(songService.findAllSongsByAlbum(albumID), SongDTO.class);
+        return mappingService.mapToCollection(songService.findAllSongsByAlbum(albumID), SongDTO.class);
     }
 
     @Override
     public List<SongDTO> findAllSongsByAlbumOrdered(Long albumID, boolean ascending) {
-        return mappingService.mapTo(songService.findAllSongsByAlbumOrdered(albumID, ascending), SongDTO.class);
+        return mappingService.mapToCollection(songService.findAllSongsByAlbumOrdered(albumID, ascending), SongDTO.class);
     }
 
     @Override
     public List<SongDTO> findAllSongsByMusicianAndReleaseYearRange(Long musicianID, int fromYear, int toYear) {
-        return mappingService.mapTo(songService.findAllSongsByMusicianAndReleaseYearRange(musicianID, fromYear, toYear), SongDTO.class);
+        return mappingService.mapToCollection(songService.findAllSongsByMusicianAndReleaseYearRange(musicianID, fromYear, toYear), SongDTO.class);
     }
+
+    
 
 }

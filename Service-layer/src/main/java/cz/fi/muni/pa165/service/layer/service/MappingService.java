@@ -11,5 +11,5 @@ import org.dozer.Mapper;
 public interface MappingService {   
     public Mapper getMapper();    
     public <T> T mapTo(Object objectToMap, Class<T> classToMapTo);
-    public <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass);
+    public <T> List<T> mapToCollection(Collection<?> objects, Class<T> mapToClass);
 }

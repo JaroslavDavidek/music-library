@@ -12,11 +12,17 @@ import cz.fi.muni.pa165.entity.Genre;
 import cz.fi.muni.pa165.entity.Musician;
 import cz.fi.muni.pa165.entity.Song;
 import cz.fi.muni.pa165.service.layer.config.MappingConfiguration;
+import cz.fi.muni.pa165.service.layer.service.MappingService;
 import cz.fi.muni.pa165.service.layer.service.SongService;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import org.dozer.Mapper;
+import org.mockito.InjectMocks;
+import static org.mockito.Matchers.any;
+import org.mockito.Mock;
+import static org.mockito.Mockito.when;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,23 +39,18 @@ import org.testng.annotations.Test;
 @ContextConfiguration(classes = MappingConfiguration.class)
 public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTests {
     
-    @Autowired
-    private SongFacade songFacade;
+    @Mock
+    private MappingService mappingService;
     
-    @Autowired
+    @Mock
+    private SongDao songDao;
+    
+    @Mock
     private SongService songService;
-
-    @Autowired
-    public SongDao songDao;
     
     @Autowired
-    public AlbumDao albumDao;
-    
-    @Autowired
-    public GenreDao genreDao;
-    
-    @Autowired
-    public MusicianDao musicianDao;
+    @InjectMocks
+    private SongFacade songFacade;
     
     private Musician acdc;
     
@@ -75,6 +76,7 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
     
     @BeforeClass
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         
         hardRock = new Genre();
         hardRock.setTitle("Hard Rock");
@@ -110,7 +112,7 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
         onEveryStreetAlbum.setTitle("On Every Street");
         
         shootToThrillSong = new Song();
-        shootToThrillSong.setTitle("Shoot To Thrill DTO");
+        shootToThrillSong.setTitle("Shoot To Thrill");
         shootToThrillSong.setAlbum(backInBlackAlbum);      
         shootToThrillSong.setGenre(hardRock);
         shootToThrillSong.setMusician(acdc);
@@ -134,9 +136,10 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
     }
 
     @Test
-    public void testCreateSong() {
-        
+    public void testCreateSong() {       
         System.out.println("createSong");
+        
+        when(songService.createSong(any(Song.class))).thenReturn(shootToThrillSong);
         Long createdSongID = songFacade.createSong(shootToThrillSongCreateDTO);
         storedSong = songService.findSongByID(createdSongID);
         assertEquals(storedSong.getId(), createdSongID);  
@@ -144,16 +147,17 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
 
   
     @Test
-    public void testDeleteSong() {
-        
+    public void testDeleteSong() {       
         System.out.println("deleteSong");
-        SongFacadeImplementation instance = new SongFacadeImplementation();
-        songFacade.deleteSong(storedSong.getId());
-        Song expectedResult = songService.findSongByID(storedSong.getId());
-        assertEquals(null, expectedResult);        
+        
+        when(songDao.delete(any(Song.class))).thenReturn(true);
+        when(songService.deleteSong(any(Song.class))).thenReturn(true);
+        when(songService.findSongByID(any(Long.class))).thenReturn(shootToThrillSong);
+        boolean expectedResult = songFacade.deleteSong(1l);
+        assertEquals(true, expectedResult);        
     }
 
-    
+    /*
     @Test
     public void testUpdateTitle() {
         System.out.println("updateTitle");
@@ -165,7 +169,7 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
         
     }
 
-    /*
+    
     @Test
     public void testUpdateBitrate() {
         System.out.println("updateBitrate");

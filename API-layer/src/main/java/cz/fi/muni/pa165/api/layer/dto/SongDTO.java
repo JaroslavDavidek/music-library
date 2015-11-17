@@ -49,27 +49,27 @@ public class SongDTO {
     }
     
     /*
-    public Album getAlbum() {
+    public AlbumDTO getAlbum() {
         return this.album;
     }
     
-    public void setAlbum(Album albumToSet) {
+    public void setAlbum(AlbumDTO albumToSet) {
         this.album = albumToSet;
     }
     
-    public Genre getGenre() {
+    public GenreDTO getGenre() {
         return this.genre;
     }
     
-    public void setGenre(Genre genreToSet) {
+    public void setGenre(GenreDTO genreToSet) {
         this.genre = genreToSet;
     }
     
-    public Musician getMusician() {
+    public MusicianDTO getMusician() {
         return this.musician;
     }
     
-    public void setMusician(Musician musicianToSet) {
+    public void setMusician(MusicianDTO musicianToSet) {
         this.musician = musicianToSet;
     }
     */ 
@@ -95,7 +95,7 @@ public class SongDTO {
     }
     
     public void setCommentary(String commentaryToSet) {
-        this.title = commentaryToSet;
+        this.commentary = commentaryToSet;
     }
     
     @Override

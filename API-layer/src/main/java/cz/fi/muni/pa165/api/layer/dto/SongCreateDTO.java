@@ -101,7 +101,7 @@ public class SongCreateDTO {
     }
     
     public void setCommentary(String commentaryToSet) {
-        this.title = commentaryToSet;
+        this.commentary = commentaryToSet;
     }
     
     // endregion Song getters/setters
@@ -110,11 +110,11 @@ public class SongCreateDTO {
     // region Album getters/setters
     
     public String getAlbumTitle() {
-        return this.title;
+        return this.albumTitle;
     }
 
     public void setAlbumTitle(String title) {
-        this.title = title;
+        this.albumTitle = title;
     }
 
     public Date getAlbumReleaseDate() {

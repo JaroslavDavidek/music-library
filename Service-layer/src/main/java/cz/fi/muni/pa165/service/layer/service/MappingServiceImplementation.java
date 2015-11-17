@@ -28,7 +28,7 @@ public class MappingServiceImplementation implements MappingService {
     }
     
     @Override
-    public <T> List<T> mapTo(Collection<?> objectsToMap, Class<T> classToMapTo) {
+    public <T> List<T> mapToCollection(Collection<?> objectsToMap, Class<T> classToMapTo) {
         List<T> mappedObjects = new ArrayList<>();
         for (Object object : objectsToMap)
         {

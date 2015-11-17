@@ -10,15 +10,17 @@ import java.util.List;
  */
 public interface SongFacade {   
     public Long createSong(SongCreateDTO song);
-    public void deleteSong(Long songID);
-    public void updateTitle(Long songID, String newTitle);
-    public void updateBitrate(Long songID, int newBitrate);
-    public void updateAlbumPosition(Long songID, int newAlbumPosition);
-    public void updateCommentary(Long songID, String newCommentary);
-    public void updateMusician(Long songID, Long musicianID);
-    public void updateGenre(Long songID, Long genreID);
-    public void updateAlbum(Long songID, Long albumID);
+    public boolean deleteSong(Long songID);
+    public SongDTO updateTitle(Long songID, String newTitle);
+    public SongDTO updateBitrate(Long songID, int newBitrate);
+    public SongDTO updateAlbumPosition(Long songID, int newAlbumPosition);
+    public SongDTO updateCommentary(Long songID, String newCommentary);
+    public SongDTO updateMusician(Long songID, Long musicianID);
+    public SongDTO updateGenre(Long songID, Long genreID);
+    public SongDTO updateAlbum(Long songID, Long albumID);
     public SongDTO findSongByID(Long songID);
+    public SongDTO findSongByTitle(String songTitle);
+    public List<SongDTO> findAll();
     public List<SongDTO> findAllSongsByMusician(Long musicianID);
     public List<SongDTO> findAllSongsByGenre(Long genreID);
     public List<SongDTO> findAllSongsByAlbum(Long albumID);

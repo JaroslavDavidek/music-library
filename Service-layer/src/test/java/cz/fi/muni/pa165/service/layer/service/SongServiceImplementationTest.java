@@ -235,7 +235,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         
         Musician expectedMusician = direStraits2;
         moneyForNothingAlternativeTakeSong.setMusician(expectedMusician);
-        when(musicianDao.findById(1l)).thenReturn(direStraits2);
+        when(musicianDao.findById(any(Long.class))).thenReturn(direStraits2);
         when(songDao.update(moneyForNothingSong)).thenReturn(moneyForNothingAlternativeTakeSong);      
         Song updatedResult = songService.updateMusician(moneyForNothingSong, 1l);
         assertEquals(expectedMusician, updatedResult.getMusician());
@@ -247,7 +247,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         
         Musician expectedMusician = null;
         moneyForNothingAlternativeTakeSong.setMusician(expectedMusician);
-        when(musicianDao.findById(1l)).thenReturn(direStraits2);
+        when(musicianDao.findById(any(Long.class))).thenReturn(direStraits2);
         when(songDao.update(moneyForNothingSong)).thenReturn(moneyForNothingAlternativeTakeSong);      
         Song updatedResult = songService.updateMusician(moneyForNothingSong, -1l);
         assertEquals(expectedMusician, updatedResult);
@@ -259,7 +259,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         
         Genre expectedGenre = progressiveRock;
         moneyForNothingAlternativeTakeSong.setGenre(expectedGenre);
-        when(genreDao.findById(1l)).thenReturn(progressiveRock);
+        when(genreDao.findById(any(Long.class))).thenReturn(progressiveRock);
         when(songDao.update(moneyForNothingSong)).thenReturn(moneyForNothingAlternativeTakeSong);      
         Song updatedResult = songService.updateGenre(moneyForNothingSong, 1l);
         assertEquals(expectedGenre, updatedResult.getGenre());      
@@ -271,7 +271,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         
         Genre expectedGenre = null;
         moneyForNothingAlternativeTakeSong.setGenre(expectedGenre);
-        when(genreDao.findById(1l)).thenReturn(progressiveRock);
+        when(genreDao.findById(any(Long.class))).thenReturn(progressiveRock);
         when(songDao.update(moneyForNothingSong)).thenReturn(moneyForNothingAlternativeTakeSong);      
         Song updatedResult = songService.updateGenre(moneyForNothingSong, -1l);
         assertEquals(expectedGenre, updatedResult);      
@@ -283,7 +283,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         
         Album expectedAlbum = onEveryStreetAlbum;
         moneyForNothingAlternativeTakeSong.setAlbum(onEveryStreetAlbum);
-        when(albumDao.findById(1l)).thenReturn(onEveryStreetAlbum);
+        when(albumDao.findById(any(Long.class))).thenReturn(onEveryStreetAlbum);
         when(songDao.update(moneyForNothingSong)).thenReturn(moneyForNothingAlternativeTakeSong);      
         Song updatedResult = songService.updateAlbum(moneyForNothingSong, 1l);
         assertEquals(expectedAlbum, updatedResult.getAlbum());
@@ -295,7 +295,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         
         Album expectedAlbum = null;
         moneyForNothingAlternativeTakeSong.setAlbum(onEveryStreetAlbum);
-        when(albumDao.findById(1l)).thenReturn(onEveryStreetAlbum);
+        when(albumDao.findById(any(Long.class))).thenReturn(onEveryStreetAlbum);
         when(songDao.update(moneyForNothingSong)).thenReturn(moneyForNothingAlternativeTakeSong);      
         Song updatedResult = songService.updateAlbum(moneyForNothingSong, -1l);
         assertEquals(expectedAlbum, updatedResult);
@@ -305,7 +305,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
     public void testFindSongByID1() {
         System.out.println("findSongByID1");
       
-        when(songDao.findById(1l)).thenReturn(moneyForNothingAlternativeTakeSong);
+        when(songDao.findById(any(Long.class))).thenReturn(moneyForNothingAlternativeTakeSong);
         Song result = songService.findSongByID(1l);
         assertEquals(moneyForNothingAlternativeTakeSong, result);
     }
@@ -314,7 +314,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
     public void testFindSongByID2() {
         System.out.println("findSongByID2");
       
-        when(songDao.findById(-1l)).thenThrow(new InvalidParamDataAccessExpection("SongDao - findById - invalid index param passed"));
+        when(songDao.findById(any(Long.class))).thenThrow(new InvalidParamDataAccessExpection("SongDao - findById - invalid index param passed"));
         Song result = songService.findSongByID(-1l);
         assertEquals(moneyForNothingAlternativeTakeSong, result);
     }
@@ -365,7 +365,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         expectedResult.add(this.oneWorldSong);
         expectedResult.add(this.heavyFuelSong);      
         when(songDao.findAllByMusician(direStraits)).thenReturn(expectedResult);
-        when(musicianDao.findById(1l)).thenReturn(direStraits);
+        when(musicianDao.findById(any(Long.class))).thenReturn(direStraits);
         List<Song> foundSongs = songService.findAllSongsByMusician(1l);
         Assert.assertEquals(expectedResult.size(), foundSongs.size());
         for(int i = 0; i < expectedResult.size(); i++)
@@ -379,7 +379,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         System.out.println("findAllSongsByMusician2");
         
         List<Song> expectedResult = new ArrayList<>();    
-        when(musicianDao.findById(-1l)).thenReturn(null);
+        when(musicianDao.findById(any(Long.class))).thenReturn(null);
         List<Song> foundSongs = songService.findAllSongsByMusician(-1l);
         Assert.assertEquals(expectedResult.size(), foundSongs.size());
         for(int i = 0; i < expectedResult.size(); i++)
@@ -398,7 +398,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         expectedResult.add(this.moneyForNothingSong);
         expectedResult.add(this.yourLatestTrickSong);      
         when(songDao.findAllByGenre(rock)).thenReturn(expectedResult);
-        when(genreDao.findById(1l)).thenReturn(rock);
+        when(genreDao.findById(any(Long.class))).thenReturn(rock);
         List<Song> foundSongs = songService.findAllSongsByGenre(1l);
         Assert.assertEquals(expectedResult.size(), foundSongs.size());
         for(int i = 0; i < expectedResult.size(); i++)
@@ -412,7 +412,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         System.out.println("findAllSongsByGenre2");
         
         List<Song> expectedResult = new ArrayList<>();    
-        when(genreDao.findById(-1l)).thenReturn(null);
+        when(genreDao.findById(any(Long.class))).thenReturn(null);
         List<Song> foundSongs = songService.findAllSongsByGenre(-1l);
         Assert.assertEquals(expectedResult.size(), foundSongs.size());
         for(int i = 0; i < expectedResult.size(); i++)
@@ -430,7 +430,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         expectedResult.add(this.moneyForNothingSong);
         expectedResult.add(this.yourLatestTrickSong);      
         when(songDao.findAllByAlbum(brothersInArmsAlbum)).thenReturn(expectedResult);
-        when(albumDao.findById(1l)).thenReturn(brothersInArmsAlbum);
+        when(albumDao.findById(any(Long.class))).thenReturn(brothersInArmsAlbum);
         List<Song> foundSongs = songService.findAllSongsByAlbum(1l);
         Assert.assertEquals(expectedResult.size(), foundSongs.size());
         for(int i = 0; i < expectedResult.size(); i++)
@@ -444,7 +444,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         System.out.println("findAllSongsByAlbum2");
         
         List<Song> expectedResult = new ArrayList<>();    
-        when(albumDao.findById(-1l)).thenReturn(null);
+        when(albumDao.findById(any(Long.class))).thenReturn(null);
         List<Song> foundSongs = songService.findAllSongsByAlbum(-1l);
         Assert.assertEquals(expectedResult.size(), foundSongs.size());
         for(int i = 0; i < expectedResult.size(); i++)
@@ -463,7 +463,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         expectedResult.add(this.moneyForNothingSong);       // album position: 2 
         expectedResult.add(this.yourLatestTrickSong);       // album position: 4  
         when(songDao.findAllByAlbum(brothersInArmsAlbum)).thenReturn(expectedResult);
-        when(albumDao.findById(1l)).thenReturn(brothersInArmsAlbum);
+        when(albumDao.findById(any(Long.class))).thenReturn(brothersInArmsAlbum);
         List<Song> foundSongs = songService.findAllSongsByAlbumOrdered(1l, true);
         Assert.assertEquals(expectedResult.size(), foundSongs.size());
         for(int i = 0; i < expectedResult.size(); i++)
@@ -484,7 +484,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         expectedResult.add(this.moneyForNothingSong);       // album position: 2 
         expectedResult.add(this.yourLatestTrickSong);       // album position: 4  
         when(songDao.findAllByAlbum(brothersInArmsAlbum)).thenReturn(expectedResult);
-        when(albumDao.findById(-1l)).thenReturn(null);
+        when(albumDao.findById(any(Long.class))).thenReturn(null);
         List<Song> foundSongs = songService.findAllSongsByAlbumOrdered(-1l, true);
         Assert.assertEquals(0, foundSongs.size());
     }
@@ -499,7 +499,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         expectedResult.add(this.moneyForNothingSong);       // album position: 2 
         expectedResult.add(this.yourLatestTrickSong);       // album position: 4  
         when(songDao.findAllByAlbum(brothersInArmsAlbum)).thenReturn(expectedResult);
-        when(albumDao.findById(1l)).thenReturn(brothersInArmsAlbum);
+        when(albumDao.findById(any(Long.class))).thenReturn(brothersInArmsAlbum);
         List<Song> foundSongs = songService.findAllSongsByAlbumOrdered(1l, false);
         Assert.assertEquals(expectedResult.size(), foundSongs.size());
         for(int i = 0; i < expectedResult.size(); i++)
@@ -520,7 +520,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         expectedResult.add(this.moneyForNothingSong);       // album position: 2 
         expectedResult.add(this.yourLatestTrickSong);       // album position: 4  
         when(songDao.findAllByAlbum(brothersInArmsAlbum)).thenReturn(expectedResult);
-        when(albumDao.findById(-1l)).thenReturn(null);
+        when(albumDao.findById(any(Long.class))).thenReturn(null);
         List<Song> foundSongs = songService.findAllSongsByAlbumOrdered(-1l, false);
         Assert.assertEquals(0, foundSongs.size());
     }
@@ -539,7 +539,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         expectedResult.add(this.yourLatestTrickSong);
         expectedResult.add(this.oneWorldSong);
         when(songDao.findAllByMusician(direStraits)).thenReturn(allSongsByDireStraits);
-        when(musicianDao.findById(1l)).thenReturn(direStraits);
+        when(musicianDao.findById(any(Long.class))).thenReturn(direStraits);
         List<Song> foundSongs = songService.findAllSongsByMusicianAndReleaseYearRange(1l, 1982, 1986);
         Assert.assertEquals(expectedResult.size(), foundSongs.size());
         for(int i = 0; i < expectedResult.size(); i++)
@@ -559,7 +559,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         allSongsByDireStraits.add(this.heavyFuelSong);
         List<Song> expectedResult = allSongsByDireStraits;       
         when(songDao.findAllByMusician(direStraits)).thenReturn(allSongsByDireStraits);
-        when(musicianDao.findById(1l)).thenReturn(direStraits);
+        when(musicianDao.findById(any(Long.class))).thenReturn(direStraits);
         List<Song> foundSongs = songService.findAllSongsByMusicianAndReleaseYearRange(1l, 1985, 1991);
         Assert.assertEquals(expectedResult.size(), foundSongs.size());
         for(int i = 0; i < expectedResult.size(); i++)
@@ -578,7 +578,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         allSongsByDireStraits.add(this.oneWorldSong);
         allSongsByDireStraits.add(this.heavyFuelSong);      
         when(songDao.findAllByMusician(direStraits)).thenReturn(allSongsByDireStraits);
-        when(musicianDao.findById(1l)).thenReturn(direStraits);
+        when(musicianDao.findById(any(Long.class))).thenReturn(direStraits);
         List<Song> foundSongs = songService.findAllSongsByMusicianAndReleaseYearRange(1l, 1982, 1984);
         Assert.assertEquals(0, foundSongs.size());
     }
@@ -593,7 +593,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         allSongsByDireStraits.add(this.oneWorldSong);
         allSongsByDireStraits.add(this.heavyFuelSong);      
         when(songDao.findAllByMusician(direStraits)).thenReturn(allSongsByDireStraits);
-        when(musicianDao.findById(1l)).thenReturn(direStraits);
+        when(musicianDao.findById(any(Long.class))).thenReturn(direStraits);
         List<Song> foundSongs = songService.findAllSongsByMusicianAndReleaseYearRange(1l, 1992, 1982);
         Assert.assertEquals(0, foundSongs.size());
     }
@@ -602,7 +602,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
     public void testFindAllSongsByMusicianAndReleaseYearRange5() {
         System.out.println("findAllSongsByMusicianAndReleaseYearRange5");
               
-        when(musicianDao.findById(-1l)).thenReturn(null);
+        when(musicianDao.findById(any(Long.class))).thenReturn(null);
         List<Song> foundSongs = songService.findAllSongsByMusicianAndReleaseYearRange(-1l, 1984, 1987);
         Assert.assertEquals(0, foundSongs.size());
     }

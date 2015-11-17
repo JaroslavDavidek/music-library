@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.service.layer.service;
 
-import cz.fi.muni.pa165.api.layer.dto.SongDTO;
 import cz.fi.muni.pa165.dao.AlbumDao;
 import cz.fi.muni.pa165.dao.GenreDao;
 import cz.fi.muni.pa165.dao.MusicianDao;
@@ -14,8 +13,6 @@ import cz.fi.muni.pa165.service.layer.config.MappingConfiguration;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Inject;
-import org.dozer.Mapper;
 import org.mockito.InjectMocks;
 import static org.mockito.Matchers.any;
 import org.mockito.Mock;
@@ -23,12 +20,10 @@ import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.Assert;
 import static org.testng.Assert.assertEquals;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -456,32 +451,159 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         {
             Assert.assertEquals(expectedResult.get(i), foundSongs.get(i));
         }
-    }
-    
+    }   
     
     @Test
-    public void testFindAllSongsByAlbumOrdered() {
-        System.out.println("findAllSongsByAlbumOrdered");
-        Long albumID = null;
-        boolean ascending = false;
-        SongServiceImplementation instance = new SongServiceImplementation();
-        List<Song> expResult = null;
-        List<Song> result = instance.findAllSongsByAlbumOrdered(albumID, ascending);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
+    public void testFindAllSongsByAlbumOrderedAscending1() {
+        System.out.println("findAllSongsByAlbumOrderedAscending1");
         
+        int albumPosition = 0;
+        List<Song> expectedResult = new ArrayList<>();    
+        expectedResult.add(this.oneWorldSong);              // album position: 8 
+        expectedResult.add(this.moneyForNothingSong);       // album position: 2 
+        expectedResult.add(this.yourLatestTrickSong);       // album position: 4  
+        when(songDao.findAllByAlbum(brothersInArmsAlbum)).thenReturn(expectedResult);
+        when(albumDao.findById(1l)).thenReturn(brothersInArmsAlbum);
+        List<Song> foundSongs = songService.findAllSongsByAlbumOrdered(1l, true);
+        Assert.assertEquals(expectedResult.size(), foundSongs.size());
+        for(int i = 0; i < expectedResult.size(); i++)
+        {
+            int itemAlbumPosition = expectedResult.get(i).getAlbumPosition();
+            Assert.assertTrue(albumPosition <= itemAlbumPosition);
+            albumPosition = itemAlbumPosition;
+        }
     }
-   /*
+    
     @Test
-    public void testFindAllSongsByMusicianAndReleaseYearRange() {
-        System.out.println("findAllSongsByMusicianAndReleaseYearRange");
-        Long musicianID = null;
-        int fromYear = 0;
-        int toYear = 0;
-        SongServiceImplementation instance = new SongServiceImplementation();
-        List<Song> expResult = null;
-        List<Song> result = instance.findAllSongsByMusicianAndReleaseYearRange(musicianID, fromYear, toYear);
-        assertEquals(expResult, result);
+    public void testFindAllSongsByAlbumOrderedAscending2() {
+        System.out.println("findAllSongsByAlbumOrderedAscending2");
+        
+        int albumPosition = 0;
+        List<Song> expectedResult = new ArrayList<>();    
+        expectedResult.add(this.oneWorldSong);              // album position: 8 
+        expectedResult.add(this.moneyForNothingSong);       // album position: 2 
+        expectedResult.add(this.yourLatestTrickSong);       // album position: 4  
+        when(songDao.findAllByAlbum(brothersInArmsAlbum)).thenReturn(expectedResult);
+        when(albumDao.findById(-1l)).thenReturn(null);
+        List<Song> foundSongs = songService.findAllSongsByAlbumOrdered(-1l, true);
+        Assert.assertEquals(0, foundSongs.size());
     }
-    */
+    
+    @Test
+    public void testFindAllSongsByAlbumOrderedDescending1() {
+        System.out.println("findAllSongsByAlbumOrderedDescending1");
+        
+        int albumPosition = 100;
+        List<Song> expectedResult = new ArrayList<>();    
+        expectedResult.add(this.oneWorldSong);              // album position: 8 
+        expectedResult.add(this.moneyForNothingSong);       // album position: 2 
+        expectedResult.add(this.yourLatestTrickSong);       // album position: 4  
+        when(songDao.findAllByAlbum(brothersInArmsAlbum)).thenReturn(expectedResult);
+        when(albumDao.findById(1l)).thenReturn(brothersInArmsAlbum);
+        List<Song> foundSongs = songService.findAllSongsByAlbumOrdered(1l, false);
+        Assert.assertEquals(expectedResult.size(), foundSongs.size());
+        for(int i = 0; i < expectedResult.size(); i++)
+        {
+            int itemAlbumPosition = expectedResult.get(i).getAlbumPosition();
+            Assert.assertTrue(albumPosition >= itemAlbumPosition);
+            albumPosition = itemAlbumPosition;
+        }
+    }
+    
+    @Test
+    public void testFindAllSongsByAlbumOrderedDescending2() {
+        System.out.println("findAllSongsByAlbumOrderedDescending2");
+        
+        int albumPosition = 100;
+        List<Song> expectedResult = new ArrayList<>();    
+        expectedResult.add(this.oneWorldSong);              // album position: 8 
+        expectedResult.add(this.moneyForNothingSong);       // album position: 2 
+        expectedResult.add(this.yourLatestTrickSong);       // album position: 4  
+        when(songDao.findAllByAlbum(brothersInArmsAlbum)).thenReturn(expectedResult);
+        when(albumDao.findById(-1l)).thenReturn(null);
+        List<Song> foundSongs = songService.findAllSongsByAlbumOrdered(-1l, false);
+        Assert.assertEquals(0, foundSongs.size());
+    }
+       
+    @Test
+    public void testFindAllSongsByMusicianAndReleaseYearRange1() {
+        System.out.println("findAllSongsByMusicianAndReleaseYearRange1");
+        
+        List<Song> allSongsByDireStraits = new ArrayList<>();
+        allSongsByDireStraits.add(this.moneyForNothingSong);
+        allSongsByDireStraits.add(this.yourLatestTrickSong);
+        allSongsByDireStraits.add(this.oneWorldSong);
+        allSongsByDireStraits.add(this.heavyFuelSong);       
+        List<Song> expectedResult = new ArrayList<>();
+        expectedResult.add(this.moneyForNothingSong);
+        expectedResult.add(this.yourLatestTrickSong);
+        expectedResult.add(this.oneWorldSong);
+        when(songDao.findAllByMusician(direStraits)).thenReturn(allSongsByDireStraits);
+        when(musicianDao.findById(1l)).thenReturn(direStraits);
+        List<Song> foundSongs = songService.findAllSongsByMusicianAndReleaseYearRange(1l, 1982, 1986);
+        Assert.assertEquals(expectedResult.size(), foundSongs.size());
+        for(int i = 0; i < expectedResult.size(); i++)
+        {
+            Assert.assertEquals(expectedResult.get(i), foundSongs.get(i));
+        }
+    }
+    
+    @Test
+    public void testFindAllSongsByMusicianAndReleaseYearRange2() {
+        System.out.println("findAllSongsByMusicianAndReleaseYearRange2");
+        
+        List<Song> allSongsByDireStraits = new ArrayList<>();
+        allSongsByDireStraits.add(this.moneyForNothingSong);
+        allSongsByDireStraits.add(this.yourLatestTrickSong);
+        allSongsByDireStraits.add(this.oneWorldSong);
+        allSongsByDireStraits.add(this.heavyFuelSong);
+        List<Song> expectedResult = allSongsByDireStraits;       
+        when(songDao.findAllByMusician(direStraits)).thenReturn(allSongsByDireStraits);
+        when(musicianDao.findById(1l)).thenReturn(direStraits);
+        List<Song> foundSongs = songService.findAllSongsByMusicianAndReleaseYearRange(1l, 1985, 1991);
+        Assert.assertEquals(expectedResult.size(), foundSongs.size());
+        for(int i = 0; i < expectedResult.size(); i++)
+        {
+            Assert.assertEquals(expectedResult.get(i), foundSongs.get(i));
+        }
+    }
+    
+    @Test
+    public void testFindAllSongsByMusicianAndReleaseYearRange3() {
+        System.out.println("findAllSongsByMusicianAndReleaseYearRange3");
+        
+        List<Song> allSongsByDireStraits = new ArrayList<>();
+        allSongsByDireStraits.add(this.moneyForNothingSong);
+        allSongsByDireStraits.add(this.yourLatestTrickSong);
+        allSongsByDireStraits.add(this.oneWorldSong);
+        allSongsByDireStraits.add(this.heavyFuelSong);      
+        when(songDao.findAllByMusician(direStraits)).thenReturn(allSongsByDireStraits);
+        when(musicianDao.findById(1l)).thenReturn(direStraits);
+        List<Song> foundSongs = songService.findAllSongsByMusicianAndReleaseYearRange(1l, 1982, 1984);
+        Assert.assertEquals(0, foundSongs.size());
+    }
+    
+    @Test
+    public void testFindAllSongsByMusicianAndReleaseYearRange4() {
+        System.out.println("findAllSongsByMusicianAndReleaseYearRange4");
+        
+        List<Song> allSongsByDireStraits = new ArrayList<>();
+        allSongsByDireStraits.add(this.moneyForNothingSong);
+        allSongsByDireStraits.add(this.yourLatestTrickSong);
+        allSongsByDireStraits.add(this.oneWorldSong);
+        allSongsByDireStraits.add(this.heavyFuelSong);      
+        when(songDao.findAllByMusician(direStraits)).thenReturn(allSongsByDireStraits);
+        when(musicianDao.findById(1l)).thenReturn(direStraits);
+        List<Song> foundSongs = songService.findAllSongsByMusicianAndReleaseYearRange(1l, 1992, 1982);
+        Assert.assertEquals(0, foundSongs.size());
+    }
+  
+    @Test
+    public void testFindAllSongsByMusicianAndReleaseYearRange5() {
+        System.out.println("findAllSongsByMusicianAndReleaseYearRange5");
+              
+        when(musicianDao.findById(-1l)).thenReturn(null);
+        List<Song> foundSongs = songService.findAllSongsByMusicianAndReleaseYearRange(-1l, 1984, 1987);
+        Assert.assertEquals(0, foundSongs.size());
+    }
 }

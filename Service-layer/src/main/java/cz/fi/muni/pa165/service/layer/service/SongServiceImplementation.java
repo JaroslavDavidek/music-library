@@ -194,7 +194,7 @@ public class SongServiceImplementation implements SongService{
         following implementation is used */
         List<Song> filteredSongs = new ArrayList<>();
         List<Song> allSongsByMusician = this.findAllSongsByMusician(musicianID);
-        if(allSongsByMusician.isEmpty())
+        if(allSongsByMusician.isEmpty() || fromYear > toYear)
         {
             return filteredSongs;
         }

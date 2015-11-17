@@ -104,7 +104,7 @@ public class Song {
     }
     
     public void setCommentary(String commentaryToSet) {
-        this.title = commentaryToSet;
+        this.commentary = commentaryToSet;
     }
     
     @Override

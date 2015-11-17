@@ -9,15 +9,17 @@ import java.util.List;
  */
 public interface SongService {  
     public Song createSong(Song song);
-    public void deleteSong(Song song);
-    public void updateTitle(Song song, String newTitle);
-    public void updateBitrate(Song song, int newBitrate);
-    public void updateAlbumPosition(Song song, int newAlbumPosition);
-    public void updateCommentary(Song song, String  newCommentary);
-    public void updateMusician(Song song, Long musicianID);
-    public void updateGenre(Song song, Long genreID);
-    public void updateAlbum(Song song, Long albumID);
+    public boolean deleteSong(Song song);
+    public Song updateTitle(Song song, String newTitle);
+    public Song updateBitrate(Song song, int newBitrate);
+    public Song updateAlbumPosition(Song song, int newAlbumPosition);
+    public Song updateCommentary(Song song, String  newCommentary);
+    public Song updateMusician(Song song, Long musicianID);
+    public Song updateGenre(Song song, Long genreID);
+    public Song updateAlbum(Song song, Long albumID);
     public Song findSongByID(Long songID);
+    public Song findSongByTitle(String songTitle);
+    public List<Song> findAll();
     public List<Song> findAllSongsByMusician(Long musicianID);
     public List<Song> findAllSongsByGenre(Long genreID);
     public List<Song> findAllSongsByAlbum(Long albumID);

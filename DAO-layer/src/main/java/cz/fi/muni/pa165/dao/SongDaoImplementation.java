@@ -10,7 +10,6 @@ import cz.fi.muni.pa165.exception.InvalidParamDataAccessExpection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -33,6 +32,9 @@ public class SongDaoImplementation implements SongDao {
 
     @Override
     public Song findByTitle(String songTitle) {
+        if(songTitle == null){
+            throw new InvalidParamDataAccessExpection("SongDao - findByTitle - null songTitle param passed") {};
+        }
         return em.createQuery(
                 "SELECT s FROM Song s WHERE s.title= :songTitle", Song.class)
                 .setParameter("songTitle", songTitle)

@@ -42,75 +42,92 @@ public class SongServiceImplementation implements SongService{
     
     @Override
     public Song createSong(Song song) {
-        songDao.create(song);
-        return song;
+        if(songDao.create(song))
+        {
+            return song;
+        }
+        return null;
     }
 
     @Override
-    public void deleteSong(Song song) {
-        songDao.delete(song);
+    public boolean deleteSong(Song song) {
+        return songDao.delete(song);
     }
 
     @Override
-    public void updateTitle(Song song, String newTitle) {
+    public Song updateTitle(Song song, String newTitle) {
         if(newTitle != null && !newTitle.isEmpty())
         {
             song.setTitle(newTitle);
+            return songDao.update(song);
         }
-        songDao.update(song);
+        return null;
     }
 
     @Override
-    public void updateBitrate(Song song, int newBitrate) {
+    public Song updateBitrate(Song song, int newBitrate) {
         song.setBitrate(newBitrate);
-        songDao.update(song);
+        return songDao.update(song);
     }
 
     @Override
-    public void updateAlbumPosition(Song song, int newAlbumPosition) {
+    public Song updateAlbumPosition(Song song, int newAlbumPosition) {
         song.setAlbumPosition(newAlbumPosition);
-        songDao.update(song);
+        return songDao.update(song);
     }
 
     @Override
-    public void updateCommentary(Song song, String newCommentary) {
+    public Song updateCommentary(Song song, String newCommentary) {
         song.setCommentary(newCommentary);
-        songDao.update(song);
+        return songDao.update(song);
     }
 
     @Override
-    public void updateMusician(Song song, Long musicianID) {
+    public Song updateMusician(Song song, Long musicianID) {
         Musician musician = musicianDao.findById(musicianID);
         if(musician != null)
         {
             song.setMusician(musician);
-            songDao.update(song);
+            return songDao.update(song);
         }
+        return null;
     }
 
     @Override
-    public void updateGenre(Song song, Long genreID) {
+    public Song updateGenre(Song song, Long genreID) {
         Genre genre = genreDao.findById(genreID);
         if(genre != null)
         {
             song.setGenre(genre);
-            songDao.update(song);
+            return songDao.update(song);
         }
+        return null;
     }
 
     @Override
-    public void updateAlbum(Song song, Long albumID) {
+    public Song updateAlbum(Song song, Long albumID) {
         Album album = albumDao.findById(albumID);
         if(album != null)
         {
             song.setAlbum(album);
-            songDao.update(song);
+            return songDao.update(song);
         }
+        return null;
     }
 
     @Override
     public Song findSongByID(Long songID) {
         return songDao.findById(songID);
+    }
+    
+    @Override
+    public Song findSongByTitle(String songTitle) {
+        return songDao.findByTitle(songTitle);
+    }
+    
+    @Override
+    public List<Song> findAll() {
+        return songDao.findAll();
     }
 
     @Override

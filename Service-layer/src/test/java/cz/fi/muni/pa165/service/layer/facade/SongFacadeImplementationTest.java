@@ -53,11 +53,21 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
     
     private Musician acdc;
     
+    private Musician direStraits;
+    
     private Genre hardRock;
+    
+    private Genre rock;
     
     private Album backInBlackAlbum;
     
+    private Album brothersInArmsAlbum;
+    
+    private Album onEveryStreetAlbum;
+    
     private Song shootToThrillSong;
+    
+    private Song storedSong;
     
     private SongDTO shootToThrillSongDTO;
     
@@ -69,19 +79,35 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
         hardRock = new Genre();
         hardRock.setTitle("Hard Rock");
         hardRock.setYearOfOrigin(1970); 
-        //genreDao.create(hardRock);
+        
+        rock = new Genre();
+        rock.setTitle("Hard Rock");
+        rock.setYearOfOrigin(1950); 
         
         acdc = new Musician();
         acdc.setRealName("Brian Johnson");
         acdc.setArtistName("AC/DC");
         acdc.setDateOfBirth(Date.valueOf("1945-10-15"));
-        //musicianDao.create(acdc);
+        
+        direStraits = new Musician();
+        direStraits.setRealName("Mark Knopfler");
+        direStraits.setArtistName("Dire Straits");
+        direStraits.setDateOfBirth(Date.valueOf("1949-12-8"));
 
         backInBlackAlbum = new Album();
         backInBlackAlbum.setMusician(acdc);
         backInBlackAlbum.setReleaseDate(Date.valueOf("1980-7-25"));
         backInBlackAlbum.setTitle("Back In Black");
-        //albumDao.create(backInBlackAlbum);
+        
+        brothersInArmsAlbum = new Album();
+        brothersInArmsAlbum.setMusician(direStraits);
+        brothersInArmsAlbum.setReleaseDate(Date.valueOf("1985-6-13"));
+        brothersInArmsAlbum.setTitle("Brothers in Arms");
+        
+        onEveryStreetAlbum = new Album();
+        onEveryStreetAlbum.setMusician(direStraits);
+        onEveryStreetAlbum.setReleaseDate(Date.valueOf("1991-10-11"));
+        onEveryStreetAlbum.setTitle("On Every Street");
         
         shootToThrillSong = new Song();
         shootToThrillSong.setTitle("Shoot To Thrill DTO");
@@ -90,7 +116,6 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
         shootToThrillSong.setMusician(acdc);
         shootToThrillSong.setAlbumPosition(2);
         shootToThrillSong.setBitrate(320);
-        //songDao.create(shootToThrillSong);
         
         shootToThrillSongCreateDTO = new SongCreateDTO();
         shootToThrillSongCreateDTO.setTitle(shootToThrillSong.getTitle());
@@ -112,26 +137,23 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
     public void testCreateSong() {
         
         System.out.println("createSong");
-        Long expectedID = 3l;
         Long createdSongID = songFacade.createSong(shootToThrillSongCreateDTO);
-        Song song = songService.findSongByID(createdSongID);
-        assertEquals(song.getId(), createdSongID);  
+        storedSong = songService.findSongByID(createdSongID);
+        assertEquals(storedSong.getId(), createdSongID);  
+    }
+
+  
+    @Test
+    public void testDeleteSong() {
+        
+        System.out.println("deleteSong");
+        SongFacadeImplementation instance = new SongFacadeImplementation();
+        songFacade.deleteSong(storedSong.getId());
+        Song expectedResult = songService.findSongByID(storedSong.getId());
+        assertEquals(null, expectedResult);        
     }
 
     
-    @Test
-    public void testDeleteSong() {
-        /*
-        System.out.println("deleteSong");
-        Long songID = null;
-        SongFacadeImplementation instance = new SongFacadeImplementation();
-        instance.deleteSong(songID);
-        // TODO review the generated test code and remove the default call to fail.
-        */
-        
-    }
-
-    /*
     @Test
     public void testUpdateTitle() {
         System.out.println("updateTitle");
@@ -143,7 +165,7 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
         
     }
 
-    
+    /*
     @Test
     public void testUpdateBitrate() {
         System.out.println("updateBitrate");

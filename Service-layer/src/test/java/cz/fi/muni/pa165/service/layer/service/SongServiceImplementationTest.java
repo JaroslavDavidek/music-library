@@ -580,14 +580,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
     
     @Test
     public void testFindAllSongsByMusicianAndReleaseYearRange2() {
-        System.out.println("findAllSongsByMusicianAndReleaseYearRange2");
-        
-        List<Song> allSongs = new ArrayList<>();
-        allSongs.add(this.moneyForNothingSong);
-        allSongs.add(this.yourLatestTrickSong);
-        allSongs.add(this.oneWorldSong);
-        allSongs.add(this.heavyFuelSong);
-        allSongs.add(this.);
+        System.out.println("findAllSongsByMusicianAndReleaseYearRange2");       
         
         List<Song> allSongsByDireStraits = new ArrayList<>();
         allSongsByDireStraits.add(this.moneyForNothingSong);

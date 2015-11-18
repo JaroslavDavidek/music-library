@@ -51,12 +51,16 @@ public class SongServiceImplementation implements SongService{
 
     @Override
     public boolean deleteSong(Song song) {
-        return songDao.delete(song);
+        if(song != null)
+        {
+            return songDao.delete(song);
+        }
+        return false;
     }
 
     @Override
     public Song updateTitle(Song song, String newTitle) {
-        if(newTitle != null && !newTitle.isEmpty())
+        if(song != null && newTitle != null && !newTitle.isEmpty())
         {
             song.setTitle(newTitle);
             return songDao.update(song);
@@ -66,26 +70,38 @@ public class SongServiceImplementation implements SongService{
 
     @Override
     public Song updateBitrate(Song song, int newBitrate) {
-        song.setBitrate(newBitrate);
-        return songDao.update(song);
+        if(song != null)
+        {
+            song.setBitrate(newBitrate);
+            return songDao.update(song);
+        }
+        return null;
     }
 
     @Override
     public Song updateAlbumPosition(Song song, int newAlbumPosition) {
-        song.setAlbumPosition(newAlbumPosition);
-        return songDao.update(song);
+        if(song != null)
+        {
+            song.setAlbumPosition(newAlbumPosition);
+            return songDao.update(song);
+        }
+        return null;
     }
 
     @Override
     public Song updateCommentary(Song song, String newCommentary) {
-        song.setCommentary(newCommentary);
-        return songDao.update(song);
+        if(song != null)
+        {
+            song.setCommentary(newCommentary);
+            return songDao.update(song);
+        }
+        return null;
     }
 
     @Override
     public Song updateMusician(Song song, Long musicianID) {
         Musician musician = musicianDao.findById(musicianID);
-        if(musician != null)
+        if(song != null && musician != null)
         {
             song.setMusician(musician);
             return songDao.update(song);
@@ -96,7 +112,7 @@ public class SongServiceImplementation implements SongService{
     @Override
     public Song updateGenre(Song song, Long genreID) {
         Genre genre = genreDao.findById(genreID);
-        if(genre != null)
+        if(song != null && genre != null)
         {
             song.setGenre(genre);
             return songDao.update(song);
@@ -107,7 +123,7 @@ public class SongServiceImplementation implements SongService{
     @Override
     public Song updateAlbum(Song song, Long albumID) {
         Album album = albumDao.findById(albumID);
-        if(album != null)
+        if(song != null && album != null)
         {
             song.setAlbum(album);
             return songDao.update(song);

@@ -18,14 +18,14 @@ public class SongDTO {
     @Size(min = 1, max = 128)
     private String title;
     
-    //@Valid
-    //private AlbumDTO album;
+    @Valid
+    private AlbumDTO album;
     
-    //@Valid
-    //private GenreDTO genre;
+    @Valid
+    private GenreDTO genre;
     
-    //@Valid
-    //private MusicianDTO musician;
+    @Valid
+    private MusicianDTO musician;
     
     @Min(0)
     private int bitrate;
@@ -47,8 +47,7 @@ public class SongDTO {
     public void setTitle(String titleToSet) {
         this.title = titleToSet;
     }
-    
-    /*
+       
     public AlbumDTO getAlbum() {
         return this.album;
     }
@@ -71,8 +70,7 @@ public class SongDTO {
     
     public void setMusician(MusicianDTO musicianToSet) {
         this.musician = musicianToSet;
-    }
-    */ 
+    } 
     
     public int getBitrate() {
         return this.bitrate;
@@ -113,8 +111,7 @@ public class SongDTO {
         if(this.commentary != null){
             hashCode += Objects.hash(commentary) * primeTwo;
         }
-        
-        /*
+             
         if(this.album != null){
             hashCode += album.hashCode() * primeTwo;
         }
@@ -125,7 +122,6 @@ public class SongDTO {
         if(this.musician != null){
             hashCode += musician.hashCode() * primeTwo;
         }
-        */
 
         return hashCode;
     }
@@ -151,11 +147,6 @@ public class SongDTO {
         if(this.getCommentary() != null ? !Objects.equals(this.getCommentary(), other.getCommentary()) : other.getCommentary() != null){
             return false;
         }
-        
-        // to be commented out
-        return true;
-        
-        /*
         if(this.getAlbum() != null ? !this.getAlbum().equals(other.getAlbum()) : other.getAlbum() != null){
             return false;
         }
@@ -163,12 +154,11 @@ public class SongDTO {
             return false;
         }
         return !(this.getMusician() != null ? !this.getMusician().equals(other.getMusician()) : other.getMusician() != null);
-        */
     }
 
     @Override
     public String toString() {
-        return title /* + " from " + album.getTitle() + " by " + musician.toString() */ + " @" + bitrate + " Kbps";
+        return title + " from " + album.toString() + " by " + musician.toString() + " @" + bitrate + " Kbps";
     }
     
 }

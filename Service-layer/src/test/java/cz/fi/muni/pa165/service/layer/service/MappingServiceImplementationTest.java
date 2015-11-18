@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import static org.testng.Assert.assertEquals;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -45,7 +46,7 @@ public class MappingServiceImplementationTest extends AbstractTestNGSpringContex
     
     private List<SongDTO> dtoSongs;
     
-    @BeforeMethod
+    @BeforeClass
     public void setUp() {
 
         acdc = new Musician();

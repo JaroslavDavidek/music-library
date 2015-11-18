@@ -51,7 +51,11 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
     
     private Genre rock;
     
+    private Genre hardRock;
+    
     private Genre progressiveRock;
+    
+    private Musician acdc;  
     
     private Musician direStraits;
     
@@ -59,7 +63,11 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
     
     private Album brothersInArmsAlbum;
     
+    private Album backInBlackAlbum;
+    
     private Album onEveryStreetAlbum;
+    
+    private Song shootToThrillSong;    
     
     private Song moneyForNothingSong;
     
@@ -79,9 +87,18 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         rock.setTitle("Hard Rock");
         rock.setYearOfOrigin(1950); 
         
+        hardRock = new Genre();
+        hardRock.setTitle("Hard Rock");
+        hardRock.setYearOfOrigin(1970); 
+        
         progressiveRock = new Genre();
         progressiveRock.setTitle("Progressive Rock");
         progressiveRock.setYearOfOrigin(1960); 
+        
+        acdc = new Musician();
+        acdc.setRealName("Brian Johnson");
+        acdc.setArtistName("AC/DC");
+        acdc.setDateOfBirth(Date.valueOf("1945-10-15"));
         
         direStraits = new Musician();
         direStraits.setRealName("Mark Knopfler");
@@ -93,6 +110,11 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         direStraits2.setArtistName("Dire Straits");
         direStraits2.setDateOfBirth(Date.valueOf("1952-3-5"));
         
+        backInBlackAlbum = new Album();
+        backInBlackAlbum.setMusician(acdc);
+        backInBlackAlbum.setReleaseDate(Date.valueOf("1980-7-25"));
+        backInBlackAlbum.setTitle("Back In Black");
+        
         brothersInArmsAlbum = new Album();
         brothersInArmsAlbum.setMusician(direStraits);
         brothersInArmsAlbum.setReleaseDate(Date.valueOf("1985-6-13"));
@@ -102,6 +124,14 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         onEveryStreetAlbum.setMusician(direStraits);
         onEveryStreetAlbum.setReleaseDate(Date.valueOf("1991-10-11"));
         onEveryStreetAlbum.setTitle("On Every Street");
+        
+        shootToThrillSong = new Song();
+        shootToThrillSong.setTitle("Shoot To Thrill");
+        shootToThrillSong.setAlbum(backInBlackAlbum);      
+        shootToThrillSong.setGenre(hardRock);
+        shootToThrillSong.setMusician(acdc);
+        shootToThrillSong.setAlbumPosition(2);
+        shootToThrillSong.setBitrate(320);
         
         moneyForNothingSong = new Song();
         moneyForNothingSong.setTitle("Money For Nothing");
@@ -247,7 +277,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         
         Musician expectedMusician = null;
         moneyForNothingAlternativeTakeSong.setMusician(expectedMusician);
-        when(musicianDao.findById(any(Long.class))).thenReturn(direStraits2);
+        when(musicianDao.findById(any(Long.class))).thenReturn(null);
         when(songDao.update(moneyForNothingSong)).thenReturn(moneyForNothingAlternativeTakeSong);      
         Song updatedResult = songService.updateMusician(moneyForNothingSong, -1l);
         assertEquals(expectedMusician, updatedResult);
@@ -271,7 +301,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         
         Genre expectedGenre = null;
         moneyForNothingAlternativeTakeSong.setGenre(expectedGenre);
-        when(genreDao.findById(any(Long.class))).thenReturn(progressiveRock);
+        when(genreDao.findById(any(Long.class))).thenReturn(null);
         when(songDao.update(moneyForNothingSong)).thenReturn(moneyForNothingAlternativeTakeSong);      
         Song updatedResult = songService.updateGenre(moneyForNothingSong, -1l);
         assertEquals(expectedGenre, updatedResult);      
@@ -295,7 +325,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
         
         Album expectedAlbum = null;
         moneyForNothingAlternativeTakeSong.setAlbum(onEveryStreetAlbum);
-        when(albumDao.findById(any(Long.class))).thenReturn(onEveryStreetAlbum);
+        when(albumDao.findById(any(Long.class))).thenReturn(null);
         when(songDao.update(moneyForNothingSong)).thenReturn(moneyForNothingAlternativeTakeSong);      
         Song updatedResult = songService.updateAlbum(moneyForNothingSong, -1l);
         assertEquals(expectedAlbum, updatedResult);
@@ -323,7 +353,7 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
     public void testFindSongByTitle1() {
         System.out.println("findSongByTitle1");
       
-        when(songDao.findByTitle(moneyForNothingAlternativeTakeSong.getTitle())).thenReturn(moneyForNothingAlternativeTakeSong);
+        when(songDao.findByTitle(any(String.class))).thenReturn(moneyForNothingAlternativeTakeSong);
         Song result = songService.findSongByTitle(moneyForNothingAlternativeTakeSong.getTitle());
         assertEquals(moneyForNothingAlternativeTakeSong, result);
     }
@@ -551,6 +581,13 @@ public class SongServiceImplementationTest extends AbstractTransactionalTestNGSp
     @Test
     public void testFindAllSongsByMusicianAndReleaseYearRange2() {
         System.out.println("findAllSongsByMusicianAndReleaseYearRange2");
+        
+        List<Song> allSongs = new ArrayList<>();
+        allSongs.add(this.moneyForNothingSong);
+        allSongs.add(this.yourLatestTrickSong);
+        allSongs.add(this.oneWorldSong);
+        allSongs.add(this.heavyFuelSong);
+        allSongs.add(this.);
         
         List<Song> allSongsByDireStraits = new ArrayList<>();
         allSongsByDireStraits.add(this.moneyForNothingSong);

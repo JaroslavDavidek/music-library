@@ -6,6 +6,7 @@
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.entity.Album;
+import cz.fi.muni.pa165.entity.Song;
 import java.util.List;
 
 /**
@@ -40,20 +41,38 @@ public interface AlbumDao {
      * Create a new album in DB
      * 
      * @param album that is being added/created in db 
+     * @return if creation was success  
      */
-    public void create(Album album);
+    public boolean create(Album album);
     
     /**
      * Delete corresponding album from db
      * 
      * @param album that is being deleted from db
+     * @return if deletion was success
      */
-    public void delete(Album album);
+    public boolean delete(Album album);
     
     /**
      * Update given album
      * 
      * @param album that is being updated in db
+     * @return updated album 
      */
-    public void update(Album album);
+    public Album update(Album album);
+    /**
+     * 
+     * @param album to add song to
+     * @param song to add
+     * @return album
+     */
+    public Album addSong(Album album, Song song);
+    
+    /**
+     * 
+     * @param album to remove song from
+     * @param song to remove
+     * @return album
+     */
+    public Album removeSong(Album album, Song song);
 }

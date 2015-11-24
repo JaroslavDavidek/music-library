@@ -6,6 +6,8 @@
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.entity.Album;
+import cz.fi.muni.pa165.entity.Song;
+import cz.fi.muni.pa165.exception.InvalidParamDataAccessExpection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,6 +25,9 @@ public class AlbumDaoImplementation implements AlbumDao {
     
     @Override
     public Album findById(Long id) {
+        if (id < 0) {
+            throw new InvalidParamDataAccessExpection("AlbumDao - find by id - wrong id parameter");
+        }
         return em.find(Album.class, id);
     }
 
@@ -35,6 +40,9 @@ public class AlbumDaoImplementation implements AlbumDao {
 
     @Override
     public Album findByTitle(String title) {
+        if (title == null) {
+            throw new InvalidParamDataAccessExpection("AlbumDao - find by title - title must not be null");
+        }
         return em.createQuery(
                 "SELECT a FROM Album a WHERE a.title= :customTitle", Album.class)
                 .setParameter("customTitle", title)
@@ -42,18 +50,49 @@ public class AlbumDaoImplementation implements AlbumDao {
     }
 
     @Override
-    public void create(Album album) {
+    public boolean create(Album album) {
+        if (album == null) {
+            throw new InvalidParamDataAccessExpection("AlbumDao - create album - album must not be null");
+        }
+        if (em.contains(album)) return false;
         em.persist(album);
+        return true;
     }
 
     @Override
-    public void delete(Album album) {
+    public boolean delete(Album album) {
+        if (album == null) {
+            throw new InvalidParamDataAccessExpection("AlbumDao - delete album - album must not be null");
+        }
+        if (!em.contains(album)) return false;
         em.remove(album);
+        return true;
     }
     
     @Override
-    public void update(Album album) {
-        em.merge(album);
+    public Album update(Album album) {
+        if (album == null) {
+            throw new InvalidParamDataAccessExpection("AlbumDao - update album - album must not be null");
+        }
+        return em.merge(album);
+    }
+
+    @Override
+    public Album addSong(Album album, Song song) {
+        if (album == null || song == null) {
+            throw new InvalidParamDataAccessExpection("AlbumDao - add song - album nor song must not be null");
+        }
+        album.addSong(song);
+        return em.merge(album);
+    }
+
+    @Override
+    public Album removeSong(Album album, Song song) {
+        if (album == null || song == null) {
+            throw new InvalidParamDataAccessExpection("AlbumDao - add song - album nor song must not be null");
+        }
+        album.removeSong(song);
+        return em.merge(album);
     }
     
 }

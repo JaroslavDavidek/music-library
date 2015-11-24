@@ -13,6 +13,6 @@ public interface GenreService {
     public Genre updateTitle(Genre genre, String newTitle);
     public Genre updateYearOfOrigin(Genre genre, int newYearOfOrigin);
     public Genre findGenreByID(Long genreID);
-    public Genre findSongByTitle(String genreTitle);
+    public Genre findGenreByTitle(String genreTitle);
     public List<Genre> findAll();
 }

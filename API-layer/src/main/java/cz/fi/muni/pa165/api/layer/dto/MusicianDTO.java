@@ -24,7 +24,7 @@ public class MusicianDTO {
     private String artistName;
     
     @Past
-    private Date birthDate;
+    private Date dateOfBirth;
     
     public Long getId() {
         return this.id;
@@ -46,12 +46,12 @@ public class MusicianDTO {
         this.artistName = artistName;
     }
     
-    public Date getBirthDate() {
-        return this.birthDate;
+    public Date getDateOfBirth() {
+        return this.dateOfBirth;
     }
     
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setDateOfBirth(Date birthDate) {
+        this.dateOfBirth = birthDate;
     }
     
     @Override
@@ -62,4 +62,30 @@ public class MusicianDTO {
         return hash;
     }
     
+    @Override
+    public boolean equals(Object object) {
+        if (object == this){
+            return true;
+        }
+        if (object == null || !(object instanceof MusicianDTO)){
+            return false;
+        }       
+        MusicianDTO other = (MusicianDTO) object;
+        
+        if (this.getRealName()!= null ? !Objects.equals(this.getRealName(), other.getRealName()) : other.getRealName() != null){
+            return false;
+        }
+        
+        if (this.getArtistName()!= null ? !Objects.equals(this.getArtistName(), other.getArtistName()) : other.getArtistName() != null){
+            return false;
+        }
+        
+        return !(this.getDateOfBirth()!= null ? !Objects.equals(this.getDateOfBirth(), other.getDateOfBirth()) : other.getDateOfBirth() != null);
+    }
+    
+    @Override
+    public String toString() {
+        return "real name: " + realName + ", artist name: " + artistName + 
+                ", date of birth" + dateOfBirth;
+    }
 }

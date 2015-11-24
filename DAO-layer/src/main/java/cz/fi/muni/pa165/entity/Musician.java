@@ -99,16 +99,15 @@ public class Musician {
             return false;
         }
         Musician other = (Musician) object;
-        if (!Objects.equals(this.getRealName(), other.getRealName())) {
+        if (this.getRealName()!= null ? !Objects.equals(this.getRealName(), other.getRealName()) : other.getRealName() != null){
             return false;
         }
-        if (!Objects.equals(this.getArtistName(), other.getArtistName())) {
+        
+        if (this.getArtistName()!= null ? !Objects.equals(this.getArtistName(), other.getArtistName()) : other.getArtistName() != null){
             return false;
         }
-        if (!Objects.equals(this.getDateOfBirth(), other.getDateOfBirth())) {
-            return false;
-        }
-        return true;
+        
+        return !(this.getDateOfBirth()!= null ? !Objects.equals(this.getDateOfBirth(), other.getDateOfBirth()) : other.getDateOfBirth() != null);
     }
     
     @Override

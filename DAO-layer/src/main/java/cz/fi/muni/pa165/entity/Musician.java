@@ -27,7 +27,10 @@ public class Musician {
     @NotNull
     @Column(nullable=false)
     private String realName;
+    
+    @NotNull
     private String artistName;
+    
     private Date dateOfBirth;
 
     /**

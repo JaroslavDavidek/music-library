@@ -1,12 +1,16 @@
 package cz.fi.muni.pa165.entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
@@ -30,6 +34,9 @@ public class Album {
     @OneToOne
     @NotNull
     private Musician musician;
+    
+    @OneToMany(mappedBy = "album")
+    private List<Song> songs = new ArrayList<>();
     
     public Album() {
     }
@@ -76,6 +83,22 @@ public class Album {
 
     public void setMusician(Musician musician) {
         this.musician = musician;
+    }
+
+    public Collection<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
+    }
+    
+    public void addSong(Song song) {
+        this.songs.add(song);
+    }
+    
+    public void removeSong(Song song) {
+        this.songs.remove(song);
     }
 
     @Override

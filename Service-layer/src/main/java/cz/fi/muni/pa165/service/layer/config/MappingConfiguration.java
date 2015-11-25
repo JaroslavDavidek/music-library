@@ -8,6 +8,8 @@ import cz.fi.muni.pa165.service.layer.facade.AlbumFacadeImplementation;
 
 import cz.fi.muni.pa165.service.layer.service.SongServiceImplementation;
 import cz.fi.muni.pa165.service.layer.service.AlbumServiceImplementation;
+import cz.fi.muni.pa165.service.layer.service.GenreServiceImplementation;
+import cz.fi.muni.pa165.service.layer.service.MusicianServiceImplementation;
 import org.dozer.Mapper;
 import org.springframework.context.annotation.Bean;
 import org.dozer.DozerBeanMapper;
@@ -19,7 +21,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @Configuration
 @Import(PersistenceAplicationContext.class)
-@ComponentScan(basePackageClasses={SongServiceImplementation.class, SongFacadeImplementation.class, AlbumServiceImplementation.class, AlbumFacadeImplementation.class})
+@ComponentScan(basePackageClasses={SongServiceImplementation.class, SongFacadeImplementation.class, AlbumServiceImplementation.class, AlbumFacadeImplementation.class, MusicianServiceImplementation.class, GenreServiceImplementation.class})
 public class MappingConfiguration {
     
     @Bean

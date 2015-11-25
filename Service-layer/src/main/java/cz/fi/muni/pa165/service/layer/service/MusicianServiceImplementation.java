@@ -5,11 +5,13 @@ import cz.fi.muni.pa165.entity.Musician;
 import java.sql.Date;
 import java.util.List;
 import javax.inject.Inject;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Jergus Fasanek
  */
+@Service
 public class MusicianServiceImplementation implements MusicianService{
     
     @Inject
@@ -33,7 +35,7 @@ public class MusicianServiceImplementation implements MusicianService{
 
     @Override
     public Musician updateRealName(Musician musician, String newName) {
-        if(musician != null){
+        if(musician != null && newName != null){
             musician.setRealName(newName);
             return musicianDao.update(musician);
         }
@@ -42,7 +44,7 @@ public class MusicianServiceImplementation implements MusicianService{
 
     @Override
     public Musician updateArtistName(Musician musician, String newName) {
-        if(musician != null){
+        if(musician != null && newName != null){
             musician.setArtistName(newName);
             return musicianDao.update(musician);
         }
@@ -51,7 +53,7 @@ public class MusicianServiceImplementation implements MusicianService{
 
     @Override
     public Musician updateDateOfBirth(Musician musician, Date date) {
-        if(musician != null){
+        if(musician != null && date != null){
             musician.setDateOfBirth(date);
             return musicianDao.update(musician);
         }

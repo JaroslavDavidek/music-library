@@ -4,11 +4,13 @@ import cz.fi.muni.pa165.dao.GenreDao;
 import cz.fi.muni.pa165.entity.Genre;
 import java.util.List;
 import javax.inject.Inject;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Jergus Fasanek
  */
+@Service
 public class GenreServiceImplementation implements GenreService{
     
     @Inject
@@ -32,7 +34,7 @@ public class GenreServiceImplementation implements GenreService{
 
     @Override
     public Genre updateTitle(Genre genre, String newTitle) {
-        if(genre != null){
+        if(genre != null && newTitle != null){
             genre.setTitle(newTitle);
             return genreDao.update(genre);
         }

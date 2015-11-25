@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.api.layer.facade;
 
-import cz.fi.muni.pa165.api.layer.dto.SongCreateDTO;
 import cz.fi.muni.pa165.api.layer.dto.SongDTO;
 import java.util.List;
 
@@ -9,7 +8,7 @@ import java.util.List;
  * @author JaroslavDavidek
  */
 public interface SongFacade {   
-    public Long createSong(SongCreateDTO song);
+    public Long createSong(SongDTO song);
     public boolean deleteSong(Long songID);
     public SongDTO updateTitle(Long songID, String newTitle);
     public SongDTO updateBitrate(Long songID, int newBitrate);

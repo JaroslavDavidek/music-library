@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.service.layer.facade;
 
-import cz.fi.muni.pa165.api.layer.dto.SongCreateDTO;
 import cz.fi.muni.pa165.api.layer.dto.SongDTO;
 import cz.fi.muni.pa165.api.layer.facade.SongFacade;
 import cz.fi.muni.pa165.entity.Album;
@@ -30,28 +29,8 @@ public class SongFacadeImplementation implements SongFacade {
     private SongService songService;
    
     @Override
-    public Long createSong(SongCreateDTO songCreateDTO) {
-        Song mappedSong = mappingService.mapTo(songCreateDTO, Song.class);
-        
-        Genre genre = new Genre();
-        genre.setTitle(songCreateDTO.getGenreTitle());
-        genre.setYearOfOrigin(songCreateDTO.getGenreYearOfOrigin());
-        mappedSong.setGenre(genre);
-        
-        Musician musician = new Musician();
-        musician.setArtistName(songCreateDTO.getMusicianArtistName());
-        musician.setRealName(songCreateDTO.getMusicianRealName());
-        musician.setDateOfBirth(new java.sql.Date(songCreateDTO.getMusicianDateOfBirth().getTime()));
-        mappedSong.setMusician(musician);       
-        
-        Album album = new Album();
-        album.setTitle(songCreateDTO.getAlbumTitle());
-        album.setMusician(musician);
-        album.setReleaseDate(new java.sql.Date(songCreateDTO.getAlbumReleaseDate().getTime()));
-        album.setCover(songCreateDTO.getAlbumCover());
-        album.setCommentary(songCreateDTO.getAlbumCommentary());
-        mappedSong.setAlbum(album);
-        
+    public Long createSong(SongDTO songCreateDTO) {
+        Song mappedSong = mappingService.mapTo(songCreateDTO, Song.class);      
         return songService.createSong(mappedSong).getId();
     }
 

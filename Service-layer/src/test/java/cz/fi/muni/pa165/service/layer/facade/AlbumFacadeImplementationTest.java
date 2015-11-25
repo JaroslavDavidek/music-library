@@ -7,7 +7,6 @@ package cz.fi.muni.pa165.service.layer.facade;
 
 import cz.fi.muni.pa165.api.layer.dto.AlbumDTO;
 import cz.fi.muni.pa165.api.layer.dto.MusicianDTO;
-import cz.fi.muni.pa165.api.layer.dto.SongCreateDTO;
 import cz.fi.muni.pa165.api.layer.facade.AlbumFacade;
 import cz.fi.muni.pa165.dao.AlbumDao;
 import cz.fi.muni.pa165.dao.GenreDao;
@@ -63,8 +62,6 @@ public class AlbumFacadeImplementationTest extends AbstractTestNGSpringContextTe
     private Album backInBlackAlbum;
     
     private Song shootToThrillSong;
-    
-    private SongCreateDTO shootToThrillSongCreateDTO;
     
     private AlbumDTO albumDTO;
     

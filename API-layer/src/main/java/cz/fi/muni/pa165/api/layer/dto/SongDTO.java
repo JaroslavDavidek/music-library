@@ -158,7 +158,7 @@ public class SongDTO {
 
     @Override
     public String toString() {
-        return title + " from " + album.toString() + " by " + musician.toString() + " @" + bitrate + " Kbps";
+        return title + " from " + album.getTitle() + " by " + musician.toString() + " @" + bitrate + " Kbps";
     }
     
 }

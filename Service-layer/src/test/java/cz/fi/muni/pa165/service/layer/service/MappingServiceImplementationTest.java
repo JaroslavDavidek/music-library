@@ -1,5 +1,8 @@
 package cz.fi.muni.pa165.service.layer.service;
 
+import cz.fi.muni.pa165.api.layer.dto.AlbumDTO;
+import cz.fi.muni.pa165.api.layer.dto.GenreDTO;
+import cz.fi.muni.pa165.api.layer.dto.MusicianDTO;
 import cz.fi.muni.pa165.api.layer.dto.SongDTO;
 import cz.fi.muni.pa165.entity.Album;
 import cz.fi.muni.pa165.entity.Genre;
@@ -30,9 +33,15 @@ public class MappingServiceImplementationTest extends AbstractTestNGSpringContex
     
     private Musician acdc;
     
+    private MusicianDTO musicianDTO;
+    
     private Genre hardRock;
     
+    private GenreDTO genreDTO;
+    
     private Album backInBlackAlbum;
+    
+    private AlbumDTO albumDTO;
     
     private Song shootToThrillSong;
     
@@ -79,29 +88,38 @@ public class MappingServiceImplementationTest extends AbstractTestNGSpringContex
         haveADrinkOnMeSong.setAlbumPosition(8);
         haveADrinkOnMeSong.setBitrate(320);
         
+       
+       
+        genreDTO = new GenreDTO();
+        genreDTO.setTitle(hardRock.getTitle());
+        genreDTO.setYearOfOrigin(hardRock.getYearOfOrigin());
+        
+        musicianDTO = new MusicianDTO();
+        musicianDTO.setArtistName(acdc.getArtistName());
+        musicianDTO.setRealName(acdc.getRealName());
+        musicianDTO.setDateOfBirth(acdc.getDateOfBirth());
+        
+        albumDTO = new AlbumDTO();
+        albumDTO.setTitle(backInBlackAlbum.getTitle());
+        albumDTO.setReleaseDate(backInBlackAlbum.getReleaseDate());
+        albumDTO.setMusician(musicianDTO);
+        albumDTO.setCover(backInBlackAlbum.getCover());
+       
         shootToThrillSongDTO = new SongDTO();
         shootToThrillSongDTO.setTitle("Shoot To Thrill");
         shootToThrillSongDTO.setAlbumPosition(2);
         shootToThrillSongDTO.setBitrate(320);
-        
-        /* should be commented out after implementation of other dto's
-        
-        shootToThrillSongDTO.setAlbum(backInBlackAlbum);      
-        shootToThrillSongDTO.setGenre(hardRock);
-        shootToThrillSongDTO.setMusician(acdc);
-        */
-        
+        shootToThrillSongDTO.setAlbum(albumDTO);      
+        shootToThrillSongDTO.setGenre(genreDTO);
+        shootToThrillSongDTO.setMusician(musicianDTO);
+     
         haveADrinkOnMeSongDTO = new SongDTO();
         haveADrinkOnMeSongDTO.setTitle("Have A Drink On Me");
         haveADrinkOnMeSongDTO.setAlbumPosition(8);
         haveADrinkOnMeSongDTO.setBitrate(320);
-        
-        /* should be commented out after implementation of other dto's
-        
-        haveADrinkOnMeSongDTO.setAlbum(backInBlackAlbum);      
-        haveADrinkOnMeSongDTO.setGenre(hardRock);
-        haveADrinkOnMeSongDTO.setMusician(acdc);
-        */
+        haveADrinkOnMeSongDTO.setAlbum(albumDTO);      
+        haveADrinkOnMeSongDTO.setGenre(genreDTO);
+        haveADrinkOnMeSongDTO.setMusician(musicianDTO);
         
         songs = new ArrayList<Song>();
         songs.add(this.shootToThrillSong);
@@ -119,7 +137,6 @@ public class MappingServiceImplementationTest extends AbstractTestNGSpringContex
         assertEquals(true, mapper instanceof Mapper);
     }
 
-    /* should be commented out after implementation of other dto's
     
     @Test
     public void testMapTo_Object_Class() {
@@ -131,9 +148,7 @@ public class MappingServiceImplementationTest extends AbstractTestNGSpringContex
     @Test
     public void testMapTo_Collection_Class() {
         System.out.println("mapTo");
-        List<Song> mappedSongs = mappingService.mapTo(dtoSongs, Song.class);
+        List<Song> mappedSongs = mappingService.mapToCollection(dtoSongs, Song.class);
         assertEquals(songs, mappedSongs);
     }
-    
-    */
 }

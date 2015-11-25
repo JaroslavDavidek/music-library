@@ -70,13 +70,19 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
     
     private Musician direStraits2;
     
+    private MusicianDTO musicianDTO;
+    
     private Genre progressiveRock;
     
     private Genre hardRock;
     
     private Genre rock;
     
+    private GenreDTO genreDTO;
+    
     private Album backInBlackAlbum;
+    
+    private AlbumDTO albumDTO;
     
     private Album brothersInArmsAlbum;
     
@@ -92,7 +98,7 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
     
     private Song moneyForNothingAlternativeTakeSong;
     
-    private SongCreateDTO shootToThrillSongCreateDTO;
+    private SongDTO shootToThrillSongDTO;
     
     @BeforeClass
     public void setUp() {
@@ -106,10 +112,19 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
         rock.setTitle("Hard Rock");
         rock.setYearOfOrigin(1950); 
         
+        genreDTO = new GenreDTO();
+        genreDTO.setTitle(rock.getTitle());
+        genreDTO.setYearOfOrigin(rock.getYearOfOrigin());
+        
         acdc = new Musician();
         acdc.setRealName("Brian Johnson");
         acdc.setArtistName("AC/DC");
         acdc.setDateOfBirth(Date.valueOf("1945-10-15"));
+        
+        musicianDTO = new MusicianDTO();
+        musicianDTO.setArtistName(acdc.getArtistName());
+        musicianDTO.setRealName(acdc.getRealName());
+        musicianDTO.setDateOfBirth(acdc.getDateOfBirth());
         
         direStraits = new Musician();
         direStraits.setRealName("Mark Knopfler");
@@ -120,6 +135,12 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
         backInBlackAlbum.setMusician(acdc);
         backInBlackAlbum.setReleaseDate(Date.valueOf("1980-7-25"));
         backInBlackAlbum.setTitle("Back In Black");
+        
+        albumDTO = new AlbumDTO();
+        albumDTO.setTitle(backInBlackAlbum.getTitle());
+        albumDTO.setReleaseDate(backInBlackAlbum.getReleaseDate());
+        albumDTO.setMusician(this.musicianDTO);
+        albumDTO.setCover(backInBlackAlbum.getCover());
         
         brothersInArmsAlbum = new Album();
         brothersInArmsAlbum.setMusician(direStraits);
@@ -139,19 +160,14 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
         shootToThrillSong.setAlbumPosition(2);
         shootToThrillSong.setBitrate(320);
         
-        shootToThrillSongCreateDTO = new SongCreateDTO();
-        shootToThrillSongCreateDTO.setTitle(shootToThrillSong.getTitle());
-        shootToThrillSongCreateDTO.setAlbumPosition(shootToThrillSong.getAlbumPosition());
-        shootToThrillSongCreateDTO.setBitrate(shootToThrillSong.getBitrate());
-        shootToThrillSongCreateDTO.setAlbumCommentary(backInBlackAlbum.getCommentary());
-        shootToThrillSongCreateDTO.setAlbumCover(backInBlackAlbum.getCover());
-        shootToThrillSongCreateDTO.setAlbumReleaseDate(backInBlackAlbum.getReleaseDate());
-        shootToThrillSongCreateDTO.setAlbumTitle(backInBlackAlbum.getTitle());
-        shootToThrillSongCreateDTO.setGenreTitle(hardRock.getTitle());
-        shootToThrillSongCreateDTO.setGenreYearOfOrigin(hardRock.getYearOfOrigin());
-        shootToThrillSongCreateDTO.setMusicianArtistName(acdc.getArtistName());
-        shootToThrillSongCreateDTO.setMusicianRealName(acdc.getRealName());
-        shootToThrillSongCreateDTO.setMusicianDateOfBirth(acdc.getDateOfBirth());
+        shootToThrillSongDTO = new SongDTO();
+        shootToThrillSongDTO.setTitle(shootToThrillSong.getTitle());
+        shootToThrillSongDTO.setAlbumPosition(shootToThrillSong.getAlbumPosition());
+        shootToThrillSongDTO.setBitrate(shootToThrillSong.getBitrate());
+        shootToThrillSongDTO.setAlbum(this.albumDTO);
+        shootToThrillSongDTO.setGenre(this.genreDTO);
+        shootToThrillSongDTO.setMusician(this.musicianDTO);
+     
        
         progressiveRock = new Genre();
         progressiveRock.setTitle("Progressive Rock");
@@ -193,9 +209,10 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
     public void testCreateSong() {       
         System.out.println("createSong");
         
+        // this test also checks that no exception is thrown during create call
         when(songDao.create(any(Song.class))).thenReturn(true);
         when(songDao.findById(any(Long.class))).thenReturn(shootToThrillSong);
-        Long createdSongID = songFacade.createSong(shootToThrillSongCreateDTO);
+        Long createdSongID = songFacade.createSong(shootToThrillSongDTO);
         // songID is null, since song has not been stored because mock objects were used
         assertEquals(null, createdSongID);  
     }
@@ -301,7 +318,7 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
         when(songDao.update(moneyForNothingSong)).thenReturn(moneyForNothingAlternativeTakeSong);
         when(songDao.findById(any(Long.class))).thenReturn(moneyForNothingSong);
         SongDTO updatedResult = songFacade.updateAlbum(1l, 1l);
-        assertEquals(mappingService.mapTo(expectedAlbum, AlbumDTO.class), updatedResult.getGenre());
+        assertEquals(mappingService.mapTo(expectedAlbum, AlbumDTO.class), updatedResult.getAlbum());
     }
   
     @Test
@@ -422,17 +439,16 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
         List<Song> allSongsByDireStraits = new ArrayList<>();
         allSongsByDireStraits.add(this.moneyForNothingSong);
         allSongsByDireStraits.add(this.yourLatestTrickSong);
-        allSongsByDireStraits.add(this.heavyFuelSong);       
+        allSongsByDireStraits.add(this.heavyFuelSong);
         List<Song> expectedResult = new ArrayList<>();
-        expectedResult.add(this.moneyForNothingSong);
-        expectedResult.add(this.yourLatestTrickSong);
+        expectedResult.add(this.heavyFuelSong);
         when(songDao.findAllByMusician(direStraits)).thenReturn(allSongsByDireStraits);
         when(musicianDao.findById(any(Long.class))).thenReturn(direStraits);
-        List<SongDTO> foundSongs = songFacade.findAllSongsByMusicianAndReleaseYearRange(1l, 1982, 1986);
+        List<SongDTO> foundSongs = songFacade.findAllSongsByMusicianAndReleaseYearRange(1l, 1988, 1993);
         Assert.assertEquals(expectedResult.size(), foundSongs.size());
         for(int i = 0; i < expectedResult.size(); i++)
         {
-            Assert.assertEquals(expectedResult.get(i), foundSongs.get(i));
+            Assert.assertEquals(mappingService.mapTo(expectedResult.get(i), SongDTO.class), foundSongs.get(i));
         }
     }
 }

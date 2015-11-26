@@ -47,6 +47,8 @@ public class MusicianFacadeImplementationTest extends AbstractTestNGSpringContex
     
     private Musician jimi;
     
+    private Musician flea;
+    
     private Musician curt2;
     
     private MusicianDTO curtDTO;
@@ -64,6 +66,11 @@ public class MusicianFacadeImplementationTest extends AbstractTestNGSpringContex
         jimi.setArtistName("Jimi Hendrix");
         jimi.setRealName("James Marshall Hendrix");
         jimi.setDateOfBirth(Date.valueOf("1942-11-27"));
+        
+        flea = new Musician();
+        flea.setArtistName("Flea");
+        flea.setRealName("Michael Peter Balzary");
+        flea.setDateOfBirth(Date.valueOf("1962-10-16"));
         
         curtDTO = new MusicianDTO();
         curtDTO.setArtistName(curt.getArtistName());
@@ -192,6 +199,8 @@ public class MusicianFacadeImplementationTest extends AbstractTestNGSpringContex
         List<Musician> expectedResult = new ArrayList<>();
         expectedResult.add(curt);
         expectedResult.add(curt2);
+        expectedResult.add(jimi);
+        expectedResult.add(flea);
         
         when(musicianDao.findAll()).thenReturn(expectedResult);
         List<MusicianDTO> found = musicianFacade.findAll();

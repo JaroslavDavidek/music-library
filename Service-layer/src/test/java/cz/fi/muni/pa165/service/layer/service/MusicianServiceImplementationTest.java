@@ -7,7 +7,7 @@ import cz.fi.muni.pa165.service.layer.config.MappingConfiguration;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import static org.junit.Assert.*;
+
 import org.mockito.InjectMocks;
 import static org.mockito.Matchers.any;
 import org.mockito.Mock;
@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.Assert;
+import static org.testng.Assert.assertEquals;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 /**
@@ -24,7 +25,7 @@ import org.testng.annotations.Test;
  * @author Jergus Fasanek
  */
 @ContextConfiguration(classes = MappingConfiguration.class)
-public class MusicianServiceImplementationTest  extends AbstractTransactionalTestNGSpringContextTests {
+public class MusicianServiceImplementationTest extends AbstractTransactionalTestNGSpringContextTests {
     
     @Mock
     private MusicianDao musicianDao;

@@ -5,18 +5,17 @@
  */
 package cz.fi.muni.pa165.api.layer.facade;
 
-import cz.fi.muni.pa165.api.layer.dto.MusicianCreateDTO;
 import cz.fi.muni.pa165.api.layer.dto.MusicianDTO;
 import java.sql.Date;
 import java.util.List;
 
 /**
  *
- * @author JJ
+ * @author Jergus Fasanek
  */
 public interface MusicianFacade {
-    public Long createMusicianDTO(MusicianCreateDTO musician);
-    public boolean deleteMusicianDTO(Long musicianID);
+    public Long createMusician(MusicianDTO musician);
+    public boolean deleteMusician(Long musicianID);
     public MusicianDTO updateRealName(Long musicianID, String newName);
     public MusicianDTO updateArtistName(Long musicianID, String newName);
     public MusicianDTO updateDateOfBirth(Long musicianID, Date date);

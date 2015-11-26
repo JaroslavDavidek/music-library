@@ -193,7 +193,7 @@ public class MusicianServiceImplementationTest extends AbstractTransactionalTest
     }
     
     @Test(expectedExceptions=InvalidParamDataAccessExpection.class)
-    public void testFindMusicianByByArtistName2() {
+    public void testFindMusicianByArtistName2() {
         System.out.println("testFindMusicianByArtistName2");
         
         when(musicianDao.findByArtistName(null)).thenThrow(new InvalidParamDataAccessExpection("MusicianDao - find by Artist name - wrong Artist name parameter"));
@@ -211,7 +211,7 @@ public class MusicianServiceImplementationTest extends AbstractTransactionalTest
     }
     
     @Test(expectedExceptions=InvalidParamDataAccessExpection.class)
-    public void testFindMusicianByByRealName2() {
+    public void testFindMusicianByRealName2() {
         System.out.println("testFindMusicianByRealName2");
         
         when(musicianDao.findByRealName(null)).thenThrow(new InvalidParamDataAccessExpection("MusicianDao - find by Real name - wrong Real name parameter"));

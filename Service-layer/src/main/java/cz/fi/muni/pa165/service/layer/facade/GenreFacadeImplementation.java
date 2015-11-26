@@ -7,6 +7,8 @@ package cz.fi.muni.pa165.service.layer.facade;
 
 import cz.fi.muni.pa165.api.layer.dto.GenreDTO;
 import cz.fi.muni.pa165.api.layer.facade.GenreFacade;
+import cz.fi.muni.pa165.entity.Genre;
+import cz.fi.muni.pa165.service.layer.service.GenreService;
 import cz.fi.muni.pa165.service.layer.service.MappingService;
 import java.util.List;
 import javax.inject.Inject;
@@ -23,40 +25,44 @@ public class GenreFacadeImplementation implements GenreFacade{
     
     @Inject
     private MappingService mappingService;
+    
+    @Inject
+    private GenreService genreService;
 
     @Override
     public Long createGenre(GenreDTO genre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Genre mappedGenre = mappingService.mapTo(genre, Genre.class);
+        return genreService.createGenre(mappedGenre).getId();
     }
 
     @Override
     public boolean deleteGenre(Long genreID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return genreService.deleteGenre(genreService.findGenreByID(genreID));
     }
 
     @Override
     public GenreDTO updateTitle(Long genreID, String newTitle) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return mappingService.mapTo(genreService.updateTitle(genreService.findGenreByID(genreID), newTitle), GenreDTO.class);
     }
 
     @Override
     public GenreDTO updateYearOfOrigin(Long genreID, int newYearOfOrigin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return mappingService.mapTo(genreService.updateYearOfOrigin(genreService.findGenreByID(genreID), newYearOfOrigin), GenreDTO.class);
     }
 
     @Override
-    public GenreDTO findGenreDTOByID(Long genreID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public GenreDTO findGenreByID(Long genreID) {
+        return mappingService.mapTo(genreService.findGenreByID(genreID), GenreDTO.class);
     }
 
     @Override
-    public GenreDTO findGenreDTOByTitle(String genreTitle) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public GenreDTO findGenreByTitle(String genreTitle) {
+        return mappingService.mapTo(genreService.findGenreByTitle(genreTitle), GenreDTO.class);
     }
 
     @Override
     public List<GenreDTO> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return mappingService.mapToCollection(genreService.findAll(), GenreDTO.class);
     }
     
 }

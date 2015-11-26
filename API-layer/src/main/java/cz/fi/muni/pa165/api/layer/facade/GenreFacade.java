@@ -12,7 +12,7 @@ public interface GenreFacade {
     public boolean deleteGenre(Long genreID);
     public GenreDTO updateTitle(Long genreID, String newTitle);
     public GenreDTO updateYearOfOrigin(Long genreID, int newYearOfOrigin);
-    public GenreDTO findGenreDTOByID(Long genreID);
-    public GenreDTO findGenreDTOByTitle(String genreTitle);
+    public GenreDTO findGenreByID(Long genreID);
+    public GenreDTO findGenreByTitle(String genreTitle);
     public List<GenreDTO> findAll();
 }

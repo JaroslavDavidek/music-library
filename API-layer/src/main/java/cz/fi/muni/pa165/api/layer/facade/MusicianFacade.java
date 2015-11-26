@@ -19,9 +19,9 @@ public interface MusicianFacade {
     public MusicianDTO updateRealName(Long musicianID, String newName);
     public MusicianDTO updateArtistName(Long musicianID, String newName);
     public MusicianDTO updateDateOfBirth(Long musicianID, Date date);
-    public MusicianDTO findMusicianDTOByID(Long musicianID);
-    public MusicianDTO findMusicianDTOByRealName(String realName);
-    public MusicianDTO findMusicianDTOByArtistName(String artistName);
+    public MusicianDTO findMusicianByID(Long musicianID);
+    public MusicianDTO findMusicianByRealName(String realName);
+    public MusicianDTO findMusicianByArtistName(String artistName);
     public List<MusicianDTO> findAll();
     
 }

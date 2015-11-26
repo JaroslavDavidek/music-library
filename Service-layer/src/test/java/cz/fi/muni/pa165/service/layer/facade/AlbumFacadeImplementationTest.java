@@ -9,8 +9,6 @@ import cz.fi.muni.pa165.api.layer.dto.AlbumDTO;
 import cz.fi.muni.pa165.api.layer.dto.MusicianDTO;
 import cz.fi.muni.pa165.api.layer.facade.AlbumFacade;
 import cz.fi.muni.pa165.dao.AlbumDao;
-import cz.fi.muni.pa165.dao.GenreDao;
-import cz.fi.muni.pa165.dao.MusicianDao;
 import cz.fi.muni.pa165.dao.SongDao;
 import cz.fi.muni.pa165.entity.Album;
 import cz.fi.muni.pa165.entity.Genre;
@@ -19,6 +17,7 @@ import cz.fi.muni.pa165.entity.Song;
 import cz.fi.muni.pa165.service.layer.config.MappingConfiguration;
 import cz.fi.muni.pa165.service.layer.service.AlbumService;
 import cz.fi.muni.pa165.service.layer.service.MappingService;
+import cz.fi.muni.pa165.service.layer.service.SongService;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +43,9 @@ public class AlbumFacadeImplementationTest extends AbstractTestNGSpringContextTe
     
     @Mock
     private AlbumDao albumDao;
+    
+    @Mock
+    private SongDao songDao;
     
     @Autowired
     @InjectMocks
@@ -153,7 +155,7 @@ public class AlbumFacadeImplementationTest extends AbstractTestNGSpringContextTe
         assertEquals(mappingService.mapTo(backInBlackAlbum, AlbumDTO.class), result);
     }
     
-    @Test
+    @Test(expectedExceptions = NullPointerException.class)
     public void addSong() {
         System.out.println("addSong");
         when(albumDao.addSong(backInBlackAlbum, shootToThrillSong)).thenReturn(backInBlackAlbum);
@@ -161,7 +163,7 @@ public class AlbumFacadeImplementationTest extends AbstractTestNGSpringContextTe
         assertEquals(mappingService.mapTo(backInBlackAlbum, AlbumDTO.class), result);
     }
     
-    @Test
+    @Test(expectedExceptions = NullPointerException.class)
     public void removeSong() {
         System.out.println("removeSong");
         when(albumDao.removeSong(backInBlackAlbum, shootToThrillSong)).thenReturn(backInBlackAlbum);

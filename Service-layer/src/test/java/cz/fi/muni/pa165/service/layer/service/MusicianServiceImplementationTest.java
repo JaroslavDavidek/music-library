@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cz.fi.muni.pa165.service.layer.service;
 
 import cz.fi.muni.pa165.dao.MusicianDao;
@@ -60,12 +55,9 @@ public class MusicianServiceImplementationTest  extends AbstractTransactionalTes
         
     }
     
-    /**
-     * Test of createMusician method, of class MusicianServiceImplementation.
-     */
     @Test
     public void testCreateMusician1() {
-        System.out.println("createMusician1");
+        System.out.println("testCreateMusician1");
    
        
         when(musicianDao.create(any(Musician.class))).thenReturn(true);
@@ -75,7 +67,7 @@ public class MusicianServiceImplementationTest  extends AbstractTransactionalTes
     
     @Test
     public void testCreateMusician2() {
-        System.out.println("createMusician2");
+        System.out.println("testCreateMusician2");
         
         when(musicianDao.create(any(Musician.class))).thenReturn(false);
         Musician createdMusician = musicianService.createMusician(prince);       
@@ -84,7 +76,7 @@ public class MusicianServiceImplementationTest  extends AbstractTransactionalTes
     
     @Test
     public void testDeleteMusician1() {
-        System.out.println("deleteMusician1");
+        System.out.println("testDeleteMusician1");
         
         when(musicianDao.delete(any(Musician.class))).thenReturn(true);
         boolean result = musicianService.deleteMusician(prince);
@@ -93,7 +85,7 @@ public class MusicianServiceImplementationTest  extends AbstractTransactionalTes
     
     @Test
     public void testDeleteMusician2() {
-        System.out.println("deleteMusician2");
+        System.out.println("testDeleteMusician2");
         
         when(musicianDao.delete(any(Musician.class))).thenReturn(false);
         boolean result = musicianService.deleteMusician(prince);
@@ -102,7 +94,7 @@ public class MusicianServiceImplementationTest  extends AbstractTransactionalTes
     
     @Test
     public void testUpdateRealName1() {
-        System.out.println("updateRealName1");
+        System.out.println("testUpdateRealName1");
         
         String expectedRealName = "Prince";
         Musician prince2 = prince;
@@ -114,7 +106,7 @@ public class MusicianServiceImplementationTest  extends AbstractTransactionalTes
     
     @Test
     public void testUpdateRealName2() {
-        System.out.println("updateRealName2");
+        System.out.println("testUpdateRealName2");
         
         String expectedRealName = null;
         Musician prince2 = prince;
@@ -126,7 +118,7 @@ public class MusicianServiceImplementationTest  extends AbstractTransactionalTes
     
     @Test
     public void testUpdateArtistName1() {
-        System.out.println("updateArtistName1");
+        System.out.println("testUpdateArtistName1");
         
         String expectedArtistName = "Prince Rogers Nelson";
         Musician prince2 = prince;
@@ -138,7 +130,7 @@ public class MusicianServiceImplementationTest  extends AbstractTransactionalTes
     
     @Test
     public void testUpdateArtistName2() {
-        System.out.println("updateArtistName2");
+        System.out.println("testUpdateArtistName2");
         
         String expectedArtistName = null;
         Musician prince2 = prince;
@@ -150,9 +142,9 @@ public class MusicianServiceImplementationTest  extends AbstractTransactionalTes
     
     @Test
     public void testUpdateDateOfBirth1() {
-        System.out.println("updateDate1");
+        System.out.println("testUpdateDate1");
         
-        Date date = Date.valueOf("1991-10-11");
+        Date date = Date.valueOf("1958-6-7");
         Musician princeMusician2 = prince;
         princeMusician2.setDateOfBirth(date);
         when(musicianDao.update(prince)).thenReturn(princeMusician2);
@@ -162,7 +154,7 @@ public class MusicianServiceImplementationTest  extends AbstractTransactionalTes
     
     @Test
     public void testUpdateDateOfBirth2() {
-        System.out.println("updateDate2");
+        System.out.println("testUpdateDate2");
         
         Date date = null;
         Musician princeMusician2 = prince;
@@ -183,7 +175,7 @@ public class MusicianServiceImplementationTest  extends AbstractTransactionalTes
     
     @Test(expectedExceptions=InvalidParamDataAccessExpection.class)
     public void testFindMusicianByID2() {
-        System.out.println("findMusicianByID2");
+        System.out.println("testFindMusicianByID2");
         
         when(musicianDao.findById(any(Long.class))).thenThrow(new InvalidParamDataAccessExpection("MusicianDao - find by id - wrong id parameter"));
         Musician findResult = musicianService.findMusicianByID(-1l);
@@ -203,7 +195,7 @@ public class MusicianServiceImplementationTest  extends AbstractTransactionalTes
     public void testFindMusicianByByArtistName2() {
         System.out.println("testFindMusicianByArtistName2");
         
-        when(musicianDao.findByArtistName(null)).thenThrow(new InvalidParamDataAccessExpection("MusicianDao - find by Real name - wrong Real name parameter"));
+        when(musicianDao.findByArtistName(null)).thenThrow(new InvalidParamDataAccessExpection("MusicianDao - find by Artist name - wrong Artist name parameter"));
         Musician result = musicianService.findMusicianByArtistName(null);
         assertEquals(null, result);
     }
@@ -228,7 +220,7 @@ public class MusicianServiceImplementationTest  extends AbstractTransactionalTes
 
     @Test
     public void testFindAll() {
-        System.out.println("findAllMusician");
+        System.out.println("testSindAll");
       
         List<Musician> expectedResult = new ArrayList<>();
         expectedResult.add(prince);

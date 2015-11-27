@@ -11,6 +11,7 @@ import cz.fi.muni.pa165.entity.Album;
 import cz.fi.muni.pa165.service.layer.service.AlbumService;
 import cz.fi.muni.pa165.service.layer.service.MappingService;
 import cz.fi.muni.pa165.service.layer.service.SongService;
+import java.sql.Date;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
@@ -73,6 +74,16 @@ public class AlbumFacadeImplementation implements AlbumFacade {
     @Override
     public AlbumDTO findByTitle(String title) {
         return mappingService.mapTo(albumService.findByTitle(title), AlbumDTO.class);
+    }
+
+    @Override
+    public AlbumDTO updateAlbumTitle(Long albumId, String title) {
+        return mappingService.mapTo(albumService.updateAlbumTitle(albumService.findById(albumId), title), AlbumDTO.class);
+    }
+
+    @Override
+    public AlbumDTO updateAlbumReleaseDate(Long albumId, Date releasedate) {
+        return mappingService.mapTo(albumService.updateAlbumReleaseDate(albumService.findById(albumId), releasedate), AlbumDTO.class);
     }
     
 }

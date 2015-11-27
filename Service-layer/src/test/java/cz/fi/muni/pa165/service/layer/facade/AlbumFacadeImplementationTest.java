@@ -170,4 +170,22 @@ public class AlbumFacadeImplementationTest extends AbstractTestNGSpringContextTe
         AlbumDTO result = albumFacade.removeSong(backInBlackAlbum.getId(), shootToThrillSong.getId());
         assertEquals(mappingService.mapTo(backInBlackAlbum, AlbumDTO.class), result);
     }
+    
+    @Test
+    public void updateTitle() {
+        System.out.println("updateTitle");
+        when(albumDao.update(backInBlackAlbum)).thenReturn(backInBlackAlbum);
+        when(albumDao.findById(any(Long.class))).thenReturn(backInBlackAlbum);
+        AlbumDTO result = albumFacade.updateAlbumTitle(1l, "new");
+        assertEquals(mappingService.mapTo(backInBlackAlbum, AlbumDTO.class), result);
+    }
+    
+    @Test
+    public void updateReleaseDate() {
+        System.out.println("updateRelease");
+        when(albumDao.update(backInBlackAlbum)).thenReturn(backInBlackAlbum);
+        when(albumDao.findById(any(Long.class))).thenReturn(backInBlackAlbum);
+        AlbumDTO result = albumFacade.updateAlbumReleaseDate(1l, Date.valueOf("1945-10-15"));
+        assertEquals(mappingService.mapTo(backInBlackAlbum, AlbumDTO.class), result);
+    }
 }

@@ -6,6 +6,7 @@
 package cz.fi.muni.pa165.api.layer.facade;
 
 import cz.fi.muni.pa165.api.layer.dto.AlbumDTO;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -16,6 +17,10 @@ public interface AlbumFacade {
     Long createAlbum(AlbumDTO a);
 
     boolean deleteAlbum(Long albumId);
+    
+    AlbumDTO updateAlbumTitle(Long albumId, String title);
+    
+    AlbumDTO updateAlbumReleaseDate(Long albumId, Date releasedate);
 
     List<AlbumDTO> findAll();
 

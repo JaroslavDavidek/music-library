@@ -15,4 +15,6 @@ public interface GenreFacade {
     public GenreDTO findGenreByID(Long genreID);
     public GenreDTO findGenreByTitle(String genreTitle);
     public List<GenreDTO> findAll();
+    public List<GenreDTO> findAllGenresInYearRange(int from, int to);
+    public List<GenreDTO> findAllGenresByYearOfOriginOrdered(boolean ascending);
 }

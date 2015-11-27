@@ -37,6 +37,8 @@ public class MusicianServiceImplementationTest extends AbstractTransactionalTest
     private Musician prince;
     
     private Musician madonna;
+    
+    private Musician synyster;
 
     @BeforeClass
     public void setUpClass() {
@@ -44,15 +46,19 @@ public class MusicianServiceImplementationTest extends AbstractTransactionalTest
         
         prince = new Musician();
         madonna = new Musician();
+        synyster = new Musician();
         
         prince.setRealName("Prince Rogers Nelson");
         madonna.setRealName("Louise Ciccone");
+        synyster.setRealName("Brian Elwin Haner");
         
         prince.setArtistName("Prince");
         madonna.setArtistName("Madonna");
+        synyster.setArtistName("Synyster Gates");
         
-        prince.setDateOfBirth(new Date(1));
-        madonna.setDateOfBirth(new Date(3));
+        prince.setDateOfBirth(Date.valueOf("1958-6-7"));
+        madonna.setDateOfBirth(Date.valueOf("1958-8-16"));
+        synyster.setDateOfBirth(Date.valueOf("1981-7-7"));
         
     }
     
@@ -233,5 +239,57 @@ public class MusicianServiceImplementationTest extends AbstractTransactionalTest
         {
             Assert.assertEquals(expectedResult.get(i), foundMusician.get(i));
         }
+    }
+    
+    @Test
+    public void testFindAllMusiciansInYearRange1() {
+        System.out.println("findAllMusiciansInYearRange1");
+        
+        List<Musician> list = new ArrayList<>();
+        list.add(synyster);
+        list.add(madonna);
+        when(musicianDao.findAll()).thenReturn(list);
+        List<Musician> result = musicianService.findAllMusiciansInYearRange(1950, 2015);
+        assertEquals(result.size(), 2);
+        for (int i = 0; i<list.size(); i++) {
+            assertEquals(list.get(i), result.get(i));
+        }
+    }
+    
+    @Test
+    public void testFindAllMusiciansInYearRange2() {
+        System.out.println("findAllMusiciansInYearRange2");
+        
+        List<Musician> list = new ArrayList<>();
+        list.add(synyster);
+        list.add(madonna);
+        when(musicianDao.findAll()).thenReturn(list);
+        List<Musician> result = musicianService.findAllMusiciansInYearRange(2015, 1900);
+        assertEquals(result.size(), 0);
+    }
+    
+    @Test
+    public void testFindAllMusiciansInYearRange3() {
+        System.out.println("findAllMusiciansInYearRange3");
+        
+        List<Musician> list = new ArrayList<>();
+        list.add(synyster);
+        list.add(madonna);
+        when(musicianDao.findAll()).thenReturn(list);
+        List<Musician> result = musicianService.findAllMusiciansInYearRange(1980, 2015);
+        assertEquals(result.size(), 1);
+        assertEquals(result.get(0), synyster);
+    }
+    
+    @Test
+    public void testFindAllMusiciansInYearRange4() {
+        System.out.println("findAllMusiciansInYearRange4");
+        
+        List<Musician> list = new ArrayList<>();
+        list.add(synyster);
+        list.add(madonna);
+        when(musicianDao.findAll()).thenReturn(list);
+        List<Musician> result = musicianService.findAllMusiciansInYearRange(1900, 1950);
+        assertEquals(result.size(), 0);
     }
 }

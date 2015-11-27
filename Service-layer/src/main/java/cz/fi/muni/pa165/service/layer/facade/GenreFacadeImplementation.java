@@ -65,4 +65,13 @@ public class GenreFacadeImplementation implements GenreFacade{
         return mappingService.mapToCollection(genreService.findAll(), GenreDTO.class);
     }
     
+    @Override
+    public List<GenreDTO> findAllGenresInYearRange(int from, int to){
+        return mappingService.mapToCollection(genreService.findAllGenresInYearRange(from, to), GenreDTO.class);
+    }
+    
+    @Override
+    public List<GenreDTO> findAllGenresByYearOfOriginOrdered(boolean ascending){
+        return mappingService.mapToCollection(genreService.findAllGenresByYearOfOriginOrdered(ascending), GenreDTO.class);
+    }
 }

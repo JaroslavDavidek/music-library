@@ -15,4 +15,6 @@ public interface GenreService {
     public Genre findGenreByID(Long genreID);
     public Genre findGenreByTitle(String genreTitle);
     public List<Genre> findAll();
+    public List<Genre> findAllGenresInYearRange(int from, int to);
+    public List<Genre> findAllGenresByYearOfOriginOrdered(boolean ascending);
 }

@@ -2,6 +2,9 @@ package cz.fi.muni.pa165.service.layer.service;
 
 import cz.fi.muni.pa165.dao.GenreDao;
 import cz.fi.muni.pa165.entity.Genre;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
@@ -63,6 +66,48 @@ public class GenreServiceImplementation implements GenreService{
     @Override
     public List<Genre> findAll() {
         return genreDao.findAll();
+    }
+    
+    @Override
+    public List<Genre> findAllGenresInYearRange(int from, int to){
+        List<Genre> filteredGenres = new ArrayList<>();
+        List<Genre> allGenres = this.findAll();
+        if(from > to || allGenres.isEmpty()){
+            return filteredGenres;
+        }
+        for(Genre genre : allGenres){
+            int year = genre.getYearOfOrigin();
+            if(year >= from && year <= to){
+                filteredGenres.add(genre);
+            }
+        }
+        return filteredGenres;
+    }
+    
+    @Override
+    public List<Genre> findAllGenresByYearOfOriginOrdered(boolean ascending){
+        List<Genre> allGenres = this.findAll();
+        if(allGenres.isEmpty()){
+            return new ArrayList<>();
+        }
+        if(ascending){
+            Comparator<Genre> comparator = new Comparator<Genre>() {
+                @Override
+                public int compare(Genre g1, Genre g2) {
+                    return g1.getYearOfOrigin()- g2.getYearOfOrigin();
+                }
+            };
+            Collections.sort(allGenres, comparator);
+        } else {
+            Comparator<Genre> comparator = new Comparator<Genre>() {
+                @Override
+                public int compare(Genre g1, Genre g2) {
+                    return g2.getYearOfOrigin()- g1.getYearOfOrigin();
+                }
+            };
+            Collections.sort(allGenres, comparator);
+        }
+        return allGenres;
     }
     
 }

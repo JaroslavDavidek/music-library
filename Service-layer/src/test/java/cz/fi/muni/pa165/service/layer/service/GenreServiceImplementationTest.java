@@ -25,7 +25,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 /**
  *
- * @author JJ
+ * @author Jergus Fasanek
  */
 @ContextConfiguration(classes = MappingConfiguration.class)
 public class GenreServiceImplementationTest extends AbstractTransactionalTestNGSpringContextTests {
@@ -39,7 +39,7 @@ public class GenreServiceImplementationTest extends AbstractTransactionalTestNGS
     
     private Genre rock;
     private Genre folkMetal;
-    
+ 
     @BeforeClass
     public void setUpClass() {
         MockitoAnnotations.initMocks(this);
@@ -190,4 +190,97 @@ public class GenreServiceImplementationTest extends AbstractTransactionalTestNGS
         }
     }
     
+    @Test
+    public void testFindAllGenresInYearRange1() {
+        System.out.println("findAllGenresInYearRange1");
+        
+        List<Genre> list = new ArrayList<>();
+        list.add(folkMetal);
+        list.add(rock);
+        when(genreDao.findAll()).thenReturn(list);
+        List<Genre> result = genreService.findAllGenresInYearRange(1950, 2015);
+        assertEquals(result.size(), 2);
+        for (int i = 0; i<list.size(); i++) {
+            assertEquals(list.get(i), result.get(i));
+        }
+    }
+    
+    @Test
+    public void testFindAllGenresInYearRange2() {
+        System.out.println("findAllGenresInYearRange2");
+        
+        List<Genre> list = new ArrayList<>();
+        list.add(folkMetal);
+        list.add(rock);
+        when(genreDao.findAll()).thenReturn(list);
+        List<Genre> result = genreService.findAllGenresInYearRange(2015, 1900);
+        assertEquals(result.size(), 0);
+    }
+    
+    @Test
+    public void testFindAllGenresInYearRange3() {
+        System.out.println("findAllGenresInYearRange3");
+        
+        List<Genre> list = new ArrayList<>();
+        list.add(folkMetal);
+        list.add(rock);
+        when(genreDao.findAll()).thenReturn(list);
+        List<Genre> result = genreService.findAllGenresInYearRange(1980, 2015);
+        assertEquals(result.size(), 1);
+        assertEquals(result.get(0), folkMetal);
+    }
+    
+    @Test
+    public void testFindAllGenresInYearRange4() {
+        System.out.println("findAllGenresInYearRange4");
+        
+        List<Genre> list = new ArrayList<>();
+        list.add(folkMetal);
+        list.add(rock);
+        when(genreDao.findAll()).thenReturn(list);
+        List<Genre> result = genreService.findAllGenresInYearRange(1900, 1940);
+        assertEquals(result.size(), 0);
+    }
+    
+    @Test
+    public void testFindAllGenresByYearOfOriginOrderedAscending(){
+        System.out.println("testFindAllGenresByYearOfOriginOrderedAscending");
+        
+        List<Genre> expectedResult = new ArrayList<>(); 
+        expectedResult.add(folkMetal);      // 1980                 
+        expectedResult.add(rock);           // 1950
+        List<Genre> orderedGenres = genreService.findAllGenresByYearOfOriginOrdered(true);
+
+        Assert.assertEquals(expectedResult.size(), orderedGenres.size());
+        when(genreDao.findAll()).thenReturn(expectedResult);
+
+        for(int i = 0; i < expectedResult.size() - 1; i++)
+        {
+            int prewYear = orderedGenres.get(i).getYearOfOrigin();
+            int nextYear = orderedGenres.get(i + 1).getYearOfOrigin();
+            Assert.assertTrue(prewYear <= nextYear);
+
+        }
+    }
+    
+    @Test
+    public void testFindAllGenresByYearOfOriginOrderedDescending(){
+        System.out.println("testFindAllGenresByYearOfOriginOrderedDescending");
+        
+        List<Genre> expectedResult = new ArrayList<>(); 
+        expectedResult.add(rock);           // 1950
+        expectedResult.add(folkMetal);      // 1980                 
+        List<Genre> orderedGenres = genreService.findAllGenresByYearOfOriginOrdered(false);
+
+        Assert.assertEquals(expectedResult.size(), orderedGenres.size());
+        when(genreDao.findAll()).thenReturn(expectedResult);
+
+        for(int i = 0; i < expectedResult.size() - 1; i++)
+        {
+            int prewYear = orderedGenres.get(i).getYearOfOrigin();
+            int nextYear = orderedGenres.get(i + 1).getYearOfOrigin();
+            Assert.assertTrue(prewYear >= nextYear);
+
+        }
+    }
 }

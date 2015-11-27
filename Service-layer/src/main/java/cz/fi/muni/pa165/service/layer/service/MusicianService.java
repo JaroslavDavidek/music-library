@@ -16,5 +16,7 @@ public interface MusicianService {
     public Musician findMusicianByID(Long musicianID);
     public Musician findMusicianByRealName(String realName);
     public Musician findMusicianByArtistName(String artistName);
+    public List<Musician> findAllMusiciansInYearRange(int from, int to);
+    public List<Musician> findAllMusiciansByDateOfBirthOrdered(boolean ascending);
     public List<Musician> findAll();
 }

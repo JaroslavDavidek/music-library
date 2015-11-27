@@ -76,4 +76,8 @@ public class MusicianFacadeImplementation implements MusicianFacade{
         return mappingService.mapToCollection(musicianService.findAll(), MusicianDTO.class);
     }
     
+    @Override
+    public List<MusicianDTO> findAllMusiciansInYearRange(int from, int to){
+        return mappingService.mapToCollection(musicianService.findAllMusiciansInYearRange(from, to), MusicianDTO.class);
+    }
 }

@@ -54,8 +54,9 @@ public class SampleDataLoadFacadeImplementation implements SampleDataLoadFacade{
         Musician avicii = storeMusician("Tim Bergling", "Avicii", Date.valueOf("1945-6-14"));
         Musician dio = storeMusician("Ronnie James Dio", "Dio", Date.valueOf("1956-8-11"));
         
-        /* 
-        Album backInBlackAlbum = storeAlbum("Back In Black", "", Date.valueOf("1980-7-25"), "backinblack_cover.jpg", acdc);
+        
+        //Album backInBlackAlbum = storeAlbum("Back In Black", "", Date.valueOf("1980-7-25"), "backinblack_cover.jpg", acdc);
+        Album backInBlackAlbum = storeAlbum("Back In Black", "", Date.valueOf("1980-7-25"), "", acdc);
         
         Song backInBlack = storeSong("Back In Black", "", 320, 6, backInBlackAlbum, acdc, hardRock);
         Song shootToThrill = storeSong("Shoot To Thrill", "", 320, 2, backInBlackAlbum, acdc, hardRock);
@@ -69,7 +70,7 @@ public class SampleDataLoadFacadeImplementation implements SampleDataLoadFacade{
         backInBlackAlbumPlaylist.add(hellBellsSong);
                 
         addSongsToAlbum(backInBlackAlbum, backInBlackAlbumPlaylist);
-        */
+       
     }
     
     private Song storeSong(String title, String commentary, int bitrate, int albumPosition, Album album, Musician musician, Genre genre) {
@@ -118,6 +119,9 @@ public class SampleDataLoadFacadeImplementation implements SampleDataLoadFacade{
     }
     
     private Byte[] readImage(String file) throws IOException {
+        if(file == null && file.isEmpty()){
+            return new Byte[0];
+        }
         try (InputStream is = this.getClass().getResourceAsStream("/" + file)) {
             int nRead;
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();

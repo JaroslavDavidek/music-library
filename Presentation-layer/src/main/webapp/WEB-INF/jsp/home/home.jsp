@@ -17,26 +17,13 @@
     <div class="jumbotron">
         <h1>Welcome to the Music Library project !</h1>
         <p class="lead">Manage your content with ease... </p>
+        <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/song/list"
+              role="button">View songs</a></p>
+        <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/song/new"
+              role="button">Create song</a></p>
     </div>
     
-    <div class="row">
-        <table class="table">
-        <thead>
-        <tr>
-            <th>Song title</th>
-        </tr>
-        </thead>
-        <tbody>
-            <%-- 
-        <c:forEach items="${songs}" var="song">
-            <tr>
-                <td><c:out value="${song.title}"/></td>
-            </tr>
-        </c:forEach>
-            --%>
-        </tbody>
-    </table>
-    </div>
+    
 
 </jsp:attribute>
 </own:masterpage>

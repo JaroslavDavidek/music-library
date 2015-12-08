@@ -53,23 +53,46 @@ public class SampleDataLoadFacadeImplementation implements SampleDataLoadFacade{
         Musician acdc = storeMusician("Brian Johnson", "AC-DC", Date.valueOf("1948-2-17"));
         Musician avicii = storeMusician("Tim Bergling", "Avicii", Date.valueOf("1945-6-14"));
         Musician dio = storeMusician("Ronnie James Dio", "Dio", Date.valueOf("1956-8-11"));
+        Musician direStraits = storeMusician("Mark Knopfler", "Dire Straits", Date.valueOf("1949-8-12"));
         
         
         //Album backInBlackAlbum = storeAlbum("Back In Black", "", Date.valueOf("1980-7-25"), "backinblack_cover.jpg", acdc);
         Album backInBlackAlbum = storeAlbum("Back In Black", "", Date.valueOf("1980-7-25"), "", acdc);
         
+        //Album brothersInArmsAlbum = storeAlbum("Brothers in Arms", "", Date.valueOf("1985-6-13"), "brothersinarms_cover.jpg", direStraits);
+        Album brothersInArmsAlbum = storeAlbum("Brothers in Arms", "", Date.valueOf("1985-6-13"), "", direStraits);
+        
+        //Album onEveryStreetAlbum = storeAlbum("On Every Street", "", Date.valueOf("1991-10-11"), "oneverystreet_cover.jpg", direStraits);
+        Album onEveryStreetAlbum = storeAlbum("On Every Street", "", Date.valueOf("1991-10-11"), "", direStraits);
+        
         Song backInBlack = storeSong("Back In Black", "", 320, 6, backInBlackAlbum, acdc, hardRock);
         Song shootToThrill = storeSong("Shoot To Thrill", "", 320, 2, backInBlackAlbum, acdc, hardRock);
-        Song haveADrinkOnMeSong = storeSong("Have A Drink On Me", "", 320, 8, backInBlackAlbum, acdc, hardRock);
-        Song hellBellsSong = storeSong("Hell Bells", "", 320, 1, backInBlackAlbum, acdc, hardRock);
+        Song haveADrinkOnMe = storeSong("Have A Drink On Me", "", 320, 8, backInBlackAlbum, acdc, hardRock);
+        Song hellBells = storeSong("Hell Bells", "", 320, 1, backInBlackAlbum, acdc, hardRock);
+        Song moneyForNothing = storeSong("Money For Nothing", "", 256, 2, brothersInArmsAlbum, direStraits, rock);
+        Song oneWorld = storeSong("One World", "", 256, 8, brothersInArmsAlbum, direStraits, rock);
+        Song yourLatestTrick = storeSong("Your Latest Trick", "", 256, 4, brothersInArmsAlbum, direStraits, rock);
+        Song heavyFuel = storeSong("Heavy Fuel", "", 192, 7, onEveryStreetAlbum, direStraits, rock);
         
         List<Song> backInBlackAlbumPlaylist = new ArrayList<Song>();
         backInBlackAlbumPlaylist.add(backInBlack);
         backInBlackAlbumPlaylist.add(shootToThrill);
-        backInBlackAlbumPlaylist.add(haveADrinkOnMeSong);
-        backInBlackAlbumPlaylist.add(hellBellsSong);
+        backInBlackAlbumPlaylist.add(haveADrinkOnMe);
+        backInBlackAlbumPlaylist.add(hellBells);
+        
+        List<Song> brothersInArmsAlbumPlaylist = new ArrayList<Song>();
+        brothersInArmsAlbumPlaylist.add(moneyForNothing);
+        brothersInArmsAlbumPlaylist.add(oneWorld);
+        brothersInArmsAlbumPlaylist.add(yourLatestTrick);
+        
+        List<Song> onEveryStreetAlbumPlaylist = new ArrayList<Song>();
+        onEveryStreetAlbumPlaylist.add(heavyFuel);
                 
         addSongsToAlbum(backInBlackAlbum, backInBlackAlbumPlaylist);
+        
+        addSongsToAlbum(brothersInArmsAlbum, brothersInArmsAlbumPlaylist);
+        
+        addSongsToAlbum(onEveryStreetAlbum, onEveryStreetAlbumPlaylist);
        
     }
     

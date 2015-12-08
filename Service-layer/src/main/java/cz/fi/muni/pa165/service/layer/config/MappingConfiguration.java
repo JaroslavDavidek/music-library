@@ -23,11 +23,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @Configuration
 @Import(PersistenceAplicationContext.class)
-@ComponentScan(basePackageClasses={SongServiceImplementation.class, SongFacadeImplementation.class, 
-    AlbumServiceImplementation.class, AlbumFacadeImplementation.class, 
-    MusicianServiceImplementation.class, MusicianFacadeImplementation.class,
-    GenreServiceImplementation.class, GenreFacadeImplementation.class
-})
+@ComponentScan(basePackageClasses={GenreServiceImplementation.class, AlbumFacadeImplementation.class})
 public class MappingConfiguration {
     
     @Bean

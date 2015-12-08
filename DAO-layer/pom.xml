@@ -13,7 +13,7 @@
 
     <name>DAO-layer</name>
 
-    <dependencies>
+<dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -46,11 +46,6 @@
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>5.0.2.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>5.0.2.Final</version>
         </dependency>
@@ -80,6 +75,12 @@
             <artifactId>derby</artifactId>
             <version>10.10.2.0</version>
         </dependency>
-    </dependencies>
+    <dependency>
+        <groupId>javax</groupId>
+        <artifactId>javaee-web-api</artifactId>
+      <version>7.0</version>
+      <type>jar</type>
+    </dependency>
+</dependencies>
 
 </project>

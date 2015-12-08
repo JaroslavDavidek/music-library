@@ -7,9 +7,12 @@ import cz.fi.muni.pa165.entity.Genre;
 import cz.fi.muni.pa165.entity.Musician;
 import cz.fi.muni.pa165.entity.Song;
 import cz.fi.muni.pa165.service.layer.service.MappingService;
+import cz.fi.muni.pa165.service.layer.service.MappingServiceImplementation;
 import cz.fi.muni.pa165.service.layer.service.SongService;
 import java.util.List;
 import javax.inject.Inject;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,8 @@ import org.springframework.stereotype.Service;
  * @author JaroslavDavidek
  */
 @Service
+@Component
+@ComponentScan(basePackageClasses={MappingServiceImplementation.class})
 @Transactional
 public class SongFacadeImplementation implements SongFacade {
 

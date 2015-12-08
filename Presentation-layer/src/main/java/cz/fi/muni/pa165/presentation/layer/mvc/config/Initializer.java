@@ -1,6 +1,8 @@
 package cz.fi.muni.pa165.presentation.layer.mvc.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import org.springframework.web.filter.CharacterEncodingFilter;
+import javax.servlet.Filter;
 
 /**
  *
@@ -14,13 +16,20 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
     }
 
     @Override
-    protected Class<?>[] getServletConfigClasses() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
     }
 
     @Override
-    protected String[] getServletMappings() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
+        encodingFilter.setEncoding("utf-8");
+        return new Filter[]{encodingFilter};
+    }
+
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return null;
     }
     
 }

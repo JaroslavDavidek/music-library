@@ -1,9 +1,13 @@
 package cz.fi.muni.pa165.service.layer.service;
 
 import cz.fi.muni.pa165.dao.AlbumDao;
+import cz.fi.muni.pa165.dao.AlbumDaoImplementation;
 import cz.fi.muni.pa165.dao.GenreDao;
+import cz.fi.muni.pa165.dao.GenreDaoImplementation;
 import cz.fi.muni.pa165.dao.MusicianDao;
+import cz.fi.muni.pa165.dao.MusicianDaoImplementation;
 import cz.fi.muni.pa165.dao.SongDao;
+import cz.fi.muni.pa165.dao.SongDaoImplementation;
 import cz.fi.muni.pa165.entity.Album;
 import cz.fi.muni.pa165.entity.Genre;
 import cz.fi.muni.pa165.entity.Musician;
@@ -17,6 +21,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import javax.inject.Inject;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
 
@@ -25,6 +30,8 @@ import org.springframework.stereotype.Service;
  * @author JaroslavDavidek
  */
 @Service
+@ComponentScan(basePackageClasses={SongDaoImplementation.class, MusicianDaoImplementation.class,
+    GenreDaoImplementation.class, AlbumDaoImplementation.class})
 public class SongServiceImplementation implements SongService{
 
     @Inject

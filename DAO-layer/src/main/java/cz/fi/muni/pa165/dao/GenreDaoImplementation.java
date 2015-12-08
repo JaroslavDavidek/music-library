@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Genre DAO - supports basic operations over Genre Entity
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Repository;
  * @author JaroslavDavidek
  */
 @Repository
+@Transactional
 public class GenreDaoImplementation implements GenreDao {
 
     @PersistenceContext

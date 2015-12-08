@@ -10,7 +10,8 @@
         <module>DAO-layer</module>
         <module>API-layer</module>
         <module>Presentation-layer</module>
-  </modules>
+        <module>Sample-data</module>
+    </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

@@ -1,8 +1,11 @@
 package cz.fi.muni.pa165;
 
 import cz.fi.muni.pa165.dao.AlbumDao;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -31,7 +34,7 @@ public class PersistenceAplicationContext {
 	public JpaTransactionManager transactionManager(){
 		return  new JpaTransactionManager(entityManagerFactory().getObject());
 	}
-	
+        
 	/**
 	 * Starts up a container that emulates behavior prescribed in JPA spec for container-managed EntityManager
 	 * @return

@@ -2,8 +2,10 @@ package cz.fi.muni.pa165.presentation.layer.mvc.controllers;
 
 import cz.fi.muni.pa165.api.layer.dto.SongDTO;
 import cz.fi.muni.pa165.api.layer.facade.SongFacade;
+import cz.fi.muni.pa165.service.layer.facade.SongFacadeImplementation;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,9 +20,9 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @author JaroslavDavidek
  */
 @Controller
+@ComponentScan(basePackageClasses={SongFacadeImplementation.class})
 @RequestMapping("/song")
 public class SongController {
-    
     @Autowired
     private SongFacade songFacade;
     

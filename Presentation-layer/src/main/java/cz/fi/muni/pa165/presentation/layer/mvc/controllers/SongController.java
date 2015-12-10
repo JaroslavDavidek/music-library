@@ -55,10 +55,10 @@ public class SongController {
      */
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
     public String create(Model model) {
-        model.addAttribute("songCreateDTO", new SongCreateDTO());
-        model.addAttribute("genres", genreFacade.findAll());
+        model.addAttribute("songCreate", new SongCreateDTO());      
         model.addAttribute("albums", albumFacade.findAll());
         model.addAttribute("musicians", musicianFacade.findAll());
+        model.addAttribute("genres", genreFacade.findAll());
         return "song/create";
     }
     
@@ -73,11 +73,14 @@ public class SongController {
      * @return 
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@Valid @ModelAttribute("songCreate") SongDTO formBean,
+    public String create(@Valid @ModelAttribute("songCreate") SongCreateDTO formBean,
             BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
             UriComponentsBuilder uriBuilder) {
 
-        if (bindingResult.hasErrors()) {           
+        if (bindingResult.hasErrors()) {   
+            model.addAttribute("albums", albumFacade.findAll());
+            model.addAttribute("musicians", musicianFacade.findAll());
+            model.addAttribute("genres", genreFacade.findAll());
             return "/song/create";
         }
         

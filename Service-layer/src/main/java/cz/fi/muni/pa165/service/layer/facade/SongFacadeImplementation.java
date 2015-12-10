@@ -1,13 +1,17 @@
 package cz.fi.muni.pa165.service.layer.facade;
 
+import cz.fi.muni.pa165.api.layer.dto.SongCreateDTO;
 import cz.fi.muni.pa165.api.layer.dto.SongDTO;
 import cz.fi.muni.pa165.api.layer.facade.SongFacade;
 import cz.fi.muni.pa165.entity.Album;
 import cz.fi.muni.pa165.entity.Genre;
 import cz.fi.muni.pa165.entity.Musician;
 import cz.fi.muni.pa165.entity.Song;
+import cz.fi.muni.pa165.service.layer.service.AlbumService;
+import cz.fi.muni.pa165.service.layer.service.GenreService;
 import cz.fi.muni.pa165.service.layer.service.MappingService;
 import cz.fi.muni.pa165.service.layer.service.MappingServiceImplementation;
+import cz.fi.muni.pa165.service.layer.service.MusicianService;
 import cz.fi.muni.pa165.service.layer.service.SongService;
 import java.util.List;
 import javax.inject.Inject;
@@ -32,11 +36,27 @@ public class SongFacadeImplementation implements SongFacade {
     
     @Inject
     private SongService songService;
+    
+    @Inject
+    private AlbumService albumService;
    
+    @Inject
+    private GenreService genreService;
+    
+    @Inject 
+    private MusicianService musicianService;
+    
     @Override
-    public Long createSong(SongDTO songCreateDTO) {
-        Song mappedSong = mappingService.mapTo(songCreateDTO, Song.class);      
-        return songService.createSong(mappedSong).getId();
+    public Long createSong(SongCreateDTO songCreateDTO) {
+        Song song = new Song();
+        song.setAlbum(albumService.findById(songCreateDTO.getAlbumId()));
+        song.setMusician(musicianService.findMusicianByID(songCreateDTO.getMusicianId()));
+        song.setGenre(genreService.findGenreByID(songCreateDTO.getGenreId()));
+        song.setTitle(songCreateDTO.getTitle());
+        song.setAlbumPosition(songCreateDTO.getAlbumPosition());
+        song.setBitrate(songCreateDTO.getBitrate());
+        song.setCommentary(songCreateDTO.getCommentary()); 
+        return songService.createSong(song).getId();
     }
 
     @Override

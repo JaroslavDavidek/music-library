@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <div class="col-md-8 col-md-offset-2 form-group ${album_error?'has-error':''}">
+            <div class="col-md-8 col-md-offset-2 form-group ${albumId_error?'has-error':''}">
                 <form:label path="albumId" cssClass="col-sm-3 text-right control-label">Album</form:label>
                     <div class="col-sm-5">
                     <form:select path="albumId" cssClass="form-control">
@@ -42,7 +42,7 @@
                 </div>
             </div>
                 
-            <div class="col-md-8 col-md-offset-2 form-group ${musician_error?'has-error':''}">
+            <div class="col-md-8 col-md-offset-2 form-group ${musicianId_error?'has-error':''}">
                 <form:label path="musicianId" cssClass="col-sm-3 text-right control-label">Musician</form:label>
                     <div class="col-sm-5">
                     <form:select path="musicianId" cssClass="form-control">
@@ -54,7 +54,7 @@
                 </div>
             </div>
                 
-            <div class="col-md-8 col-md-offset-2 form-group ${genre_error?'has-error':''}">
+            <div class="col-md-8 col-md-offset-2 form-group ${genreId_error?'has-error':''}">
                 <form:label path="genreId" cssClass="col-sm-3 text-right control-label">Genre</form:label>
                     <div class="col-sm-5">
                     <form:select path="genreId" cssClass="form-control">

@@ -11,6 +11,7 @@
         <class>cz.fi.muni.pa165.entity.Song</class>
         <class>cz.fi.muni.pa165.entity.Genre</class>
         <class>cz.fi.muni.pa165.entity.Musician</class>
+        <class>cz.fi.muni.pa165.entity.User</class>
 
         <properties>
             <property name="hibernate.connection.url" value="jdbc:derby:memory:testdb" />

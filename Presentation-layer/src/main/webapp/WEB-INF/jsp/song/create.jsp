@@ -31,38 +31,38 @@
             </div>
 
             <div class="col-md-8 col-md-offset-2 form-group ${album_error?'has-error':''}">
-                <form:label path="album" cssClass="col-sm-3 text-right control-label">Album</form:label>
+                <form:label path="albumId" cssClass="col-sm-3 text-right control-label">Album</form:label>
                     <div class="col-sm-5">
-                    <form:select path="album" cssClass="form-control">
+                    <form:select path="albumId" cssClass="form-control">
                         <c:forEach items="${albums}" var="album">
                             <form:option value="${album.id}">${album.title}</form:option>
                         </c:forEach>
                     </form:select>
-                    <p class="help-block"><form:errors path="album" cssClass="error"/></p>
+                    <p class="help-block"><form:errors path="albumId" cssClass="error"/></p>
                 </div>
             </div>
                 
             <div class="col-md-8 col-md-offset-2 form-group ${musician_error?'has-error':''}">
-                <form:label path="musician" cssClass="col-sm-3 text-right control-label">Musician</form:label>
+                <form:label path="musicianId" cssClass="col-sm-3 text-right control-label">Musician</form:label>
                     <div class="col-sm-5">
-                    <form:select path="musician" cssClass="form-control">
+                    <form:select path="musicianId" cssClass="form-control">
                         <c:forEach items="${musicians}" var="musician">
                             <form:option value="${musician.id}">${musician.artistName}</form:option>
                         </c:forEach>
                     </form:select>
-                    <p class="help-block"><form:errors path="musician" cssClass="error"/></p>
+                    <p class="help-block"><form:errors path="musicianId" cssClass="error"/></p>
                 </div>
             </div>
                 
             <div class="col-md-8 col-md-offset-2 form-group ${genre_error?'has-error':''}">
-                <form:label path="genre" cssClass="col-sm-3 text-right control-label">Genre</form:label>
+                <form:label path="genreId" cssClass="col-sm-3 text-right control-label">Genre</form:label>
                     <div class="col-sm-5">
-                    <form:select path="genre" cssClass="form-control">
+                    <form:select path="genreId" cssClass="form-control">
                         <c:forEach items="${genres}" var="genre">
                             <form:option value="${genre.id}">${genre.title}</form:option>
                         </c:forEach>
                     </form:select>
-                    <p class="help-block"><form:errors path="genre" cssClass="error"/></p>
+                    <p class="help-block"><form:errors path="genreId" cssClass="error"/></p>
                 </div>
             </div>
                 

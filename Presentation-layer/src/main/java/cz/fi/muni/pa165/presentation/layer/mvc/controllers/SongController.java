@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.presentation.layer.mvc.controllers;
 
+import cz.fi.muni.pa165.api.layer.dto.SongCreateDTO;
 import cz.fi.muni.pa165.api.layer.dto.SongDTO;
 import cz.fi.muni.pa165.api.layer.facade.AlbumFacade;
 import cz.fi.muni.pa165.api.layer.facade.GenreFacade;
@@ -54,7 +55,7 @@ public class SongController {
      */
     @RequestMapping(value = {"/new"}, method = RequestMethod.GET)
     public String create(Model model) {
-        model.addAttribute("songCreate", new SongDTO());
+        model.addAttribute("songCreateDTO", new SongCreateDTO());
         model.addAttribute("genres", genreFacade.findAll());
         model.addAttribute("albums", albumFacade.findAll());
         model.addAttribute("musicians", musicianFacade.findAll());

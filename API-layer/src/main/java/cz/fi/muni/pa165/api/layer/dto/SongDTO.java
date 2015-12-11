@@ -169,7 +169,17 @@ public class SongDTO {
 
     @Override
     public String toString() {
-        return title + " from " + album.getTitle() + " by " + musician.toString() + " @" + bitrate + " Kbps";
+        String output = title;
+        if(this.album != null)
+        {          
+            output += " from " + album.getTitle();
+        }
+        if(this.musician != null)
+        {          
+            output += " by " + musician.toString();
+        }
+        output += " @" + bitrate + " Kbps";
+        return output;
     }
     
 }

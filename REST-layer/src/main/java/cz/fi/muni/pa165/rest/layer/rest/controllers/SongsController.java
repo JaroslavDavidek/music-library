@@ -28,9 +28,39 @@ public class SongsController {
 
         return songFacade.findAll();
     }
+    
+    @RequestMapping(value = "/{id}/listByAlbum", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final List<SongDTO> getAllSongsByAlbum(@PathVariable("id") long albumId) {
+        
+        List<SongDTO> foundSongsDTO = songFacade.findAllSongsByAlbum(albumId);
+        if (foundSongsDTO == null) {
+            throw new NotFound404Exception();
+        }
+        return foundSongsDTO;
+    }
+    
+    @RequestMapping(value = "/{id}/listByMusician", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final List<SongDTO> getAllSongsByMusician(@PathVariable("id") long musicianId) {
+
+        List<SongDTO> foundSongsDTO = songFacade.findAllSongsByMusician(musicianId);
+        if (foundSongsDTO == null) {
+            throw new NotFound404Exception();
+        }
+        return foundSongsDTO;
+    }
+    
+    @RequestMapping(value = "/{id}/listByGenre", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final List<SongDTO> getAllSongsByGenre(@PathVariable("id") long genreId) {
+
+        List<SongDTO> foundSongsDTO = songFacade.findAllSongsByMusician(genreId);
+        if (foundSongsDTO == null) {
+            throw new NotFound404Exception();
+        }
+        return foundSongsDTO;
+    }
 
     
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public final SongDTO getSong(@PathVariable("id") long id) throws Exception {
 
         SongDTO foundSongDTO = songFacade.findSongByID(id);
@@ -38,5 +68,13 @@ public class SongsController {
             throw new NotFound404Exception();
         }
         return foundSongDTO;
+    }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final void deleteSong(@PathVariable("id") long id) throws Exception {
+
+        if(!songFacade.deleteSong(id)){
+            throw new NotFound404Exception();
+        }
     }
 }

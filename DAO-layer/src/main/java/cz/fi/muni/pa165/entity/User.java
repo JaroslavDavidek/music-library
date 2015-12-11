@@ -24,7 +24,6 @@ public class User {
 
     private String passwordHash;
 
-    @Column(nullable=false,unique=true)
     @Pattern(regexp=".+@.+\\....?")   
     @NotNull
     private String email;

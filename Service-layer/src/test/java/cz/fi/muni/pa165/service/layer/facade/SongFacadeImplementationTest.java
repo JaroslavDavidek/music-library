@@ -350,7 +350,7 @@ public class SongFacadeImplementationTest extends AbstractTestNGSpringContextTes
         expectedResult.add(this.shootToThrillSong);
         expectedResult.add(this.moneyForNothingAlternativeTakeSong);
         
-        when(songDao.findAll()).thenReturn(expectedResult);
+        when(songFacade.findAll()).thenReturn(mappingService.mapToCollection(expectedResult, SongDTO.class));
         List<SongDTO> foundSongs = songFacade.findAll();
         Assert.assertEquals(expectedResult.size(), foundSongs.size());
         for(int i = 0; i < expectedResult.size(); i++)

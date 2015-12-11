@@ -47,13 +47,13 @@ public class AlbumFacadeImplementation implements AlbumFacade {
     @Override
     public AlbumDTO addSong(Long albumId, Long songId) {
         albumService.addSong(albumService.findById(albumId), songService.findSongByID(songId));
-        return mappingService.mapTo(albumService.findById(albumId), AlbumDTO.class);
+        return mappingService.mapToEnforceID(albumService.findById(albumId), AlbumDTO.class);
     }
 
     @Override
     public AlbumDTO removeSong(Long albumId, Long songId) {
         albumService.removeSong(albumService.findById(albumId), songService.findSongByID(songId));
-        return mappingService.mapTo(albumService.findById(albumId), AlbumDTO.class);
+        return mappingService.mapToEnforceID(albumService.findById(albumId), AlbumDTO.class);
     }
 
     @Override
@@ -63,27 +63,27 @@ public class AlbumFacadeImplementation implements AlbumFacade {
 
     @Override
     public List<AlbumDTO> findAll() {
-        return mappingService.mapToCollection(albumService.findAll(), AlbumDTO.class);
+        return mappingService.mapToCollectionEnforceID(albumService.findAll(), AlbumDTO.class);
     }
 
     @Override
     public AlbumDTO findById(Long id) {
-        return mappingService.mapTo(albumService.findById(id), AlbumDTO.class);
+        return mappingService.mapToEnforceID(albumService.findById(id), AlbumDTO.class);
     }
 
     @Override
     public AlbumDTO findByTitle(String title) {
-        return mappingService.mapTo(albumService.findByTitle(title), AlbumDTO.class);
+        return mappingService.mapToEnforceID(albumService.findByTitle(title), AlbumDTO.class);
     }
 
     @Override
     public AlbumDTO updateAlbumTitle(Long albumId, String title) {
-        return mappingService.mapTo(albumService.updateAlbumTitle(albumService.findById(albumId), title), AlbumDTO.class);
+        return mappingService.mapToEnforceID(albumService.updateAlbumTitle(albumService.findById(albumId), title), AlbumDTO.class);
     }
 
     @Override
     public AlbumDTO updateAlbumReleaseDate(Long albumId, Date releasedate) {
-        return mappingService.mapTo(albumService.updateAlbumReleaseDate(albumService.findById(albumId), releasedate), AlbumDTO.class);
+        return mappingService.mapToEnforceID(albumService.updateAlbumReleaseDate(albumService.findById(albumId), releasedate), AlbumDTO.class);
     }
     
 }

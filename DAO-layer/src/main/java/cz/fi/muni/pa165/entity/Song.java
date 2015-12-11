@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 public class Song {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -49,6 +49,10 @@ public class Song {
     
     public Long getId() {
         return this.id;
+    }
+    
+    private void setId(Long id) {
+        this.id = id;
     }
     
     public String getTitle() {

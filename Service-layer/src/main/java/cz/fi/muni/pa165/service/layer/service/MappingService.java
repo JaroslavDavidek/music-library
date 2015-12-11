@@ -11,5 +11,7 @@ import org.dozer.Mapper;
 public interface MappingService {   
     public Mapper getMapper();    
     public <T> T mapTo(Object objectToMap, Class<T> classToMapTo);
+    public <T> T mapToEnforceID(Object objectToMap, Class<T> classToMapTo);
     public <T> List<T> mapToCollection(Collection<?> objects, Class<T> mapToClass);
+    <T> List<T> mapToCollectionEnforceID(Collection<?> objectsToMap, Class<T> classToMapTo);
 }

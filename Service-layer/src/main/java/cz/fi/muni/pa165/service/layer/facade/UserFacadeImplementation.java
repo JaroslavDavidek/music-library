@@ -44,24 +44,24 @@ public class UserFacadeImplementation implements UserFacade {
 
     @Override
     public boolean isAdmin(UserDTO user) {
-        return userService.isAdmin(mappingService.mapTo(user, User.class));
+        return userService.isAdmin(mappingService.mapToEnforceID(user, User.class));
     }
 
     @Override
     public UserDTO findUserById(Long userId) {
         User user = userService.findUserById(userId);
-        return (user == null) ? null : mappingService.mapTo(user, UserDTO.class);
+        return (user == null) ? null : mappingService.mapToEnforceID(user, UserDTO.class);
     }
 
     @Override
     public UserDTO findUserByEmail(String email) {
         User user = userService.findUserByEmail(email);
-        return (user == null) ? null : mappingService.mapTo(user, UserDTO.class);
+        return (user == null) ? null : mappingService.mapToEnforceID(user, UserDTO.class);
     }
 
     @Override
     public Collection<UserDTO> getAllUsers() {
-        return mappingService.mapToCollection(userService.getAllUsers(), UserDTO.class);
+        return mappingService.mapToCollectionEnforceID(userService.getAllUsers(), UserDTO.class);
     }
     
     

@@ -42,36 +42,36 @@ public class GenreFacadeImplementation implements GenreFacade{
 
     @Override
     public GenreDTO updateTitle(Long genreID, String newTitle) {
-        return mappingService.mapTo(genreService.updateTitle(genreService.findGenreByID(genreID), newTitle), GenreDTO.class);
+        return mappingService.mapToEnforceID(genreService.updateTitle(genreService.findGenreByID(genreID), newTitle), GenreDTO.class);
     }
 
     @Override
     public GenreDTO updateYearOfOrigin(Long genreID, int newYearOfOrigin) {
-        return mappingService.mapTo(genreService.updateYearOfOrigin(genreService.findGenreByID(genreID), newYearOfOrigin), GenreDTO.class);
+        return mappingService.mapToEnforceID(genreService.updateYearOfOrigin(genreService.findGenreByID(genreID), newYearOfOrigin), GenreDTO.class);
     }
 
     @Override
     public GenreDTO findGenreByID(Long genreID) {
-        return mappingService.mapTo(genreService.findGenreByID(genreID), GenreDTO.class);
+        return mappingService.mapToEnforceID(genreService.findGenreByID(genreID), GenreDTO.class);
     }
 
     @Override
     public GenreDTO findGenreByTitle(String genreTitle) {
-        return mappingService.mapTo(genreService.findGenreByTitle(genreTitle), GenreDTO.class);
+        return mappingService.mapToEnforceID(genreService.findGenreByTitle(genreTitle), GenreDTO.class);
     }
 
     @Override
     public List<GenreDTO> findAll() {
-        return mappingService.mapToCollection(genreService.findAll(), GenreDTO.class);
+        return mappingService.mapToCollectionEnforceID(genreService.findAll(), GenreDTO.class);
     }
     
     @Override
     public List<GenreDTO> findAllGenresInYearRange(int from, int to){
-        return mappingService.mapToCollection(genreService.findAllGenresInYearRange(from, to), GenreDTO.class);
+        return mappingService.mapToCollectionEnforceID(genreService.findAllGenresInYearRange(from, to), GenreDTO.class);
     }
     
     @Override
     public List<GenreDTO> findAllGenresByYearOfOriginOrdered(boolean ascending){
-        return mappingService.mapToCollection(genreService.findAllGenresByYearOfOriginOrdered(ascending), GenreDTO.class);
+        return mappingService.mapToCollectionEnforceID(genreService.findAllGenresByYearOfOriginOrdered(ascending), GenreDTO.class);
     }
 }

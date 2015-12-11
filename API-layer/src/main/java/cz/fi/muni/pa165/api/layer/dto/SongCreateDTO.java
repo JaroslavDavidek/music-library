@@ -1,7 +1,6 @@
 package cz.fi.muni.pa165.api.layer.dto;
 
 import java.util.Objects;
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -46,7 +45,7 @@ public class SongCreateDTO {
         return this.albumId;
     }
     
-    public void setAlbum(Long albumIdToSet) {
+    public void setAlbumId(Long albumIdToSet) {
         this.albumId = albumIdToSet;
     }
     

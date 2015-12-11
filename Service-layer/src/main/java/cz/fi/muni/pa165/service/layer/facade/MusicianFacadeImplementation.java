@@ -43,41 +43,41 @@ public class MusicianFacadeImplementation implements MusicianFacade{
 
     @Override
     public MusicianDTO updateRealName(Long musicianID, String newName) {
-        return mappingService.mapTo(musicianService.updateRealName(musicianService.findMusicianByID(musicianID), newName), MusicianDTO.class);
+        return mappingService.mapToEnforceID(musicianService.updateRealName(musicianService.findMusicianByID(musicianID), newName), MusicianDTO.class);
     }
 
     @Override
     public MusicianDTO updateArtistName(Long musicianID, String newName) {
-        return mappingService.mapTo(musicianService.updateArtistName(musicianService.findMusicianByID(musicianID), newName), MusicianDTO.class);
+        return mappingService.mapToEnforceID(musicianService.updateArtistName(musicianService.findMusicianByID(musicianID), newName), MusicianDTO.class);
     }
 
     @Override
     public MusicianDTO updateDateOfBirth(Long musicianID, Date date) {
-        return mappingService.mapTo(musicianService.updateDateOfBirth(musicianService.findMusicianByID(musicianID), date), MusicianDTO.class);
+        return mappingService.mapToEnforceID(musicianService.updateDateOfBirth(musicianService.findMusicianByID(musicianID), date), MusicianDTO.class);
     }
 
     @Override
     public MusicianDTO findMusicianByID(Long musicianID) {
-        return mappingService.mapTo(musicianService.findMusicianByID(musicianID), MusicianDTO.class);
+        return mappingService.mapToEnforceID(musicianService.findMusicianByID(musicianID), MusicianDTO.class);
     }
 
     @Override
     public MusicianDTO findMusicianByRealName(String realName) {
-        return mappingService.mapTo(musicianService.findMusicianByRealName(realName), MusicianDTO.class);
+        return mappingService.mapToEnforceID(musicianService.findMusicianByRealName(realName), MusicianDTO.class);
     }
 
     @Override
     public MusicianDTO findMusicianByArtistName(String artistName) {
-        return mappingService.mapTo(musicianService.findMusicianByArtistName(artistName), MusicianDTO.class);
+        return mappingService.mapToEnforceID(musicianService.findMusicianByArtistName(artistName), MusicianDTO.class);
     }
 
     @Override
     public List<MusicianDTO> findAll() {
-        return mappingService.mapToCollection(musicianService.findAll(), MusicianDTO.class);
+        return mappingService.mapToCollectionEnforceID(musicianService.findAll(), MusicianDTO.class);
     }
     
     @Override
     public List<MusicianDTO> findAllMusiciansInYearRange(int from, int to){
-        return mappingService.mapToCollection(musicianService.findAllMusiciansInYearRange(from, to), MusicianDTO.class);
+        return mappingService.mapToCollectionEnforceID(musicianService.findAllMusiciansInYearRange(from, to), MusicianDTO.class);
     }
 }

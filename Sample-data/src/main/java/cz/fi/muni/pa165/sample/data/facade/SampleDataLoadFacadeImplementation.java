@@ -74,18 +74,18 @@ public class SampleDataLoadFacadeImplementation implements SampleDataLoadFacade{
         Song yourLatestTrick = storeSong("Your Latest Trick", "", 256, 4, brothersInArmsAlbum, direStraits, rock);
         Song heavyFuel = storeSong("Heavy Fuel", "", 192, 7, onEveryStreetAlbum, direStraits, rock);
         
-        List<Song> backInBlackAlbumPlaylist = new ArrayList<Song>();
+        List<Song> backInBlackAlbumPlaylist = new ArrayList<>();
         backInBlackAlbumPlaylist.add(backInBlack);
         backInBlackAlbumPlaylist.add(shootToThrill);
         backInBlackAlbumPlaylist.add(haveADrinkOnMe);
         backInBlackAlbumPlaylist.add(hellBells);
         
-        List<Song> brothersInArmsAlbumPlaylist = new ArrayList<Song>();
+        List<Song> brothersInArmsAlbumPlaylist = new ArrayList<>();
         brothersInArmsAlbumPlaylist.add(moneyForNothing);
         brothersInArmsAlbumPlaylist.add(oneWorld);
         brothersInArmsAlbumPlaylist.add(yourLatestTrick);
         
-        List<Song> onEveryStreetAlbumPlaylist = new ArrayList<Song>();
+        List<Song> onEveryStreetAlbumPlaylist = new ArrayList<>();
         onEveryStreetAlbumPlaylist.add(heavyFuel);
                 
         addSongsToAlbum(backInBlackAlbum, backInBlackAlbumPlaylist);
@@ -105,7 +105,8 @@ public class SampleDataLoadFacadeImplementation implements SampleDataLoadFacade{
         song.setAlbum(album);
         song.setGenre(genre);
         song.setMusician(musician);       
-        return songService.createSong(song);
+        songService.createSong(song);
+        return song;
     }
 
     private Album storeAlbum(String title, String commentary, Date releaseDate, String coverFilePath, Musician musician) throws IOException {
@@ -115,7 +116,8 @@ public class SampleDataLoadFacadeImplementation implements SampleDataLoadFacade{
         album.setReleaseDate(releaseDate);
         album.setCover(readImage(coverFilePath));
         album.setMusician(musician);
-        return albumService.createAlbum(album);    
+        albumService.createAlbum(album);  
+        return album;
     }
     
     private void addSongsToAlbum(Album album, List<Song> songs)
@@ -131,14 +133,16 @@ public class SampleDataLoadFacadeImplementation implements SampleDataLoadFacade{
         musician.setRealName(realName);
         musician.setArtistName(artistName);
         musician.setDateOfBirth(dateOfBirth);
-        return musicianService.createMusician(musician);  
+        musicianService.createMusician(musician);  
+        return musician;
     }
     
     private Genre storeGenre(String title, int yearOfOrigin) {
         Genre genre = new Genre();
         genre.setTitle(title);
         genre.setYearOfOrigin(yearOfOrigin);
-        return genreService.createGenre(genre);
+        genreService.createGenre(genre);
+        return genre;
     }
     
     private Byte[] readImage(String file) throws IOException {

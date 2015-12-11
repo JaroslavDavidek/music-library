@@ -19,7 +19,7 @@
         </div>  
         
         
-        <form:form method="POST" modelAttribute="songCreate" acceptCharset=""
+        <form:form method="POST" modelAttribute="songCreateDTO" acceptCharset=""
                    action="${pageContext.request.contextPath}/song/create">
 
             <div class="col-md-8 col-md-offset-2 form-group ${title_error?'has-error':''}">

@@ -64,6 +64,8 @@ public class SampleDataLoadFacadeImplementation implements SampleDataLoadFacade{
         
         //Album onEveryStreetAlbum = storeAlbum("On Every Street", "", Date.valueOf("1991-10-11"), "oneverystreet_cover.jpg", direStraits);
         Album onEveryStreetAlbum = storeAlbum("On Every Street", "", Date.valueOf("1991-10-11"), "", direStraits);
+       
+        Album bornedAgainAlbum = storeAlbum("Borned Again", "", Date.valueOf("1983-11-15"), "", direStraits);
         
         Song backInBlack = storeSong("Back In Black", "", 320, 6, backInBlackAlbum, acdc, hardRock);
         Song shootToThrill = storeSong("Shoot To Thrill", "", 320, 2, backInBlackAlbum, acdc, hardRock);
@@ -73,6 +75,7 @@ public class SampleDataLoadFacadeImplementation implements SampleDataLoadFacade{
         Song oneWorld = storeSong("One World", "", 256, 8, brothersInArmsAlbum, direStraits, rock);
         Song yourLatestTrick = storeSong("Your Latest Trick", "", 256, 4, brothersInArmsAlbum, direStraits, rock);
         Song heavyFuel = storeSong("Heavy Fuel", "", 192, 7, onEveryStreetAlbum, direStraits, rock);
+        Song trashed = storeSong("Trashed", "", 128, 1, bornedAgainAlbum, dio, heavyMetal);
         
         List<Song> backInBlackAlbumPlaylist = new ArrayList<>();
         backInBlackAlbumPlaylist.add(backInBlack);
@@ -87,12 +90,17 @@ public class SampleDataLoadFacadeImplementation implements SampleDataLoadFacade{
         
         List<Song> onEveryStreetAlbumPlaylist = new ArrayList<>();
         onEveryStreetAlbumPlaylist.add(heavyFuel);
+        
+        List<Song> bornedAgainAlbumPlaylist = new ArrayList<>();
+        bornedAgainAlbumPlaylist.add(trashed);
                 
         addSongsToAlbum(backInBlackAlbum, backInBlackAlbumPlaylist);
         
         addSongsToAlbum(brothersInArmsAlbum, brothersInArmsAlbumPlaylist);
         
         addSongsToAlbum(onEveryStreetAlbum, onEveryStreetAlbumPlaylist);
+        
+        addSongsToAlbum(bornedAgainAlbum, bornedAgainAlbumPlaylist);
        
     }
     

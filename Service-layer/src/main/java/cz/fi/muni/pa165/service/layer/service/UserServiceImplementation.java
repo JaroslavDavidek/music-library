@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
  * @author JaroslavDavidek
  */
 @Service
-@ComponentScan(basePackageClasses={UserDaoImplementation.class})
 public class UserServiceImplementation implements UserService {
 
     @Autowired

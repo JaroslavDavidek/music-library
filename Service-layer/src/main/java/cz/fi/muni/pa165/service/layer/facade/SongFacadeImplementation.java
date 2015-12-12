@@ -26,8 +26,6 @@ import org.springframework.stereotype.Service;
  * @author JaroslavDavidek
  */
 @Service
-@Component
-@ComponentScan(basePackageClasses={MappingServiceImplementation.class})
 @Transactional
 public class SongFacadeImplementation implements SongFacade {
 

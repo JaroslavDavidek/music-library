@@ -30,8 +30,6 @@ import org.springframework.stereotype.Service;
  * @author JaroslavDavidek
  */
 @Service
-@ComponentScan(basePackageClasses={SongDaoImplementation.class, MusicianDaoImplementation.class,
-    GenreDaoImplementation.class, AlbumDaoImplementation.class})
 public class SongServiceImplementation implements SongService{
 
     @Inject

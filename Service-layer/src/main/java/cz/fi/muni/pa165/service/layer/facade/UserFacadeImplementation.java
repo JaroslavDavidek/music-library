@@ -18,8 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @author JaroslavDavidek
  */
 @Service
-@Component
-@ComponentScan(basePackageClasses={MappingServiceImplementation.class})
 @Transactional
 public class UserFacadeImplementation implements UserFacade {
         

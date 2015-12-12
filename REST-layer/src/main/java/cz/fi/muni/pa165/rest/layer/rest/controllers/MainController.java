@@ -1,9 +1,11 @@
 package cz.fi.muni.pa165.rest.layer.rest.controllers;
 
+import cz.fi.muni.pa165.api.layer.dto.SongDTO;
 import cz.fi.muni.pa165.rest.layer.rest.ApiUris;
 import java.util.Map;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.http.MediaType;
@@ -21,6 +23,12 @@ public class MainController {
 
         Map<String,String> resourcesMap = new HashMap<String,String>();     
         resourcesMap.put("songs", ApiUris.ROOT_URI_SONGS);
-        return Collections.unmodifiableMap(resourcesMap);        
+        return Collections.unmodifiableMap(resourcesMap);         
     }
+    /*
+    @RequestMapping(value = "/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final String getAllSongs() {
+
+        return "All ok";
+    }*/
 }

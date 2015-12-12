@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.rest.layer;
 
 import javax.servlet.Filter;
+import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
@@ -32,5 +33,11 @@ public class Init extends AbstractAnnotationConfigDispatcherServletInitializer{
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return null;
+    }
+    
+    @Override
+    public void onStartup(javax.servlet.ServletContext servletContext) throws javax.servlet.ServletException {
+        super.onStartup(servletContext);
+        servletContext.addListener(RequestContextListener.class);
     }
 }

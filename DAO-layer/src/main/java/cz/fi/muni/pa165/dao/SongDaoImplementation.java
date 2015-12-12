@@ -3,8 +3,6 @@ package cz.fi.muni.pa165.dao;
 import cz.fi.muni.pa165.entity.Album;
 import cz.fi.muni.pa165.entity.Genre;
 import cz.fi.muni.pa165.entity.Musician;
-//import cz.fi.muni.pa165.entity.Genre;
-//import cz.fi.muni.pa165.entity.Musician;
 import cz.fi.muni.pa165.entity.Song;
 import cz.fi.muni.pa165.exception.InvalidParamDataAccessExpection;
 import java.util.List;

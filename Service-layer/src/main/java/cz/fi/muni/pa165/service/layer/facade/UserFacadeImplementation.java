@@ -8,8 +8,6 @@ import cz.fi.muni.pa165.service.layer.service.MappingServiceImplementation;
 import cz.fi.muni.pa165.service.layer.service.UserService;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

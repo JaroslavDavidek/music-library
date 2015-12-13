@@ -14,8 +14,8 @@ import java.io.InputStream;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import javax.inject.Inject;
 import javax.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,19 +23,18 @@ import org.springframework.stereotype.Component;
  * @author JaroslavDavidek
  */
 @Component
-@Transactional
 public class SampleDataLoadFacadeImplementation implements SampleDataLoadFacade{
     
-    @Inject
+    @Autowired
     private SongService songService;
     
-    @Inject
+    @Autowired
     private AlbumService albumService;
 
-    @Inject
+    @Autowired
     private GenreService genreService;
     
-    @Inject
+    @Autowired
     private MusicianService musicianService;
 
     

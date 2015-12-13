@@ -4,10 +4,12 @@ import cz.fi.muni.pa165.entity.Album;
 import cz.fi.muni.pa165.entity.Genre;
 import cz.fi.muni.pa165.entity.Musician;
 import cz.fi.muni.pa165.entity.Song;
+import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.service.layer.service.AlbumService;
 import cz.fi.muni.pa165.service.layer.service.GenreService;
 import cz.fi.muni.pa165.service.layer.service.MusicianService;
 import cz.fi.muni.pa165.service.layer.service.SongService;
+import cz.fi.muni.pa165.service.layer.service.UserService;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,9 +39,14 @@ public class SampleDataLoadFacadeImplementation implements SampleDataLoadFacade{
     @Autowired
     private MusicianService musicianService;
 
+    @Autowired
+    private UserService userService;
     
     @Override
     public void loadSampleData() throws IOException {
+        
+        storeUser("admin","admin","admin@musiclib.com",true);
+        storeUser("user","password","user@musiclib.com",false);
         
         Genre rock = storeGenre("Rock", 1950);
         Genre hardRock = storeGenre("Hard Rock", 1970);
@@ -102,6 +109,14 @@ public class SampleDataLoadFacadeImplementation implements SampleDataLoadFacade{
         
         addSongsToAlbum(bornedAgainAlbum, bornedAgainAlbumPlaylist);
        
+    }
+    
+    private void storeUser(String password, String login, String email, boolean isAdmin) {
+        User user = new User();
+        user.setLogin(login);
+        user.setEmail(email);
+        user.setAdmin(isAdmin);
+        userService.registerUser(user, password);
     }
     
     private Song storeSong(String title, String commentary, int bitrate, int albumPosition, Album album, Musician musician, Genre genre) {

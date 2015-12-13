@@ -5,14 +5,20 @@
  */
 package cz.fi.muni.pa165.service.layer.facade;
 
+import cz.fi.muni.pa165.api.layer.dto.AlbumCreateDTO;
 import cz.fi.muni.pa165.api.layer.dto.AlbumDTO;
 import cz.fi.muni.pa165.api.layer.facade.AlbumFacade;
 import cz.fi.muni.pa165.entity.Album;
 import cz.fi.muni.pa165.service.layer.service.AlbumService;
 import cz.fi.muni.pa165.service.layer.service.MappingService;
+import cz.fi.muni.pa165.service.layer.service.MusicianService;
 import cz.fi.muni.pa165.service.layer.service.SongService;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +36,9 @@ public class AlbumFacadeImplementation implements AlbumFacade {
 
     @Inject
     private SongService songService;
+    
+    @Inject
+    private MusicianService musicianService; 
 
     @Inject
     private MappingService mappingService;
@@ -40,6 +49,22 @@ public class AlbumFacadeImplementation implements AlbumFacade {
         album.setTitle(albumDto.getTitle());
         album.setCommentary(albumDto.getCommentary());
         album.setReleaseDate(albumDto.getReleaseDate());
+        albumService.createAlbum(album);
+        return album.getId();
+    }
+    
+    @Override
+    public long createAlbum(AlbumCreateDTO albumDto) {
+        Album album = new Album();
+        album.setTitle(albumDto.getTitle());
+        album.setCommentary(albumDto.getCommentary());
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            album.setReleaseDate(new java.sql.Date(format.parse(albumDto.getReleaseDate()).getTime()));
+        } catch (ParseException ex) {
+            Logger.getLogger(AlbumFacadeImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        album.setMusician(musicianService.findMusicianByID(albumDto.getMusicianId()));
         albumService.createAlbum(album);
         return album.getId();
     }
@@ -85,5 +110,7 @@ public class AlbumFacadeImplementation implements AlbumFacade {
     public AlbumDTO updateAlbumReleaseDate(Long albumId, Date releasedate) {
         return mappingService.mapToEnforceID(albumService.updateAlbumReleaseDate(albumService.findById(albumId), releasedate), AlbumDTO.class);
     }
+    
+    
     
 }

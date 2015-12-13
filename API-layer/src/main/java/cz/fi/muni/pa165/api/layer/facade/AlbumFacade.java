@@ -5,6 +5,7 @@
  */
 package cz.fi.muni.pa165.api.layer.facade;
 
+import cz.fi.muni.pa165.api.layer.dto.AlbumCreateDTO;
 import cz.fi.muni.pa165.api.layer.dto.AlbumDTO;
 import java.sql.Date;
 import java.util.List;
@@ -15,6 +16,8 @@ import java.util.List;
  */
 public interface AlbumFacade {
     Long createAlbum(AlbumDTO a);
+    
+    long createAlbum(AlbumCreateDTO a);
 
     boolean deleteAlbum(Long albumId);
     

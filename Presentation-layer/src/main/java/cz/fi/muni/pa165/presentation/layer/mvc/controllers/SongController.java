@@ -2,11 +2,14 @@ package cz.fi.muni.pa165.presentation.layer.mvc.controllers;
 
 import cz.fi.muni.pa165.api.layer.dto.SongCreateDTO;
 import cz.fi.muni.pa165.api.layer.dto.SongDTO;
+import cz.fi.muni.pa165.api.layer.dto.SongSearchDTO;
 import cz.fi.muni.pa165.api.layer.facade.AlbumFacade;
 import cz.fi.muni.pa165.api.layer.facade.GenreFacade;
 import cz.fi.muni.pa165.api.layer.facade.MusicianFacade;
 import cz.fi.muni.pa165.api.layer.facade.SongFacade;
 import cz.fi.muni.pa165.service.layer.facade.SongFacadeImplementation;
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -168,4 +171,133 @@ public class SongController {
         redirectAttributes.addFlashAttribute("alert_success", "Song " + formBean.getTitle() + " updated");
         return "redirect:" + uriComponentsBuilder.path("/song/listAsAdmin").buildAndExpand(id).encode().toUriString();
     }
+    
+    @RequestMapping(value = {"/find"}, method = RequestMethod.GET)
+    public String find(Model model) {
+        model.addAttribute("searchDTO", new SongSearchDTO());      
+        model.addAttribute("albums", albumFacade.findAll());
+        model.addAttribute("musicians", musicianFacade.findAll());
+        model.addAttribute("genres", genreFacade.findAll());
+        return "song/find";
+    }
+    
+    @RequestMapping(value = {"/findByID"}, method = RequestMethod.POST)
+    public String findByID(@ModelAttribute("searchDTO") SongSearchDTO formBean, BindingResult bindingResult, 
+            Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+        
+         if (bindingResult.hasErrors()) {   
+            model.addAttribute("searchDTO", new SongSearchDTO());   
+            model.addAttribute("albums", albumFacade.findAll());
+            model.addAttribute("musicians", musicianFacade.findAll());
+            model.addAttribute("genres", genreFacade.findAll());
+            return "song/find";
+        }
+        
+        SongDTO foundSong = songFacade.findSongByID(formBean.getSongId());
+        List<SongDTO> foundSongs = new ArrayList<SongDTO>();
+        foundSongs.add(foundSong);
+        model.addAttribute("allSongs", foundSongs); 
+        return "song/list";
+    }
+    
+    @RequestMapping(value = {"/findByTitle"}, method = RequestMethod.POST)
+    public String findByTitle(@ModelAttribute("searchDTO") SongSearchDTO formBean, BindingResult bindingResult, 
+            Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+        
+         if (bindingResult.hasErrors()) {   
+            model.addAttribute("searchDTO", new SongSearchDTO());   
+            model.addAttribute("albums", albumFacade.findAll());
+            model.addAttribute("musicians", musicianFacade.findAll());
+            model.addAttribute("genres", genreFacade.findAll());
+            return "song/find";
+        }
+        
+        SongDTO foundSong = songFacade.findSongByTitle(formBean.getTitle());
+        List<SongDTO> foundSongs = new ArrayList<SongDTO>();
+        foundSongs.add(foundSong);
+        model.addAttribute("allSongs", foundSongs); 
+        return "song/list";
+    }
+    
+    @RequestMapping(value = {"/findByMusician"}, method = RequestMethod.POST)
+    public String findByMusician(@ModelAttribute("searchDTO") SongSearchDTO formBean, BindingResult bindingResult, 
+            Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+        
+         if (bindingResult.hasErrors()) {   
+            model.addAttribute("searchDTO", new SongSearchDTO());   
+            model.addAttribute("albums", albumFacade.findAll());
+            model.addAttribute("musicians", musicianFacade.findAll());
+            model.addAttribute("genres", genreFacade.findAll());
+            return "song/find";
+        }
+        
+        model.addAttribute("allSongs", songFacade.findAllSongsByMusician(formBean.getMusicianId())); 
+        return "song/list";
+    }
+    
+    @RequestMapping(value = {"/findByGenre"}, method = RequestMethod.POST)
+    public String findByGenre(@ModelAttribute("searchDTO") SongSearchDTO formBean, BindingResult bindingResult, 
+            Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+        
+         if (bindingResult.hasErrors()) {   
+            model.addAttribute("searchDTO", new SongSearchDTO());   
+            model.addAttribute("albums", albumFacade.findAll());
+            model.addAttribute("musicians", musicianFacade.findAll());
+            model.addAttribute("genres", genreFacade.findAll());
+            return "song/find";
+        }
+        
+        model.addAttribute("allSongs", songFacade.findAllSongsByGenre(formBean.getGenreId())); 
+        return "song/list";
+    }
+    
+    @RequestMapping(value = {"/findByAlbum"}, method = RequestMethod.POST)
+    public String findByAlbum(@ModelAttribute("searchDTO") SongSearchDTO formBean, BindingResult bindingResult, 
+            Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+        
+         if (bindingResult.hasErrors()) {   
+            model.addAttribute("searchDTO", new SongSearchDTO());   
+            model.addAttribute("albums", albumFacade.findAll());
+            model.addAttribute("musicians", musicianFacade.findAll());
+            model.addAttribute("genres", genreFacade.findAll());
+            return "song/find";
+        }
+        
+        model.addAttribute("allSongs", songFacade.findAllSongsByAlbum(formBean.getAlbumId())); 
+        return "song/list";
+    }
+    
+    @RequestMapping(value = {"/findByMusicianAndReleaseYearRange"}, method = RequestMethod.POST)
+    public String findByMusicianAndReleaseYearRange(@ModelAttribute("searchDTO") SongSearchDTO formBean, BindingResult bindingResult, 
+            Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+        
+         if (bindingResult.hasErrors()) {   
+            model.addAttribute("searchDTO", new SongSearchDTO());   
+            model.addAttribute("albums", albumFacade.findAll());
+            model.addAttribute("musicians", musicianFacade.findAll());
+            model.addAttribute("genres", genreFacade.findAll());
+            return "song/find";
+        }
+        
+        model.addAttribute("allSongs", songFacade.findAllSongsByMusicianAndReleaseYearRange(formBean.getMusicianId(), formBean.getFromYear(), formBean.getToYear())); 
+        return "song/list";
+    }
+    
+    @RequestMapping(value = {"/findByAlbumOrdered"}, method = RequestMethod.POST)
+    public String findByAlbumOrdered(@ModelAttribute("searchDTO") SongSearchDTO formBean, BindingResult bindingResult, 
+            Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+        
+         if (bindingResult.hasErrors()) {   
+            model.addAttribute("searchDTO", new SongSearchDTO());   
+            model.addAttribute("albums", albumFacade.findAll());
+            model.addAttribute("musicians", musicianFacade.findAll());
+            model.addAttribute("genres", genreFacade.findAll());
+            return "song/find";
+        }
+        
+        model.addAttribute("allSongs", songFacade.findAllSongsByAlbumOrdered(formBean.getAlbumId(), formBean.getSortASC())); 
+        return "song/list";
+    }
+    
+    
 }

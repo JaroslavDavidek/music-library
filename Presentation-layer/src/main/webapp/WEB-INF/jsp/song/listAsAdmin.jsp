@@ -40,9 +40,9 @@
                 <td><c:out value="${song.album.title}"/></td>
                 <td><c:out value="${song.musician.artistName}"/></td>
                 <td><form method="get" action="${pageContext.request.contextPath}/song/detailAsAdmin/${song.id}">
-                <button type="submit" class="btn btn-primary">manage</button>
+                <button type="submit" class="btn btn-primary">Manage</button></form></td>
                 <td><form method="post" action="${pageContext.request.contextPath}/song/delete/${song.id}">
-                <button type="submit" class="btn btn-primary">delete</button></form></td>
+                <button type="submit" class="btn btn-primary">Delete</button></form></td>
             </tr>
         </c:forEach>
            

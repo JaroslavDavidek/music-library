@@ -26,10 +26,7 @@
             <th>Title</th>
             <th>Album</th>
             <th>Musician</th>
-            <th>Genre</th>
-            <th>Album Position</th>
-            <th>Bitrate</th>
-            <th>Commentary</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -39,10 +36,8 @@
                 <td><c:out value="${song.title}"/></td>
                 <td><c:out value="${song.album.title}"/></td>
                 <td><c:out value="${song.musician.artistName}"/></td>
-                <td><c:out value="${song.genre.title}"/></td>
-                <td><c:out value="${song.albumPosition}"/></td>
-                <td><c:out value="${song.bitrate}"/></td>
-                <td><c:out value="${song.commentary}"/></td>
+                <td><form method="get" action="${pageContext.request.contextPath}/song/detail/${song.id}">
+                <button type="submit" class="btn btn-primary">View</button></form></td>
             </tr>
         </c:forEach>
            

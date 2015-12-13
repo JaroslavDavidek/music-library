@@ -17,10 +17,8 @@
     <div class="jumbotron">
         <h1>Welcome to the Music Library project !</h1>
         <p class="lead">Manage your content with ease... </p>
-        <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/song/list"
-              role="button">View songs</a></p>
-        <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/song/new"
-              role="button">Create song</a></p>
+        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/song/index"
+              role="button">Songs</a></p>
     </div>
     
     

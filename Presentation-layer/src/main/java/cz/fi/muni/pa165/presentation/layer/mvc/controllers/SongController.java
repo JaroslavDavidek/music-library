@@ -43,10 +43,7 @@ public class SongController {
     
     @Autowired
     private AlbumFacade albumFacade;
-    
-    private final String onSuccess = "TBA";
-    private final String onFailure = "TBA";
-    
+
     /**
      * GET method of create will set up a new form 
      * 
@@ -89,7 +86,13 @@ public class SongController {
         redirectAttributes.addFlashAttribute("alert_success", "Succesfully created " + formBean.getTitle() + " with id " + createdSongID);
         
         redirectAttributes.addFlashAttribute("alert_success", "Category " + createdSongID + " was created");
-        return "redirect:" + uriBuilder.path("/song/list").toUriString();
+        return "redirect:" + uriBuilder.path("/song/listAsAdmin").toUriString();
+    }
+    
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index(Model model) {
+        
+        return "song/index";
     }
     
     @RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -99,6 +102,13 @@ public class SongController {
         return "song/list";
     }
     
+    @RequestMapping(value = "/listAsAdmin", method = RequestMethod.GET)
+    public String listAsAdmin(Model model) {
+        
+        model.addAttribute("allSongs", songFacade.findAll());
+        return "song/listAsAdmin";
+    }
+    
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable long id, Model model, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         
@@ -106,17 +116,25 @@ public class SongController {
         if(foundSong != null)
         {
             songFacade.deleteSong(id);
-            redirectAttributes.addFlashAttribute(onSuccess, "Song with title: " + foundSong.getTitle() + " was deleted.");
+            redirectAttributes.addFlashAttribute("alert_success", "Song with title: " + foundSong.getTitle() + " was deleted.");
             return "redirect:" + uriBuilder.path("/song/list").toUriString();
         }
-        redirectAttributes.addFlashAttribute(onFailure, "Could not create song with title: " + foundSong.getTitle());
+
         return "redirect:" + uriBuilder.path("/song/list").toUriString();
     }
 
-    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public String view(@PathVariable long id, Model model) {
+    @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+    public String detail(@PathVariable long id, Model model) {
 
         model.addAttribute("song", songFacade.findSongByID(id));
-        return "song/view";
+        return "song/detail";
     }
+    
+    @RequestMapping(value = "/detailAsAdmin/{id}", method = RequestMethod.GET)
+    public String detailAsAdmin(@PathVariable long id, Model model) {
+
+        model.addAttribute("songDetail", songFacade.findSongByID(id));
+        return "song/detailAsAdmin";
+    }
+    
 }

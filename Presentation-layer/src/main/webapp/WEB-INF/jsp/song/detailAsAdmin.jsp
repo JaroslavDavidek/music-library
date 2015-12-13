@@ -1,6 +1,6 @@
 <%-- 
-    Document   : detail
-    Created on : Dec 11, 2015, 4:00:38 PM
+    Document   : detailAsAdmin
+    Created on : Dec 13, 2015, 11:08:07 AM
     Author     : JaroslavDavidek
 --%>
 
@@ -15,9 +15,3 @@
         <h1>Hello World!</h1>
     </body>
 </html>
-
-
- <td><c:out value="${song.genre.title}"/></td>
-                <td><c:out value="${song.albumPosition}"/></td>
-                <td><c:out value="${song.bitrate}"/></td>
-                <td><c:out value="${song.commentary}"/></td>

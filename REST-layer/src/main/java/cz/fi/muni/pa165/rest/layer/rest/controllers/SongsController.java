@@ -52,7 +52,7 @@ public class SongsController {
      * @return
      * @throws NotFound404Exception 
      */
-    @RequestMapping(value = "/{title}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/title={title}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final SongDTO getSongByTitle(@PathVariable("title") String title) throws NotFound404Exception {
 
         SongDTO foundSongDTO = songFacade.findSongByTitle(title);
@@ -221,7 +221,7 @@ public class SongsController {
      */
     @RequestMapping(value = "/{id}/title", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final SongDTO updatePrice(@PathVariable("id") long id, @RequestBody String title) throws NotAcceptable406Exception {
+    public final SongDTO updateTitle(@PathVariable("id") long id, @RequestBody String title) throws NotAcceptable406Exception {
 
         SongDTO updatedSong = songFacade.updateTitle(id, title);      
         if(updatedSong == null){

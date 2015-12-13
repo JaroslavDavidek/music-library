@@ -20,31 +20,31 @@
     
     <form:form method="POST" modelAttribute="searchDTO" acceptCharset="" 
                action="${pageContext.request.contextPath}/song/findByID">
-        <div class="col-md-8 col-md-offset-2 form-group ${title_error?'has-error':''}">
+        <div class="col-md-12 form-group ${title_error?'has-error':''}">
             <form:label path="songId" cssClass="col-sm-3 text-right control-label">Find song by ID</form:label>
             <div class="col-sm-6">
                 <form:input path="songId" cssClass="form-control"/>
-                <form:errors path="songId" cssClass="help-block"/>
-                <button class="btn btn-primary " type="submit">Find</button>
+                <form:errors path="songId" cssClass="help-block"/>              
             </div>
+            <button class="btn btn-primary " type="submit">Find</button>
         </div>
     </form:form>
     
     <form:form method="POST" modelAttribute="searchDTO" acceptCharset="" 
                action="${pageContext.request.contextPath}/song/findByTitle">
-        <div class="col-md-8 col-md-offset-2 form-group ${title_error?'has-error':''}">
+        <div class="col-md-12 form-group ${title_error?'has-error':''}">
             <form:label path="title" cssClass="col-sm-3 text-right control-label">Find song by title</form:label>
             <div class="col-sm-6">
                 <form:input path="title" cssClass="form-control"/>
-                <form:errors path="title" cssClass="help-block"/>
-                <button class="btn btn-primary " type="submit">Find</button>
+                <form:errors path="title" cssClass="help-block"/>              
             </div>
+            <button class="btn btn-primary " type="submit">Find</button>
         </div>
     </form:form>
     
     <form:form method="POST" modelAttribute="searchDTO" acceptCharset="" 
                action="${pageContext.request.contextPath}/song/findByMusician">
-        <div class="col-md-8 col-md-offset-2 form-group ${title_error?'has-error':''}">
+        <div class="col-md-12 form-group ${title_error?'has-error':''}">
             <form:label path="musicianId" cssClass="col-sm-3 text-right control-label">Find all songs by artist</form:label>
             <div class="col-sm-6">
                 <form:select path="musicianId" cssClass="form-control">
@@ -53,14 +53,14 @@
                     </c:forEach>
                 </form:select>
                 <p class="help-block"><form:errors path="musicianId" cssClass="error"/></p>
-                <button class="btn btn-primary " type="submit">Find</button>
-            </div>
+                </div>
+            <button class="btn btn-primary " type="submit">Find</button>
         </div>
     </form:form>
     
     <form:form method="POST" modelAttribute="searchDTO" acceptCharset="" 
                action="${pageContext.request.contextPath}/song/findByGenre">
-        <div class="col-md-8 col-md-offset-2 form-group ${title_error?'has-error':''}">
+        <div class="col-md-12 form-group ${title_error?'has-error':''}">
             <form:label path="genreId" cssClass="col-sm-3 text-right control-label">Find all songs by genre</form:label>
             <div class="col-sm-6">
                 <form:select path="genreId" cssClass="form-control">
@@ -69,14 +69,14 @@
                     </c:forEach>
                 </form:select>
                 <p class="help-block"><form:errors path="genreId" cssClass="error"/></p>
-                <button class="btn btn-primary " type="submit">Find</button>
-            </div>
+                </div>
+            <button class="btn btn-primary " type="submit">Find</button>
         </div>
     </form:form>
     
     <form:form method="POST" modelAttribute="searchDTO" acceptCharset="" 
                action="${pageContext.request.contextPath}/song/findByAlbum">
-        <div class="col-md-8 col-md-offset-2 form-group ${title_error?'has-error':''}">
+        <div class="col-md-12 form-group ${title_error?'has-error':''}">
             <form:label path="albumId" cssClass="col-sm-3 text-right control-label">Find all songs by album</form:label>
             <div class="col-sm-6">
                 <form:select path="albumId" cssClass="form-control">
@@ -85,54 +85,56 @@
                         </c:forEach>
                     </form:select>
                 <p class="help-block"><form:errors path="albumId" cssClass="error"/></p>
-                <button class="btn btn-primary " type="submit">Find</button>
-            </div>
+                </div>
+            <button class="btn btn-primary " type="submit">Find</button>
         </div>
     </form:form>
     
     <form:form method="POST" modelAttribute="searchDTO" acceptCharset="" 
                action="${pageContext.request.contextPath}/song/findByMusicianAndReleaseYearRange">
-        <div class="col-md-8 col-md-offset-2 form-group ${title_error?'has-error':''}">
+        <div class="col-md-12 form-group ${title_error?'has-error':''}">
             <form:label path="albumId" cssClass="col-sm-3 text-right control-label">Find all songs by album</form:label>
-            <div class="col-sm-6">
+            <div class="col-sm-2">
                <form:select path="musicianId" cssClass="form-control">
                     <c:forEach items="${musicians}" var="musician">
                         <form:option value="${musician.id}">${musician.artistName}</form:option>
                     </c:forEach>
                 </form:select>
                 <p class="help-block"><form:errors path="musicianId" cssClass="error"/></p>
-                <form:label path="fromYear" cssClass="col-sm-3 text-right control-label">From year</form:label>
+            </div> 
+            <form:label path="fromYear" cssClass="col-sm-1 text-right control-label">From year</form:label>
+            <div class="col-sm-1">
+               
                 <form:input path="fromYear" cssClass="form-control"/>
                 <form:errors path="fromYear" cssClass="help-block"/>
-                <form:label path="toYear" cssClass="col-sm-3 text-right control-label">To year</form:label>
+            </div>
+            <form:label path="toYear" cssClass="col-sm-1 text-right control-label">To year</form:label>
+            <div class="col-sm-1">              
                 <form:input path="toYear" cssClass="form-control"/>
                 <form:errors path="toYear" cssClass="help-block"/>
-                <button class="btn btn-primary " type="submit">Find</button>
             </div>
+            <button class="btn btn-primary " type="submit">Find</button>
         </div>
     </form:form>
     
      <form:form method="POST" modelAttribute="searchDTO" acceptCharset="" 
                action="${pageContext.request.contextPath}/song/findByAlbumOrdered">
-        <div class="col-md-8 col-md-offset-2 form-group ${title_error?'has-error':''}">
+        <div class="col-md-12 form-group ${title_error?'has-error':''}">
             <form:label path="albumId" cssClass="col-sm-3 text-right control-label">Find all ordered songs by album</form:label>
-            <div class="col-sm-6">
+            <div class="col-sm-3">
                 <form:select path="albumId" cssClass="form-control">
                         <c:forEach items="${albums}" var="album">
                             <form:option value="${album.id}">${album.title}</form:option>
                         </c:forEach>
                     </form:select>
                 <p class="help-block"><form:errors path="albumId" cssClass="error"/></p>
-                <form:select path="albumId" cssClass="form-control">
-                    <c:forEach items="${albums}" var="album">
-                        <form:option value="${album.id}">${album.title}</form:option>
-                    </c:forEach>
-                </form:select>
-                <p class="help-block"><form:errors path="albumId" cssClass="error"/></p>
-                <form:label path="sortASC" cssClass="col-sm-3 text-right control-label">Use ascending order</form:label>
-                <form:checkbox path="sortASC" cssClass="form-control"/>
-                <button class="btn btn-primary " type="submit">Find</button>
             </div>
+            
+            <form:label path="sortASC" cssClass="col-sm-2 text-right control-label">Use ascending order</form:label>
+            <div class="col-sm-1">
+                <form:checkbox path="sortASC" cssClass="col-sm-1 form-control"/>
+            </div>
+            <button class="btn btn-primary " type="submit">Find</button>
         </div>
     </form:form>
 

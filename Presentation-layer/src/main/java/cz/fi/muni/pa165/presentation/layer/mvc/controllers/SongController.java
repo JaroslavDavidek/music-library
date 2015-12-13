@@ -66,7 +66,7 @@ public class SongController {
      * @param bindingResult
      * @param model
      * @param redirectAttributes
-     * @param uriComponentsBuilder
+     * @param uriBuilder
      * @return 
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -85,7 +85,7 @@ public class SongController {
 
         redirectAttributes.addFlashAttribute("alert_success", "Succesfully created " + formBean.getTitle() + " with id " + createdSongID);
         
-        redirectAttributes.addFlashAttribute("alert_success", "Category " + createdSongID + " was created");
+        redirectAttributes.addFlashAttribute("alert_success", "Song " + createdSongID + " was created");
         return "redirect:" + uriBuilder.path("/song/listAsAdmin").toUriString();
     }
     
@@ -133,8 +133,39 @@ public class SongController {
     @RequestMapping(value = "/detailAsAdmin/{id}", method = RequestMethod.GET)
     public String detailAsAdmin(@PathVariable long id, Model model) {
 
-        model.addAttribute("songDetail", songFacade.findSongByID(id));
+        SongDTO storedSong = songFacade.findSongByID(id);
+        SongCreateDTO songToUpdate = new SongCreateDTO();
+        songToUpdate.setTitle(storedSong.getTitle());
+        songToUpdate.setCommentary(storedSong.getCommentary());
+        songToUpdate.setBitrate(storedSong.getBitrate());
+        songToUpdate.setAlbumPosition(storedSong.getAlbumPosition());
+        songToUpdate.setAlbumId(storedSong.getAlbum().getId());
+        songToUpdate.setMusicianId(storedSong.getMusician().getId());
+        songToUpdate.setGenreId(storedSong.getGenre().getId());
+        
+        model.addAttribute("songDetail", songToUpdate);
+        model.addAttribute("albums", albumFacade.findAll());
+        model.addAttribute("musicians", musicianFacade.findAll());
+        model.addAttribute("genres", genreFacade.findAll());
+        model.addAttribute("id", id);
         return "song/detailAsAdmin";
     }
-    
+ 
+    @RequestMapping(value = "/detailAsAdmin/{id}", method = RequestMethod.POST)
+    public String update(@Valid @ModelAttribute("songDetail") SongCreateDTO formBean, BindingResult bindingResult, @PathVariable long id,
+            Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriComponentsBuilder) {
+        
+        if (bindingResult.hasErrors()) {
+            return "redirect:" + uriComponentsBuilder.path("/song/detailAsAdmin/{id}").buildAndExpand(id).encode().toUriString();
+        }      
+        songFacade.updateAlbum(id, formBean.getAlbumId());
+        songFacade.updateGenre(id, formBean.getGenreId());
+        songFacade.updateMusician(id, formBean.getMusicianId());
+        songFacade.updateTitle(id, formBean.getTitle());
+        songFacade.updateBitrate(id, formBean.getBitrate());
+        songFacade.updateAlbumPosition(id, formBean.getAlbumPosition());
+        songFacade.updateCommentary(id, formBean.getCommentary());
+        redirectAttributes.addFlashAttribute("alert_success", "Song " + formBean.getTitle() + " updated");
+        return "redirect:" + uriComponentsBuilder.path("/song/listAsAdmin").buildAndExpand(id).encode().toUriString();
+    }
 }

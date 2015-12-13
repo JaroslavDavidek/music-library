@@ -28,6 +28,7 @@
             <th>Album</th>
             <th>Musician</th>
             <th></th>
+            <th></th>
             
         </tr>
         </thead>
@@ -37,12 +38,11 @@
                 <td><c:out value="${song.id}"/></td>
                 <td><c:out value="${song.title}"/></td>
                 <td><c:out value="${song.album.title}"/></td>
-                <td><c:out value="${song.musician.artistName}"/></td> 
+                <td><c:out value="${song.musician.artistName}"/></td>
+                <td><form method="get" action="${pageContext.request.contextPath}/song/detailAsAdmin/${song.id}">
+                <button type="submit" class="btn btn-primary">manage</button>
                 <td><form method="post" action="${pageContext.request.contextPath}/song/delete/${song.id}">
-                <button type="submit" class="btn btn-primary">delete</button>
-                <td><form method="post" action="${pageContext.request.contextPath}/song/delete/${song.id}">
-                <button type="submit" class="btn btn-primary">delete</button>
-            </form></td>
+                <button type="submit" class="btn btn-primary">delete</button></form></td>
             </tr>
         </c:forEach>
            

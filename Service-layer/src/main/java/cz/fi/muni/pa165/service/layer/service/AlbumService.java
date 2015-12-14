@@ -21,6 +21,8 @@ public interface AlbumService {
     public Album updateAlbum(Album album);
     public Album updateAlbumTitle(Album album, String title);
     public Album updateAlbumReleaseDate(Album album, Date date);
+    public Album updateAlbumMusician(Album album, Musician musician);
+    public Album updateAlbumCommentary(Album album, String commentary);
     public Album findById(Long id);
     public Album findByTitle(String title);
     public List<Album> findAll();

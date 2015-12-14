@@ -12,37 +12,39 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <own:masterpage>
-<jsp:attribute name="body">
+    <jsp:attribute name="body">
 
-    <div class="jumbotron">
-        <h1>All albums</h1>
-    </div>
-    
-    <div class="row">
-        <table class="table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Release Date</th>
-            <th>Musician</th>
-            <th>Commentary</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${allAlbums}" var="album">
-            <tr>
-                <td><c:out value="${album.id}"/></td>
-                <td><c:out value="${album.title}"/></td>
-                <td><c:out value="${album.releaseDate}"/></td>
-                <td><c:out value="${album.musician.artistName}"/></td>
-                <td><c:out value="${album.commentary}"/></td>
-            </tr>
-        </c:forEach>
-           
-        </tbody>
-    </table>
-    </div>
+        <div class="jumbotron">
+            <h1>All albums</h1>
+        </div>
 
-</jsp:attribute>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Release Date</th>
+                        <th>Musician</th>
+                        <th>Commentary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${allAlbums}" var="album">
+                        <tr>
+                            <td><c:out value="${album.id}"/></td>
+                            <td><c:out value="${album.title}"/></td>
+                            <td><c:out value="${album.releaseDate}"/></td>
+                            <td><c:out value="${album.musician.artistName}"/></td>
+                            <td><c:out value="${album.commentary}"/></td>
+                            <td><form method="get" action="${pageContext.request.contextPath}/album/detail/${album.id}">
+                                    <button type="submit" class="btn btn-primary">View</button></form></td>
+                        </tr>
+                    </c:forEach>
+
+                </tbody>
+            </table>
+        </div>
+
+    </jsp:attribute>
 </own:masterpage>

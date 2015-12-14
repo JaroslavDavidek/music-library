@@ -7,6 +7,7 @@ package cz.fi.muni.pa165.service.layer.facade;
 
 import cz.fi.muni.pa165.api.layer.dto.AlbumCreateDTO;
 import cz.fi.muni.pa165.api.layer.dto.AlbumDTO;
+import cz.fi.muni.pa165.api.layer.dto.SongDTO;
 import cz.fi.muni.pa165.api.layer.facade.AlbumFacade;
 import cz.fi.muni.pa165.entity.Album;
 import cz.fi.muni.pa165.service.layer.service.AlbumService;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -93,12 +95,20 @@ public class AlbumFacadeImplementation implements AlbumFacade {
 
     @Override
     public AlbumDTO findById(Long id) {
-        return mappingService.mapToEnforceID(albumService.findById(id), AlbumDTO.class);
+        if (albumService.findById(id) != null) {
+            return mappingService.mapToEnforceID(albumService.findById(id), AlbumDTO.class);
+        } else {
+            throw new NoResultException();
+        }
     }
 
     @Override
     public AlbumDTO findByTitle(String title) {
-        return mappingService.mapToEnforceID(albumService.findByTitle(title), AlbumDTO.class);
+        if (albumService.findByTitle(title) != null) {
+            return mappingService.mapToEnforceID(albumService.findByTitle(title), AlbumDTO.class);
+        } else {
+            throw new NoResultException();
+        }
     }
 
     @Override
@@ -110,7 +120,25 @@ public class AlbumFacadeImplementation implements AlbumFacade {
     public AlbumDTO updateAlbumReleaseDate(Long albumId, Date releasedate) {
         return mappingService.mapToEnforceID(albumService.updateAlbumReleaseDate(albumService.findById(albumId), releasedate), AlbumDTO.class);
     }
-    
-    
+
+    @Override
+    public List<AlbumDTO> findAllAlbumsFromYears(int from, int to) {
+        return mappingService.mapToCollectionEnforceID(albumService.findAllAlbumsFromYears(from, to), AlbumDTO.class);
+    }
+
+    @Override
+    public List<AlbumDTO> findAllAlbumsOfMusician(long musicianId) {
+        return mappingService.mapToCollectionEnforceID(albumService.findAllAlbumsOfMusician(musicianService.findMusicianByID(musicianId)), AlbumDTO.class);
+    }
+
+    @Override
+    public AlbumDTO updateAlbumMusician(long albumId, long musicianId) {
+        return mappingService.mapToEnforceID(albumService.updateAlbumMusician(albumService.findById(albumId), musicianService.findMusicianByID(musicianId)), AlbumDTO.class);
+    }
+
+    @Override
+    public AlbumDTO updateAlbumCommentary(long albumId, String commentary) {
+        return mappingService.mapToEnforceID(albumService.updateAlbumCommentary(albumService.findById(albumId), commentary), AlbumDTO.class);
+    }
     
 }

@@ -140,4 +140,22 @@ public class AlbumServiceImplementation implements AlbumService {
         cal.setTime(date);
         return cal.get(Calendar.YEAR);
     }
+
+    @Override
+    public Album updateAlbumMusician(Album album, Musician musician) {
+        if (album != null && musician != null) {
+            album.setMusician(musician);
+            return albumDao.update(album);
+        }
+        return null;
+    }
+
+    @Override
+    public Album updateAlbumCommentary(Album album, String commentary) {
+        if (album != null && commentary != null && !commentary.isEmpty()) {
+            album.setCommentary(commentary);
+            return albumDao.update(album);
+        }
+        return null;
+    }
 }

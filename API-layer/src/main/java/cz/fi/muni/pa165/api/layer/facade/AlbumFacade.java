@@ -24,12 +24,20 @@ public interface AlbumFacade {
     AlbumDTO updateAlbumTitle(Long albumId, String title);
     
     AlbumDTO updateAlbumReleaseDate(Long albumId, Date releasedate);
+    
+    AlbumDTO updateAlbumMusician(long albumId, long musicianId);
+    
+    AlbumDTO updateAlbumCommentary(long albumId, String commentary);
 
     List<AlbumDTO> findAll();
 
     AlbumDTO findById(Long id);
 
     AlbumDTO findByTitle(String title);
+    
+    List<AlbumDTO> findAllAlbumsFromYears(int from, int to);
+    
+    List<AlbumDTO> findAllAlbumsOfMusician(long musicianId);
     
     AlbumDTO addSong(Long albumId, Long songId);
 

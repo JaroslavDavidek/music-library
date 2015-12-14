@@ -26,6 +26,7 @@
     <div class="row">
         <h1>User section</h1>
         <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/album/list" role="button">View albums</a></p>
+        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/album/find" role="button">Find albums</a></p>
     </div>
 
 </jsp:attribute>

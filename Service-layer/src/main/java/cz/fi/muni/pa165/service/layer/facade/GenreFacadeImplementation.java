@@ -12,6 +12,7 @@ import cz.fi.muni.pa165.service.layer.service.GenreService;
 import cz.fi.muni.pa165.service.layer.service.MappingService;
 import java.util.List;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,11 +22,11 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class GenreFacadeImplementation implements GenreFacade{
-    
+public class GenreFacadeImplementation implements GenreFacade {
+
     @Inject
     private MappingService mappingService;
-    
+
     @Inject
     private GenreService genreService;
 
@@ -52,26 +53,34 @@ public class GenreFacadeImplementation implements GenreFacade{
 
     @Override
     public GenreDTO findGenreByID(Long genreID) {
-        return mappingService.mapToEnforceID(genreService.findGenreByID(genreID), GenreDTO.class);
+        if (genreService.findGenreByID(genreID) != null) {
+            return mappingService.mapToEnforceID(genreService.findGenreByID(genreID), GenreDTO.class);
+        } else {
+            throw new NoResultException();
+        }
     }
 
     @Override
     public GenreDTO findGenreByTitle(String genreTitle) {
-        return mappingService.mapToEnforceID(genreService.findGenreByTitle(genreTitle), GenreDTO.class);
+        if (genreService.findGenreByTitle(genreTitle) != null) {
+            return mappingService.mapToEnforceID(genreService.findGenreByTitle(genreTitle), GenreDTO.class);
+        } else {
+            throw new NoResultException();
+        }
     }
 
     @Override
     public List<GenreDTO> findAll() {
         return mappingService.mapToCollectionEnforceID(genreService.findAll(), GenreDTO.class);
     }
-    
+
     @Override
-    public List<GenreDTO> findAllGenresInYearRange(int from, int to){
+    public List<GenreDTO> findAllGenresInYearRange(int from, int to) {
         return mappingService.mapToCollectionEnforceID(genreService.findAllGenresInYearRange(from, to), GenreDTO.class);
     }
-    
+
     @Override
-    public List<GenreDTO> findAllGenresByYearOfOriginOrdered(boolean ascending){
+    public List<GenreDTO> findAllGenresByYearOfOriginOrdered(boolean ascending) {
         return mappingService.mapToCollectionEnforceID(genreService.findAllGenresByYearOfOriginOrdered(ascending), GenreDTO.class);
     }
 }

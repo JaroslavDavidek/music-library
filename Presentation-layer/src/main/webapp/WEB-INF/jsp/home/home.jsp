@@ -19,6 +19,8 @@
             <p class="lead">Manage your content with ease... </p>
             <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/song/index"
                   role="button">Songs</a></p>
+            <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/musician/index"
+                  role="button">Musicians</a></p>
             <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/album/index"
                   role="button">Albums</a></p>
             <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/genre/index"

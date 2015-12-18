@@ -22,6 +22,14 @@
 <!-- navigation bar -->
 <nav class="navbar navbar-inverse navbar-static-top">
   <div class="container">
+      <div id="navbar" class="collapse navbar-collapse pull-left">
+            <ul class="nav navbar-nav">
+                <li><a href="${pageContext.request.contextPath}/song/index">Songs</a></li>
+                <li><a href="${pageContext.request.contextPath}/musician/index">Musicians</a></li>
+                <li><a href="${pageContext.request.contextPath}/album/index">Albums</a></li>
+                <li><a href="${pageContext.request.contextPath}/genre/index">Genres</a></li>
+            </ul>
+        </div>
     <ul class="nav navbar-nav navbar-right pull-right">  
         <li><a href="${pageContext.request.contextPath}/logout">Log out</a></li>
     </ul>

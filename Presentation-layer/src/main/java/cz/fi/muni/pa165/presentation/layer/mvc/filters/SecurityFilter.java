@@ -20,10 +20,10 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  *
  * @author JaroslavDavidek
  */
-@WebFilter(urlPatterns = {"/album/detailAsAdmin/*", "/album/listAsAdmin/*", "/album/new/*",
+/*@WebFilter(urlPatterns = {"/album/detailAsAdmin/*", "/album/listAsAdmin/*", "/album/new/*",
     "/song/detailAsAdmin/*", "/song/listAsAdmin/*", "/song/new/*",
     "/musician/detailAsAdmin/*","/musician/listAsAdmin/*","/musician/new/*",
-    "/musician/detailAsAdmin/*","/musician/listAsAdmin/*","/musician/new/*"}, filterName = "AdminFilter")
+    "/genre/detailAsAdmin/*","/genre/listAsAdmin/*","/genre/new/*"}, filterName = "AdminFilter")*/
 public class SecurityFilter implements Filter{
 
     public void init(FilterConfig fc) throws ServletException {
@@ -79,6 +79,6 @@ public class SecurityFilter implements Filter{
     private void response401(HttpServletResponse response) throws IOException {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setHeader("WWW-Authenticate", "Basic realm=\"type email and password\"");
-        response.getWriter().println("<html><body><h1>401 Unauthorized access</h1></body></html>");
+        response.getWriter().println("401 Unauthorized access");
     }
 }

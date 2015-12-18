@@ -20,7 +20,7 @@
 </head>
 <body>
 <!-- navigation bar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-static-top">
   <div class="container">
     
   </div>

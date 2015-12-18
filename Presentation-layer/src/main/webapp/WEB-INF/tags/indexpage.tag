@@ -21,11 +21,7 @@
 <body>
 <!-- navigation bar -->
 <nav class="navbar navbar-inverse navbar-static-top">
-  <div class="container">
-    <ul class="nav navbar-nav navbar-right pull-right">  
-        <li><a href="${pageContext.request.contextPath}/logout">Log out</a></li>
-    </ul>
-  </div>
+  
 </nav>
 
 <div class="container">

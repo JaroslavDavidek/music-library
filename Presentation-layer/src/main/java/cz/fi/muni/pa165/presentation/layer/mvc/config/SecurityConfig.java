@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureUrl("/login?error=invalidLoginAttempt")
                 .usernameParameter("user").passwordParameter("pass")
                 .and()
-                .logout().logoutSuccessUrl("/home")
+                .logout().logoutSuccessUrl("/")
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .and()
                 .csrf().disable();

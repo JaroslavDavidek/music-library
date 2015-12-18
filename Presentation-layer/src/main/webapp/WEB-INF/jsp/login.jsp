@@ -10,7 +10,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<own:masterpage title="Login">
+<own:indexpage title="Login">
     <jsp:attribute name="body">
 
         <div class="row">
@@ -43,4 +43,4 @@
         </div>
 
     </jsp:attribute>
-</own:masterpage>
+</own:indexpage>

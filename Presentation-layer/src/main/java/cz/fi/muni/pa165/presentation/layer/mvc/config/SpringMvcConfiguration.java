@@ -25,7 +25,7 @@ import org.springframework.context.annotation.Import;
 
 @EnableWebMvc
 @Configuration
-@Import({SampleDataSpringConfiguration.class})
+@Import({SampleDataSpringConfiguration.class, SecurityConfig.class})
 @ComponentScan(basePackages = "cz.fi.muni.pa165.presentation.layer.mvc.controllers")
 public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
 

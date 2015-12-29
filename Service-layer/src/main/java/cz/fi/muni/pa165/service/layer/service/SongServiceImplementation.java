@@ -62,6 +62,15 @@ public class SongServiceImplementation implements SongService{
         }
         return false;
     }
+    
+    @Override
+    public Song updateSong(Song song) {
+        if(song != null)
+        {
+            return songDao.update(song);
+        }
+        return null;
+    }
 
     @Override
     public Song updateTitle(Song song, String newTitle) {

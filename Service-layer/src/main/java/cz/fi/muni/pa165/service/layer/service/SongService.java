@@ -10,6 +10,7 @@ import java.util.List;
 public interface SongService {  
     public Song createSong(Song song);
     public boolean deleteSong(Song song);
+    public Song updateSong(Song song);
     public Song updateTitle(Song song, String newTitle);
     public Song updateBitrate(Song song, int newBitrate);
     public Song updateAlbumPosition(Song song, int newAlbumPosition);

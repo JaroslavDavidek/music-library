@@ -1,5 +1,8 @@
 package cz.fi.muni.pa165.service.layer.facade;
 
+import cz.fi.muni.pa165.api.layer.dto.AlbumDTO;
+import cz.fi.muni.pa165.api.layer.dto.GenreDTO;
+import cz.fi.muni.pa165.api.layer.dto.MusicianDTO;
 import cz.fi.muni.pa165.api.layer.dto.SongCreateDTO;
 import cz.fi.muni.pa165.api.layer.dto.SongDTO;
 import cz.fi.muni.pa165.api.layer.facade.SongFacade;
@@ -55,6 +58,36 @@ public class SongFacadeImplementation implements SongFacade {
     @Override
     public boolean deleteSong(Long songID) {
         return songService.deleteSong(songService.findSongByID(songID));
+    }
+    
+    @Override
+    public SongDTO updateSong(SongDTO updateSongDTO) {
+        
+        Song song = songService.findSongByID(updateSongDTO.getId());
+        
+        AlbumDTO album = updateSongDTO.getAlbum();
+        if(album != null){
+            song.setAlbum(albumService.findById(album.getId()));
+        } else {
+            song.setAlbum(null);
+        }
+        MusicianDTO musician = updateSongDTO.getMusician();
+        if(musician != null){
+            song.setMusician(musicianService.findMusicianByID(musician.getId()));
+        } else {
+            song.setMusician(null);
+        }
+        GenreDTO genre = updateSongDTO.getGenre();
+        if(album != null){
+            song.setGenre(genreService.findGenreByID(genre.getId()));
+        } else {
+            song.setAlbum(null);
+        }
+        song.setTitle(updateSongDTO.getTitle());
+        song.setAlbumPosition(updateSongDTO.getAlbumPosition());
+        song.setBitrate(updateSongDTO.getBitrate());
+        song.setCommentary(updateSongDTO.getCommentary()); 
+        return mappingService.mapToEnforceID(songService.updateSong(song), SongDTO.class);
     }
 
     @Override

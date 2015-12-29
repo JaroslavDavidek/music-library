@@ -11,6 +11,7 @@ import java.util.List;
 public interface SongFacade {   
     public Long createSong(SongCreateDTO song);
     public boolean deleteSong(Long songID);
+    public SongDTO updateSong(SongDTO newSongDTO);
     public SongDTO updateTitle(Long songID, String newTitle);
     public SongDTO updateBitrate(Long songID, int newBitrate);
     public SongDTO updateAlbumPosition(Long songID, int newAlbumPosition);

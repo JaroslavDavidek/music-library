@@ -46,7 +46,7 @@ public class SampleDataLoadFacadeImplementation implements SampleDataLoadFacade{
     public void loadSampleData() throws IOException {
         
         storeUser("admin","admin","admin@musiclib.com",true);
-        storeUser("user","password","user@musiclib.com",false);
+        storeUser("user","user","user@musiclib.com",false);
         
         Genre rock = storeGenre("Rock", 1950);
         Genre hardRock = storeGenre("Hard Rock", 1970);

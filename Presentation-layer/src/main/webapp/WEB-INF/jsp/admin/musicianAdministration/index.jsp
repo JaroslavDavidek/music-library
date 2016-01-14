@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
-    Created on : Dec 11, 2015, 4:04:31 PM
-    Author     : JaroslavDavidek
+    Created on : Dec 14, 2015, 8:30:43 PM
+    Author     : Jergus Fasanek
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" trimDirectiveWhitespaces="true" session="false" %>
@@ -15,12 +15,12 @@
 <jsp:attribute name="body">
 
     <div class="jumbotron">
-        <h1>Manage songs</h1>
+        <h1>Manage musicians</h1>
     </div>
     
     <div class="row">
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/song/new" role="button">Create song</a></p>
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/song/listAsAdmin" role="button">Manage songs</a></p>
+        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/musician/new" role="button">Create musician</a></p>
+        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/musician/listAsAdmin" role="button">Manage musicians</a></p>
     </div>
 
 </jsp:attribute>

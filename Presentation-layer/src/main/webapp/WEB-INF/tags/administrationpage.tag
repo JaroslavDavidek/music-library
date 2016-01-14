@@ -25,9 +25,9 @@
       <div id="navbar" class="collapse navbar-collapse pull-left">
             <ul class="nav navbar-nav">
                 <li><a href="${pageContext.request.contextPath}/admin/songAdministration/index">Manage songs</a></li>
-                <li><a href="${pageContext.request.contextPath}/musician/index">Musicians</a></li>
-                <li><a href="${pageContext.request.contextPath}/album/index">Albums</a></li>
-                <li><a href="${pageContext.request.contextPath}/genre/index">Genres</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/musicianAdministration/index">Manage musicians</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/albumAdministration/index">Manage albums</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/genreAdministration/index">Manage genres</a></li>
             </ul>
         </div>
     <ul class="nav navbar-nav navbar-right pull-right"> 

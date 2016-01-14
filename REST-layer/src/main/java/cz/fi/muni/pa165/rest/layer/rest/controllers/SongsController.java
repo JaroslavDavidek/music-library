@@ -211,133 +211,19 @@ public class SongsController {
         }
     }
     
-    /**
-     * PUT (updates) song
-     * 
-     * @param id id of song which should be updated
-     * @param title parameter to update
-     * @return updated Song
-     * @throws NotAcceptable406Exception 
-     */
-    @RequestMapping(value = "/{id}/title", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public final SongDTO updateTitle(@PathVariable("id") long id, @RequestBody String title) throws NotAcceptable406Exception {
-
-        SongDTO updatedSong = songFacade.updateTitle(id, title);      
-        if(updatedSong == null){
-            throw new NotAcceptable406Exception();
-        }
-        return updatedSong;
-    }
     
     /**
      * PUT (updates) song
      * 
-     * @param id id of song which should be updated
-     * @param bitrate parameter to update
-     * @return updated Song
+     * @param songDTO updated SongDTO
+     * @return modified SongDTO
      * @throws NotAcceptable406Exception 
      */
-    @RequestMapping(value = "/{id}/bitrate", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
+     @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final SongDTO updateBitrate(@PathVariable("id") long id, @RequestBody int bitrate) throws NotAcceptable406Exception {
+    public final SongDTO updateCommentary(@RequestBody SongDTO songDTO) throws NotAcceptable406Exception {
 
-        SongDTO updatedSong = songFacade.updateBitrate(id, bitrate);      
-        if(updatedSong == null){
-            throw new NotAcceptable406Exception();
-        }
-        return updatedSong;
-    }
-    
-    /**
-     * PUT (updates) song
-     * 
-     * @param id id of song which should be updated
-     * @param albumPosition parameter to update
-     * @return updated Song
-     * @throws NotAcceptable406Exception 
-     */
-    @RequestMapping(value = "/{id}/albumPosition", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public final SongDTO updateAlbumPosition(@PathVariable("id") long id, @RequestBody int albumPosition) throws NotAcceptable406Exception {
-
-        SongDTO updatedSong = songFacade.updateAlbumPosition(id, albumPosition);      
-        if(updatedSong == null){
-            throw new NotAcceptable406Exception();
-        }
-        return updatedSong;
-    }
-    
-    /**
-     * PUT (updates) song
-     * 
-     * @param id id of song which should be updated
-     * @param commentary parameter to update
-     * @return updated Song
-     * @throws NotAcceptable406Exception 
-     */
-    @RequestMapping(value = "/{id}/commentary", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public final SongDTO updateCommentary(@PathVariable("id") long id, @RequestBody String commentary) throws NotAcceptable406Exception {
-
-        SongDTO updatedSong = songFacade.updateCommentary(id, commentary);      
-        if(updatedSong == null){
-            throw new NotAcceptable406Exception();
-        }
-        return updatedSong;
-    }
-    
-    /**
-     * PUT (updates) song
-     * 
-     * @param id id of song which should be updated
-     * @param album parameter to update
-     * @return updated Song
-     * @throws NotAcceptable406Exception 
-     */
-    @RequestMapping(value = "/{id}/album", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public final SongDTO updateAlbum(@PathVariable("id") long id, @RequestBody long albumId) throws NotAcceptable406Exception {
-
-        SongDTO updatedSong = songFacade.updateAlbum(id, albumId);      
-        if(updatedSong == null){
-            throw new NotAcceptable406Exception();
-        }
-        return updatedSong;
-    }
-    
-    /**
-     * PUT (updates) song
-     * 
-     * @param id id of song which should be updated
-     * @param musician parameter to update
-     * @return updated Song
-     * @throws NotAcceptable406Exception 
-     */
-    @RequestMapping(value = "/{id}/musician", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public final SongDTO updateMusician(@PathVariable("id") long id, @RequestBody long musicianId) throws NotAcceptable406Exception {
-
-        SongDTO updatedSong = songFacade.updateMusician(id, musicianId);      
-        if(updatedSong == null){
-            throw new NotAcceptable406Exception();
-        }
-        return updatedSong;
-    }
-    
-    /**
-     * PUT (updates) song
-     * 
-     * @param id id of song which should be updated
-     * @param genre parameter to update
-     * @return updated Song
-     * @throws NotAcceptable406Exception 
-     */
-    @RequestMapping(value = "/{id}/genre", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public final SongDTO updateGenre(@PathVariable("id") long id, @RequestBody long genreId) throws NotAcceptable406Exception {
-
-        SongDTO updatedSong = songFacade.updateGenre(id, genreId);      
+        SongDTO updatedSong = songFacade.updateSong(songDTO);      
         if(updatedSong == null){
             throw new NotAcceptable406Exception();
         }

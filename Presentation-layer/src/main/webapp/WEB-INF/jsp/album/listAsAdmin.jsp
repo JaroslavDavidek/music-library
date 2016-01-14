@@ -11,7 +11,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<own:masterpage>
+<own:administrationpage>
     <jsp:attribute name="body">
 
         <div class="jumbotron">
@@ -53,4 +53,4 @@
         </div>
 
     </jsp:attribute>
-</own:masterpage>
+</own:administrationpage>

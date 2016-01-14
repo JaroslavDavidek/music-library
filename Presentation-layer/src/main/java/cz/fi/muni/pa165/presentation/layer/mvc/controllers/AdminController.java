@@ -25,5 +25,23 @@ public class AdminController {
         return "admin/songAdministration/index";
     }
     
+    @RequestMapping(value = "/albumAdministration/index", method = RequestMethod.GET)
+    public String albumIndex(Model model) {
+        
+        return "admin/albumAdministration/index";
+    }
+    
+    @RequestMapping(value = "/musicianAdministration/index", method = RequestMethod.GET)
+    public String musicianIndex(Model model) {
+        
+        return "admin/musicianAdministration/index";
+    }
+    
+    @RequestMapping(value = "/genreAdministration/index", method = RequestMethod.GET)
+    public String genreIndex(Model model) {
+        
+        return "admin/genreAdministration/index";
+    }
+    
     
 }

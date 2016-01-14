@@ -11,6 +11,7 @@ import cz.fi.muni.pa165.service.layer.facade.SongFacadeImplementation;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -120,7 +121,7 @@ public class SongController {
         {
             songFacade.deleteSong(id);
             redirectAttributes.addFlashAttribute("alert_success", "Song with title: " + foundSong.getTitle() + " was deleted.");
-            return "redirect:" + uriBuilder.path("/song/list").toUriString();
+            return "redirect:" + uriBuilder.path("/song/listAsAdmin").toUriString();
         }
 
         return "redirect:" + uriBuilder.path("/song/listAsAdmin").toUriString();
@@ -193,9 +194,13 @@ public class SongController {
             return "song/find";
         }
         
-        SongDTO foundSong = songFacade.findSongByID(formBean.getSongId());
         List<SongDTO> foundSongs = new ArrayList<SongDTO>();
-        foundSongs.add(foundSong);
+        try {
+            SongDTO foundSong = songFacade.findSongByID(formBean.getSongId());
+            foundSongs.add(foundSong);
+        } catch (NoResultException e) {
+            e.printStackTrace();
+        }
         model.addAttribute("allSongs", foundSongs); 
         return "song/list";
     }

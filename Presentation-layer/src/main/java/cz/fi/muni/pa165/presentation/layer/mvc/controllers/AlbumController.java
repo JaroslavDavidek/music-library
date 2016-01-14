@@ -202,7 +202,7 @@ public class AlbumController {
             e.printStackTrace();
         }
         model.addAttribute("allAlbums", foundAlbums);
-        return "album/list";
+    return "album/list";
     }
 
     @RequestMapping(value = {"/findByTitle"}, method = RequestMethod.POST)

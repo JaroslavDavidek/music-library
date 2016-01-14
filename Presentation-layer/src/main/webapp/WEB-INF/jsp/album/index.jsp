@@ -17,14 +17,8 @@
     <div class="jumbotron">
         <h1>Albums section</h1>
     </div>
-    
+
     <div class="row">
-        <h1>Administration section</h1>
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/album/new" role="button">Create album</a></p>
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/album/listAsAdmin" role="button">Manage albums</a></p>
-    </div>
-    <div class="row">
-        <h1>User section</h1>
         <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/album/list" role="button">View albums</a></p>
         <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/album/find" role="button">Find albums</a></p>
     </div>

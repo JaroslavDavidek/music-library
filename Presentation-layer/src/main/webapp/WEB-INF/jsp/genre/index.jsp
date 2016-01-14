@@ -19,12 +19,6 @@
     </div>
     
     <div class="row">
-        <h1>Administration section</h1>
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/genre/new" role="button">Create genre</a></p>
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/genre/listAsAdmin" role="button">Manage genres</a></p>
-    </div>
-    <div class="row">
-        <h1>User section</h1>
         <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/genre/list" role="button">View genres</a></p>
         <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/genre/find" role="button">Find genres</a></p>
     </div>

@@ -19,7 +19,6 @@
     </div>
 
     <div class="row">
-        <h1>User section</h1>
         <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/song/list" role="button">View all songs</a></p>
         <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/song/find" role="button">Find songs</a></p>
     </div>

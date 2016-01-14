@@ -19,12 +19,6 @@
     </div>
     
     <div class="row">
-        <h1>Administration section</h1>
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/musician/new" role="button">Create musician</a></p>
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/musician/listAsAdmin" role="button">Manage musicians</a></p>
-    </div>
-    <div class="row">
-        <h1>User section</h1>
         <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/musician/list" role="button">View all musicians</a></p>
         <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/musician/find" role="button">Find musicians</a></p>
     </div>

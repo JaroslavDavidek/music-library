@@ -11,18 +11,13 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<own:masterpage>
+<own:administrationpage>
 <jsp:attribute name="body">
 
     <div class="jumbotron">
-        <h1>Songs section</h1>
-    </div>
-
-    <div class="row">
-        <h1>User section</h1>
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/song/list" role="button">View all songs</a></p>
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/song/find" role="button">Find songs</a></p>
+        <h1>Administration section</h1>
+        <h2>Please select what you want to manage from the menu above...</h2>
     </div>
 
 </jsp:attribute>
-</own:masterpage>
+</own:administrationpage>

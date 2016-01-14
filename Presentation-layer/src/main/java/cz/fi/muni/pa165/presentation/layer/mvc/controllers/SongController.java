@@ -123,7 +123,7 @@ public class SongController {
             return "redirect:" + uriBuilder.path("/song/list").toUriString();
         }
 
-        return "redirect:" + uriBuilder.path("/song/list").toUriString();
+        return "redirect:" + uriBuilder.path("/song/listAsAdmin").toUriString();
     }
 
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)

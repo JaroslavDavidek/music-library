@@ -20,10 +20,6 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  *
  * @author JaroslavDavidek
  */
-/*@WebFilter(urlPatterns = {"/album/detailAsAdmin/*", "/album/listAsAdmin/*", "/album/new/*",
-    "/song/detailAsAdmin/*", "/song/listAsAdmin/*", "/song/new/*",
-    "/musician/detailAsAdmin/*","/musician/listAsAdmin/*","/musician/new/*",
-    "/genre/detailAsAdmin/*","/genre/listAsAdmin/*","/genre/new/*"}, filterName = "AdminFilter")*/
 public class SecurityFilter implements Filter{
 
     public void init(FilterConfig fc) throws ServletException {

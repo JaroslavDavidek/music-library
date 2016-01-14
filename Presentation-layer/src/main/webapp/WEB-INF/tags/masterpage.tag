@@ -30,7 +30,8 @@
                 <li><a href="${pageContext.request.contextPath}/genre/index">Genres</a></li>
             </ul>
         </div>
-    <ul class="nav navbar-nav navbar-right pull-right">  
+    <ul class="nav navbar-nav navbar-right pull-right"> 
+        <li><a href="${pageContext.request.contextPath}/admin/index">Administration</a></li>
         <li><a href="${pageContext.request.contextPath}/logout">Log out</a></li>
     </ul>
   </div>

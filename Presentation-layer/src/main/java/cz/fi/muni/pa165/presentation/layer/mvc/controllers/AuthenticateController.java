@@ -63,6 +63,11 @@ public class AuthenticateController {
         return "error";
     }
     
+    @RequestMapping(value = "/loginAccessDenied", method = RequestMethod.GET)
+    public String accesssDenied() {
+            return "/loginAccessDenied";
+    }
+    
     private void createCookie(HttpServletRequest pHttpRequest, HttpServletResponse pHttpResponse, String pCookieName, String pCookieValue) {
         try {
             Cookie cookie = new Cookie(pCookieName, pCookieValue);

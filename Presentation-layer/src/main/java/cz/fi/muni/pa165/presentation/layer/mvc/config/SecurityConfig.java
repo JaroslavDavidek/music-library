@@ -30,10 +30,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         Collection<UserDTO> userDTOs = userFacade.getAllUsers();
-        
+        /*
         auth.inMemoryAuthentication().withUser("mkyong").password("123456").roles("USER");
 	auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
-
+        */
         for(UserDTO userDTO : userDTOs) {
             if(userDTO.isAdmin()) {
                 auth.inMemoryAuthentication().passwordEncoder(passwordEncoder())
@@ -53,14 +53,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/genre/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
                 .antMatchers("/album/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
                 .antMatchers("/musician/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+                .antMatchers("/admin/**").access("hasAnyRole('ROLE_ADMIN')")
                 .and()
                 .formLogin()
                 .loginPage("/login").loginProcessingUrl("/j_spring_security_check")
-                .failureUrl("/login?error=invalidLoginAttempt")
+                .failureUrl("/login?loginError=true")
                 .usernameParameter("user").passwordParameter("pass")
                 .and()
                 .logout().logoutSuccessUrl("/")
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .and()
+                .exceptionHandling().accessDeniedPage("/loginAccessDenied")
                 .and()
                 .csrf().disable();
 
@@ -71,4 +74,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         PasswordEncoder encoder = new PasswordEncoding();
         return encoder;
     }
+    
+    
 }

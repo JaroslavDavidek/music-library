@@ -12,7 +12,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 
-<own:masterpage>
+<own:administrationpage>
 <jsp:attribute name="body">
         <div class="jumbotron">
             <h1>Update song</h1>
@@ -95,4 +95,4 @@
             <button class="col-md-2 col-md-offset-5 btn btn-primary " type="submit">Update song</button>
         </form:form>
     </jsp:attribute>
-</own:masterpage>
+</own:administrationpage>

@@ -92,7 +92,7 @@
 
             
 
-            <button class="col-md-2 col-md-offset-5 btn btn-primary " type="submit">Create song</button>
+            <button class="col-md-0 col-md-offset-6 btn btn-primary " type="submit">Create</button>
         </form:form>
     </jsp:attribute>
 </own:administrationpage>

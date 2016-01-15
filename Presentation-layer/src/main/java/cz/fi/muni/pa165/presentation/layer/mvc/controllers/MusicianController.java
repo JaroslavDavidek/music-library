@@ -53,7 +53,7 @@ public class MusicianController {
      * @return 
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String create(@Valid @ModelAttribute("musicianCreateDTO") MusicianDTO formBean,
+    public String create(@Valid @ModelAttribute("musicianDTO") MusicianDTO formBean,
             BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes,
             UriComponentsBuilder uriBuilder){
         if (bindingResult.hasErrors()) {

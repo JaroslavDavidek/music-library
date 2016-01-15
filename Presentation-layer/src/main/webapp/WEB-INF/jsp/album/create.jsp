@@ -30,13 +30,7 @@
                 </div>
             </div>
 
-            <div class="col-md-8 col-md-offset-2 form-group ${release_error?'has-error':''}">
-                <form:label path="releaseDate" cssClass="col-sm-3 text-right control-label">Release date</form:label>
-                    <div class="col-sm-5">
-                    <form:input path="releaseDate" cssClass="form-control"/>
-                    <form:errors path="releaseDate" cssClass="help-block"/>
-                </div>
-            </div>
+            
 
             <div class="col-md-8 col-md-offset-2 form-group ${musicianId_error?'has-error':''}">
                 <form:label path="musicianId" cssClass="col-sm-3 text-right control-label">Musician</form:label>
@@ -57,8 +51,32 @@
                     <form:errors path="commentary" cssClass="help-block"/>
                 </div>
             </div>
+                    
+            <div class="col-md-8 col-md-offset-2 form-group ${release_error?'has-error':''}">
+                <form:label path="releaseDate" cssClass="col-sm-3 text-right control-label">Release date</form:label>
+                    <div class="col-sm-5">
+                    <form:input path="releaseDate" id="releaseDatePicker" cssClass="form-control"/>
+                    <form:errors path="releaseDate" cssClass="help-block">You have submitted date with invalid format, please use the date picker to select it properly.</form:errors>
+                </div>
+            </div>
 
-            <button class="col-md-2 col-md-offset-5 btn btn-primary " type="submit">Create album</button>
+            <button class="col-md-0 col-md-offset-6 btn btn-primary " type="submit">Create</button>
         </form:form>
+    </jsp:attribute>
+    <jsp:attribute name="scripts">
+        <script>
+            $(function () {
+                $("#releaseDatePicker").datepicker({
+                dateFormat: "yy-mm-dd",
+                firstDay: 1,
+                hideIfNoPrevNext: true,
+                showAnim: "fold",
+                changeYear: true,
+                yearRange: "-300:+0",
+                prevText: " Previous ",
+                nextText: " Next ",
+                maxDate: "-1"});
+            });
+        </script>
     </jsp:attribute>
 </own:administrationpage>

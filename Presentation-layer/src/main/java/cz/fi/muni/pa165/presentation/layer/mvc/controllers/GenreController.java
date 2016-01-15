@@ -89,7 +89,7 @@ public class GenreController {
         Long createdID = genreFacade.createGenre(formBean);
 
         redirectAttributes.addFlashAttribute("alert_success", "Succesfully created " + formBean.getTitle() + " with id " + createdID);
-        redirectAttributes.addFlashAttribute("alert_success", "Album " + createdID + " was created");
+        redirectAttributes.addFlashAttribute("alert_success", "Genre " + createdID + " was created");
         return "redirect:" + uriBuilder.path("/genre/listAsAdmin").toUriString();
     }
 

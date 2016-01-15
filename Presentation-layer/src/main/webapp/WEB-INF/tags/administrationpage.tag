@@ -1,6 +1,7 @@
 <%@ tag pageEncoding="utf-8" dynamic-attributes="dynattrs" trimDirectiveWhitespaces="true"  %>
 <%@ attribute name="title" required="false" %>
 <%@ attribute name="head" fragment="true" %>
+<%@ attribute name="scripts" fragment="true" required="false" %>
 <%@ attribute name="body" fragment="true" required="true" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="onw" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -64,7 +65,9 @@
 <!-- javascript libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<!-- javascript custom files -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<jsp:invoke fragment="scripts"/>
 
 </body>
 </html>

@@ -142,7 +142,7 @@ public class AlbumController {
         AlbumDTO storedAlbum = albumFacade.findById(id);
         AlbumCreateDTO albumToUpdate = new AlbumCreateDTO();
         albumToUpdate.setTitle(storedAlbum.getTitle());
-        albumToUpdate.setReleaseDate(storedAlbum.getReleaseDate().toString());
+        albumToUpdate.setReleaseDate(storedAlbum.getReleaseDate());
         albumToUpdate.setCommentary(storedAlbum.getCommentary());
         albumToUpdate.setCover(storedAlbum.getCover());
         albumToUpdate.setMusicianId(storedAlbum.getMusician().getId());
@@ -164,11 +164,7 @@ public class AlbumController {
         albumFacade.updateAlbumTitle(id, formBean.getTitle());
         albumFacade.updateAlbumMusician(id, formBean.getMusicianId());
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            albumFacade.updateAlbumReleaseDate(id, new java.sql.Date(format.parse(formBean.getReleaseDate()).getTime()));
-        } catch (ParseException ex) {
-            Logger.getLogger(AlbumFacadeImplementation.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        albumFacade.updateAlbumReleaseDate(id, formBean.getReleaseDate());
         albumFacade.updateAlbumCommentary(id, formBean.getCommentary());
 
         redirectAttributes.addFlashAttribute("alert_success", "Album " + formBean.getTitle() + " updated");

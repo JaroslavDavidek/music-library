@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 public class AlbumDTO {
@@ -17,7 +18,7 @@ public class AlbumDTO {
     @Size(min = 1, max = 128)
     private String title;
     
-    @Valid
+    @Past
     private Date releaseDate;
     
     private String commentary;

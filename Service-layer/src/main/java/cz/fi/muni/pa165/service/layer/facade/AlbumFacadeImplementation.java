@@ -61,11 +61,7 @@ public class AlbumFacadeImplementation implements AlbumFacade {
         album.setTitle(albumDto.getTitle());
         album.setCommentary(albumDto.getCommentary());
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            album.setReleaseDate(new java.sql.Date(format.parse(albumDto.getReleaseDate()).getTime()));
-        } catch (ParseException ex) {
-            Logger.getLogger(AlbumFacadeImplementation.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        album.setReleaseDate(albumDto.getReleaseDate());
         album.setMusician(musicianService.findMusicianByID(albumDto.getMusicianId()));
         albumService.createAlbum(album);
         return album.getId();

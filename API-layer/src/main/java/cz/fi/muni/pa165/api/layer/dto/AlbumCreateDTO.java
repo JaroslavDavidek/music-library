@@ -9,8 +9,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 /**
@@ -25,8 +25,8 @@ public class AlbumCreateDTO {
     @Size(min = 1, max = 128)
     private String title;
     
-    @NotNull
-    private String releaseDate;
+    @Past
+    private Date releaseDate;
     
     private String commentary;
     private Byte[] cover;
@@ -52,11 +52,11 @@ public class AlbumCreateDTO {
         this.title = title;
     }
 
-    public String getReleaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(String releaseDate) {
+    public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
 

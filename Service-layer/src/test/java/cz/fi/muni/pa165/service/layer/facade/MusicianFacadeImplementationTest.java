@@ -3,7 +3,9 @@ package cz.fi.muni.pa165.service.layer.facade;
 import cz.fi.muni.pa165.api.layer.dto.MusicianDTO;
 import cz.fi.muni.pa165.api.layer.facade.MusicianFacade;
 import cz.fi.muni.pa165.dao.MusicianDao;
+import cz.fi.muni.pa165.dao.SongDao;
 import cz.fi.muni.pa165.entity.Musician;
+import cz.fi.muni.pa165.entity.Song;
 import cz.fi.muni.pa165.service.layer.config.MappingConfiguration;
 import cz.fi.muni.pa165.service.layer.service.MappingService;
 import cz.fi.muni.pa165.service.layer.service.MusicianService;
@@ -32,6 +34,9 @@ public class MusicianFacadeImplementationTest extends AbstractTestNGSpringContex
     
     @Mock
     private MusicianDao musicianDao;
+    
+    @Mock
+    private SongDao songDao;
     
     @Autowired
     @InjectMocks
@@ -104,6 +109,7 @@ public class MusicianFacadeImplementationTest extends AbstractTestNGSpringContex
         
         when(musicianDao.findById(any(Long.class))).thenReturn(curt);
         when(musicianDao.delete(any(Musician.class))).thenReturn(true);
+        when(songDao.findAllByMusician(any(Musician.class))).thenReturn(new ArrayList<Song>());
         boolean expectedResult = musicianFacade.deleteMusician(1l);
         assertEquals(true, expectedResult);
     }

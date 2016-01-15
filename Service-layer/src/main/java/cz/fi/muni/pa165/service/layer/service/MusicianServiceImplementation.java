@@ -1,7 +1,11 @@
 package cz.fi.muni.pa165.service.layer.service;
 
+import cz.fi.muni.pa165.dao.AlbumDao;
 import cz.fi.muni.pa165.dao.MusicianDao;
+import cz.fi.muni.pa165.dao.SongDao;
+import cz.fi.muni.pa165.entity.Album;
 import cz.fi.muni.pa165.entity.Musician;
+import cz.fi.muni.pa165.entity.Song;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,6 +23,12 @@ public class MusicianServiceImplementation implements MusicianService{
     @Inject
     private MusicianDao musicianDao;
     
+    @Inject
+    private SongDao songDao;
+    
+    @Inject
+    private AlbumDao albumDao;
+    
     @Override
     public Musician createMusician(Musician musician) {
         if(musicianDao.create(musician)){
@@ -30,6 +40,28 @@ public class MusicianServiceImplementation implements MusicianService{
     @Override
     public boolean deleteMusician(Musician musician) {
         if(musician != null){
+            
+            // find all albums by Musician
+            List<Album> musicianAlbums = new ArrayList<>();
+            for(Song song : songDao.findAllByMusician(musician)) {
+                
+                Album songParentAlbum = song.getAlbum();
+                if(songParentAlbum != null && !musicianAlbums.contains(songParentAlbum)){
+                    
+                    if(songParentAlbum.getSongs() != null){
+                        songParentAlbum.getSongs().clear();
+                    }
+                    musicianAlbums.add(songParentAlbum);
+                }
+                songDao.delete(song);
+            }
+            for(Album album : musicianAlbums) {
+                
+                if(album.getSongs() != null){
+                    album.getSongs().clear();
+                }             
+                albumDao.delete(album);
+            }
             return musicianDao.delete(musician);
         }
         return false;

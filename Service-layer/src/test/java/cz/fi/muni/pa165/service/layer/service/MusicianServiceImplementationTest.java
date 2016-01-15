@@ -1,7 +1,9 @@
 package cz.fi.muni.pa165.service.layer.service;
 
 import cz.fi.muni.pa165.dao.MusicianDao;
+import cz.fi.muni.pa165.dao.SongDao;
 import cz.fi.muni.pa165.entity.Musician;
+import cz.fi.muni.pa165.entity.Song;
 import cz.fi.muni.pa165.exception.InvalidParamDataAccessExpection;
 import cz.fi.muni.pa165.service.layer.config.MappingConfiguration;
 import java.sql.Date;
@@ -29,6 +31,9 @@ public class MusicianServiceImplementationTest extends AbstractTransactionalTest
     
     @Mock
     private MusicianDao musicianDao;
+    
+    @Mock
+    private SongDao songDao;
     
     @Autowired
     @InjectMocks
@@ -86,6 +91,7 @@ public class MusicianServiceImplementationTest extends AbstractTransactionalTest
         System.out.println("testDeleteMusician1");
         
         when(musicianDao.delete(any(Musician.class))).thenReturn(true);
+        when(songDao.findAllByMusician(any(Musician.class))).thenReturn(new ArrayList<Song>());
         boolean result = musicianService.deleteMusician(prince);
         assertEquals(true, result);
     }
@@ -95,6 +101,7 @@ public class MusicianServiceImplementationTest extends AbstractTransactionalTest
         System.out.println("testDeleteMusician2");
         
         when(musicianDao.delete(any(Musician.class))).thenReturn(false);
+        when(songDao.findAllByMusician(any(Musician.class))).thenReturn(new ArrayList<Song>());
         boolean result = musicianService.deleteMusician(prince);
         assertEquals(false, result);
     }

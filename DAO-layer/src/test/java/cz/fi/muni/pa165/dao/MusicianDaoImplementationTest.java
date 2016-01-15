@@ -165,4 +165,19 @@ public class MusicianDaoImplementationTest extends AbstractTransactionalTestNGSp
         Assert.assertEquals(false, result2);
     }
     
+    /**
+     * Test of update method, of class MusicianDaoImplementation.
+     */
+    @Test
+    public void testUpdate() {
+        System.out.println("update");
+        
+        metallica.setArtistName("Meth");
+        metallica.setRealName("Metal");
+        musicianDao.update(metallica);     
+        Musician mergedMusician = musicianDao.findById(metallica.getId());
+        boolean result = this.metallica.equals(mergedMusician);
+        Assert.assertEquals(true, result);
+    }
+    
 }

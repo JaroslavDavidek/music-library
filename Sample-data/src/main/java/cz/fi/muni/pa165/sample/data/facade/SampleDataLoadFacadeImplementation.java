@@ -72,7 +72,7 @@ public class SampleDataLoadFacadeImplementation implements SampleDataLoadFacade{
         //Album onEveryStreetAlbum = storeAlbum("On Every Street", "", Date.valueOf("1991-10-11"), "oneverystreet_cover.jpg", direStraits);
         Album onEveryStreetAlbum = storeAlbum("On Every Street", "", Date.valueOf("1991-10-11"), "", direStraits);
        
-        Album bornedAgainAlbum = storeAlbum("Borned Again", "", Date.valueOf("1983-11-15"), "", direStraits);
+        Album bornedAgainAlbum = storeAlbum("Borned Again", "", Date.valueOf("1983-11-15"), "", dio);
         
         Song backInBlack = storeSong("Back In Black", "", 320, 6, backInBlackAlbum, acdc, hardRock);
         Song shootToThrill = storeSong("Shoot To Thrill", "", 320, 2, backInBlackAlbum, acdc, hardRock);

@@ -3,7 +3,9 @@ package cz.fi.muni.pa165.service.layer.facade;
 import cz.fi.muni.pa165.api.layer.dto.GenreDTO;
 import cz.fi.muni.pa165.api.layer.facade.GenreFacade;
 import cz.fi.muni.pa165.dao.GenreDao;
+import cz.fi.muni.pa165.dao.SongDao;
 import cz.fi.muni.pa165.entity.Genre;
+import cz.fi.muni.pa165.entity.Song;
 import cz.fi.muni.pa165.service.layer.config.MappingConfiguration;
 import cz.fi.muni.pa165.service.layer.service.GenreService;
 import cz.fi.muni.pa165.service.layer.service.MappingService;
@@ -31,6 +33,9 @@ public class GenreFacadeImplementationTest extends AbstractTestNGSpringContextTe
     
     @Mock
     private GenreDao genreDao;
+    
+    @Mock
+    private SongDao songDao;
     
     @Autowired
     @InjectMocks
@@ -100,6 +105,7 @@ public class GenreFacadeImplementationTest extends AbstractTestNGSpringContextTe
         
         when(genreDao.findById(any(Long.class))).thenReturn(rock);
         when(genreDao.delete(any(Genre.class))).thenReturn(true);
+        when(songDao.findAllByGenre(any(Genre.class))).thenReturn(new ArrayList<Song>());
         boolean expectedResult = genreFacade.deleteGenre(1l);
         assertEquals(true, expectedResult);
     }

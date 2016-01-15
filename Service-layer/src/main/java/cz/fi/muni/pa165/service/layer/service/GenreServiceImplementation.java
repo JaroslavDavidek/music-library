@@ -1,7 +1,9 @@
 package cz.fi.muni.pa165.service.layer.service;
 
 import cz.fi.muni.pa165.dao.GenreDao;
+import cz.fi.muni.pa165.dao.SongDao;
 import cz.fi.muni.pa165.entity.Genre;
+import cz.fi.muni.pa165.entity.Song;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -19,6 +21,9 @@ public class GenreServiceImplementation implements GenreService{
     @Inject
     private GenreDao genreDao;
     
+    @Inject
+    private SongDao songDao;
+    
     @Override
     public Genre createGenre(Genre genre) {
         if(genreDao.create(genre)){
@@ -30,6 +35,9 @@ public class GenreServiceImplementation implements GenreService{
     @Override
     public boolean deleteGenre(Genre genre) {
         if(genre != null){
+            for(Song song : songDao.findAllByGenre(genre)) {
+                songDao.delete(song);
+            }
             return genreDao.delete(genre);
         }
         return false;

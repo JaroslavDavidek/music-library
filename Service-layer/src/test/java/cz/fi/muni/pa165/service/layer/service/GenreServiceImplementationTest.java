@@ -6,7 +6,9 @@
 package cz.fi.muni.pa165.service.layer.service;
 
 import cz.fi.muni.pa165.dao.GenreDao;
+import cz.fi.muni.pa165.dao.SongDao;
 import cz.fi.muni.pa165.entity.Genre;
+import cz.fi.muni.pa165.entity.Song;
 import cz.fi.muni.pa165.exception.InvalidParamDataAccessExpection;
 import cz.fi.muni.pa165.service.layer.config.MappingConfiguration;
 import java.util.ArrayList;
@@ -33,11 +35,15 @@ public class GenreServiceImplementationTest extends AbstractTransactionalTestNGS
     @Mock
     private GenreDao genreDao;
     
+    @Mock
+    private SongDao songDao;
+    
     @Autowired
     @InjectMocks
     private GenreService genreService;
     
     private Genre rock;
+    private Genre spaceRock;
     private Genre folkMetal;
  
     @BeforeClass
@@ -47,6 +53,10 @@ public class GenreServiceImplementationTest extends AbstractTransactionalTestNGS
         rock = new Genre();
         rock.setTitle("Hard Rock");
         rock.setYearOfOrigin(1950); 
+        
+        spaceRock = new Genre();
+        spaceRock.setTitle("Space Rock");
+        spaceRock.setYearOfOrigin(1990); 
         
         folkMetal = new Genre();
         folkMetal.setTitle("Folk Metal");
@@ -80,7 +90,8 @@ public class GenreServiceImplementationTest extends AbstractTransactionalTestNGS
         System.out.println("deleteGenre1");
         
         when(genreDao.delete(any(Genre.class))).thenReturn(true);
-        boolean result = genreService.deleteGenre(rock);
+        when(songDao.findAllByGenre(any(Genre.class))).thenReturn(new ArrayList<Song>());
+        boolean result = genreService.deleteGenre(spaceRock);
         assertEquals(true, result);
     }
     
@@ -89,6 +100,7 @@ public class GenreServiceImplementationTest extends AbstractTransactionalTestNGS
         System.out.println("deleteGenre2");
         
         when(genreDao.delete(any(Genre.class))).thenReturn(false);
+        when(songDao.findAllByGenre(any(Genre.class))).thenReturn(new ArrayList<Song>());
         boolean result = genreService.deleteGenre(rock);
         assertEquals(false, result);
     }

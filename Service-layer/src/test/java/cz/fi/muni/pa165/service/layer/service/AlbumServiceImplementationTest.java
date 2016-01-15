@@ -6,6 +6,7 @@
 package cz.fi.muni.pa165.service.layer.service;
 
 import cz.fi.muni.pa165.dao.AlbumDao;
+import cz.fi.muni.pa165.dao.SongDao;
 import cz.fi.muni.pa165.entity.Album;
 import cz.fi.muni.pa165.entity.Genre;
 import cz.fi.muni.pa165.entity.Musician;
@@ -37,6 +38,9 @@ public class AlbumServiceImplementationTest extends AbstractTransactionalTestNGS
    
     @Mock
     private AlbumDao albumDao;
+    
+    @Mock
+    private SongDao songDao;
     
     @Autowired
     @InjectMocks
@@ -113,6 +117,7 @@ public class AlbumServiceImplementationTest extends AbstractTransactionalTestNGS
         System.out.println("deleteAlbum1");
         
         when(albumDao.delete(any(Album.class))).thenReturn(true);
+        when(songDao.findAllByAlbum(any(Album.class))).thenReturn(new ArrayList<Song>());
         boolean result = albumService.deleteAlbum(brothersInArmsAlbum);
         assertEquals(true, result);
     }
@@ -122,6 +127,7 @@ public class AlbumServiceImplementationTest extends AbstractTransactionalTestNGS
         System.out.println("deleteAlbum2");
         
         when(albumDao.delete(any(Album.class))).thenReturn(false);
+        when(songDao.findAllByAlbum(any(Album.class))).thenReturn(new ArrayList<Song>());
         boolean result = albumService.deleteAlbum(brothersInArmsAlbum);
         assertEquals(false, result);
     }

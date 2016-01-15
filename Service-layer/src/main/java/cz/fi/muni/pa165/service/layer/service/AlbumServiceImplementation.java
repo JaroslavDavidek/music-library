@@ -41,6 +41,9 @@ public class AlbumServiceImplementation implements AlbumService {
     @Override
     public boolean deleteAlbum(Album album) {
         if (album != null) {
+            for(Song song : songDao.findAllByAlbum(album)) {
+                songDao.delete(song);
+            }
             return albumDao.delete(album);
         }
         return false;

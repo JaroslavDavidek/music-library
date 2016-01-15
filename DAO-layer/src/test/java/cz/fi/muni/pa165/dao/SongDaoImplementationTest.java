@@ -230,7 +230,7 @@ public class SongDaoImplementationTest extends AbstractTransactionalTestNGSpring
     }
     
     /**
-     * Test of update method, of class GenreDaoImplementation.
+     * Test of update method, of class SongDaoImplementation.
      */
     @Test
     public void testUpdate() {

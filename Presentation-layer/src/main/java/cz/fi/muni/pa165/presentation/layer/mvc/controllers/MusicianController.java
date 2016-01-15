@@ -155,12 +155,15 @@ public class MusicianController {
         List<MusicianDTO> foundMusicians = new ArrayList<MusicianDTO>();
         try {
             MusicianDTO found = musicianFacade.findMusicianByID(formBean.getMusicianId());
-            foundMusicians.add(found);
+            if(found != null){
+                foundMusicians.add(found);
+            }
         } catch (NoResultException e) {
             e.printStackTrace();
+        } finally {
+            model.addAttribute("allMusicians", foundMusicians);
+            return "musician/list";
         }
-        model.addAttribute("allMusicians", foundMusicians);
-        return "musician/list";
     }
     
     @RequestMapping(value = {"/findByRealName"}, method = RequestMethod.POST)
@@ -175,12 +178,15 @@ public class MusicianController {
         List<MusicianDTO> foundMusicians = new ArrayList<MusicianDTO>();
         try {
             MusicianDTO found = musicianFacade.findMusicianByRealName(formBean.getRealName());
-            foundMusicians.add(found);
+            if(found != null){
+                foundMusicians.add(found);
+            }
         } catch (NoResultException e) {
             e.printStackTrace();
+        } finally {
+            model.addAttribute("allMusicians", foundMusicians);
+            return "musician/list";
         }
-        model.addAttribute("allMusicians", foundMusicians);
-        return "musician/list";
     }
     
     @RequestMapping(value = {"/findByArtistName"}, method = RequestMethod.POST)
@@ -195,12 +201,15 @@ public class MusicianController {
         List<MusicianDTO> foundMusicians = new ArrayList<MusicianDTO>();
         try {
             MusicianDTO found = musicianFacade.findMusicianByArtistName(formBean.getArtistName());
-            foundMusicians.add(found);
+            if(found != null){
+                foundMusicians.add(found);
+            }
         } catch (NoResultException e) {
             e.printStackTrace();
+        } finally {
+            model.addAttribute("allMusicians", foundMusicians);
+            return "musician/list";
         }
-        model.addAttribute("allMusicians", foundMusicians);
-        return "musician/list";
     }
     
     @RequestMapping(value = {"/findByYearRange"}, method = RequestMethod.POST)

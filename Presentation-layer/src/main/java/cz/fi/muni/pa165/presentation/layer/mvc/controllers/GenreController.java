@@ -178,12 +178,15 @@ public class GenreController {
         List<GenreDTO> foundGenres = new ArrayList<GenreDTO>();
         try {
             GenreDTO found = genreFacade.findGenreByID(formBean.getGenreId());
-            foundGenres.add(found);
+            if(found != null){
+                foundGenres.add(found);
+            }
         } catch (NoResultException e) {
             e.printStackTrace();
+        } finally {
+            model.addAttribute("allGenres", foundGenres);
+            return "genre/list";
         }
-        model.addAttribute("allGenres", foundGenres);
-        return "genre/list";
     }
 
     @RequestMapping(value = {"/findByTitle"}, method = RequestMethod.POST)
@@ -198,12 +201,15 @@ public class GenreController {
         List<GenreDTO> foundGenres = new ArrayList<GenreDTO>();
         try {
             GenreDTO found = genreFacade.findGenreByTitle(formBean.getTitle());
-            foundGenres.add(found);
+            if(found != null){
+                foundGenres.add(found);
+            }
         } catch (NoResultException e) {
             e.printStackTrace();
+        } finally {
+            model.addAttribute("allGenres", foundGenres);
+            return "genre/list";
         }
-        model.addAttribute("allGenres", foundGenres);
-        return "genre/list";
     }
 
     @RequestMapping(value = {"/findByYearRange"}, method = RequestMethod.POST)

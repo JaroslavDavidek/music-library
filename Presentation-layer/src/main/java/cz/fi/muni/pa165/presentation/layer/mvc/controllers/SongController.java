@@ -197,12 +197,15 @@ public class SongController {
         List<SongDTO> foundSongs = new ArrayList<SongDTO>();
         try {
             SongDTO foundSong = songFacade.findSongByID(formBean.getSongId());
-            foundSongs.add(foundSong);
+            if(foundSong != null){
+                foundSongs.add(foundSong);
+            }
         } catch (NoResultException e) {
-            e.printStackTrace();
+            e.printStackTrace();      
+        } finally {
+            model.addAttribute("allSongs", foundSongs); 
+            return "song/list";
         }
-        model.addAttribute("allSongs", foundSongs); 
-        return "song/list";
     }
     
     @RequestMapping(value = {"/findByTitle"}, method = RequestMethod.POST)
@@ -216,12 +219,19 @@ public class SongController {
             model.addAttribute("genres", genreFacade.findAll());
             return "song/find";
         }
-        
-        SongDTO foundSong = songFacade.findSongByTitle(formBean.getTitle());
-        List<SongDTO> foundSongs = new ArrayList<SongDTO>();
-        foundSongs.add(foundSong);
-        model.addAttribute("allSongs", foundSongs); 
-        return "song/list";
+         
+        List<SongDTO> foundSongs = new ArrayList<SongDTO>(); 
+        try {
+            SongDTO foundSong = songFacade.findSongByTitle(formBean.getTitle());
+            if(foundSong != null){
+                foundSongs.add(foundSong);
+            }
+        } catch (NoResultException e) {
+            e.printStackTrace();
+        } finally {
+            model.addAttribute("allSongs", foundSongs); 
+            return "song/list";
+        }
     }
     
     @RequestMapping(value = {"/findByMusician"}, method = RequestMethod.POST)

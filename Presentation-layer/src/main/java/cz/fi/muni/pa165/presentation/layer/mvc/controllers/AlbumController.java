@@ -193,12 +193,15 @@ public class AlbumController {
         List<AlbumDTO> foundAlbums = new ArrayList<AlbumDTO>();
         try {
             AlbumDTO found = albumFacade.findById(formBean.getAlbumId());
-            foundAlbums.add(found);
+            if(found != null){
+                foundAlbums.add(found);
+            }
         } catch (NoResultException e) {
             e.printStackTrace();
+        } finally {
+            model.addAttribute("allAlbums", foundAlbums); 
+            return "album/list";
         }
-        model.addAttribute("allAlbums", foundAlbums);
-    return "album/list";
     }
 
     @RequestMapping(value = {"/findByTitle"}, method = RequestMethod.POST)
@@ -215,12 +218,15 @@ public class AlbumController {
         List<AlbumDTO> foundAlbums = new ArrayList<AlbumDTO>();
         try {
             AlbumDTO found = albumFacade.findByTitle(formBean.getTitle());
-            foundAlbums.add(found);
+            if(found != null){
+                foundAlbums.add(found);
+            }
         } catch (NoResultException e) {
             e.printStackTrace();
+        } finally {
+            model.addAttribute("allAlbums", foundAlbums); 
+            return "album/list";
         }
-        model.addAttribute("allAlbums", foundAlbums);
-        return "album/list";
     }
 
     @RequestMapping(value = {"/findByMusician"}, method = RequestMethod.POST)

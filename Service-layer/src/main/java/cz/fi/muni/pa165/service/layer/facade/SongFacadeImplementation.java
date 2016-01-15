@@ -165,6 +165,16 @@ public class SongFacadeImplementation implements SongFacade {
         return mappingService.mapToCollectionEnforceID(songService.findAllSongsByMusicianAndReleaseYearRange(musicianID, fromYear, toYear), SongDTO.class);
     }
 
+    @Override
+    public String createLastFMSearchQuery(Long songID) {
+        return songService.createLastFMSearchQuery(songID);
+    }
+    
+    @Override
+    public String createYoutubeSearchQuery(Long songID) {
+        return songService.createYouTubeSearchQuery(songID);
+    }
+
     
 
 }

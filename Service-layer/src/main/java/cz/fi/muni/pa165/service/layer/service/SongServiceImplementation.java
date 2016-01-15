@@ -10,12 +10,16 @@ import cz.fi.muni.pa165.entity.Musician;
 import cz.fi.muni.pa165.entity.Song;
 import cz.fi.muni.pa165.service.layer.util.comparator.SongPositionASCComparator;
 import cz.fi.muni.pa165.service.layer.util.comparator.SongPositionDSCComparator;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
@@ -185,6 +189,42 @@ public class SongServiceImplementation implements SongService{
         return new ArrayList<>();
     }
     
+    public String createLastFMSearchQuery(Long songID){      
+        Song song = songDao.findById(songID);
+        String query = "http://www.last.fm/search?q=";
+        if(song == null){
+            return query;
+        }
+        return createURLQueryFromSong(song, query);
+    }
+
+    
+    public String createYouTubeSearchQuery(Long songID){      
+        Song song = songDao.findById(songID);
+        String query = "https://www.youtube.com/results?search_query=";
+        if(song == null){
+            return query;
+        }       
+        return createURLQueryFromSong(song, query);
+    }
+    
+     private String createURLQueryFromSong(Song song, String query) {
+        Musician musician = song.getMusician();
+        if(musician!= null && musician.getArtistName() != null){
+            try {
+                query += URLEncoder.encode(musician.getArtistName(), "UTF-8") + "+";
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(SongServiceImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            query += URLEncoder.encode(song.getTitle(), "UTF-8");
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(SongServiceImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return query;
+    }
+    
     /**
      * Lists all songs from respective album in ordered way
      * 
@@ -251,5 +291,4 @@ public class SongServiceImplementation implements SongService{
         cal.setTime(date);
         return cal.get(Calendar.YEAR);
     }
-
 }

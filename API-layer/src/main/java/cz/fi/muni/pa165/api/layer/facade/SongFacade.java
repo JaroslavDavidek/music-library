@@ -161,4 +161,20 @@ public interface SongFacade {
      * @return 
      */
     public List<SongDTO> findAllSongsByMusicianAndReleaseYearRange(Long musicianID, int fromYear, int toYear);
+    
+    /**
+     * creates lastFM search query consisting of song title and corresponding album
+     * 
+     * @param songID source ID of song to form query with
+     * @return formated URL
+     */
+    public String createLastFMSearchQuery(Long songID);
+    
+    /**
+     * creates Youtube search query consisting of song title and corresponding album
+     * 
+     * @param songID source ID of song to form query with
+     * @return formated URL
+     */
+    public String createYoutubeSearchQuery(Long songID);
 }

@@ -134,6 +134,20 @@ public class SongController {
         return "song/detail";
     }
     
+    @RequestMapping(value = "/lastFM/{id}", method = RequestMethod.GET)
+    public String lastFM(@PathVariable long id, Model model) {
+
+        String query = songFacade.createLastFMSearchQuery(id);
+        return "redirect:" + query;
+    }
+    
+    @RequestMapping(value = "/youtube/{id}", method = RequestMethod.GET)
+    public String youtube(@PathVariable long id, Model model) {
+
+        String query = songFacade.createYoutubeSearchQuery(id);
+        return "redirect:" + query;
+    }
+    
     @RequestMapping(value = "/detailAsAdmin/{id}", method = RequestMethod.GET)
     public String detailAsAdmin(@PathVariable long id, Model model) {
 

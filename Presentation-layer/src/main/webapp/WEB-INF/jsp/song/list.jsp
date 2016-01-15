@@ -38,6 +38,10 @@
                 <td><c:out value="${song.musician.artistName}"/></td>
                 <td><form method="get" action="${pageContext.request.contextPath}/song/detail/${song.id}">
                 <button type="submit" class="btn btn-primary">View</button></form></td>
+                <td><form method="get" action="${pageContext.request.contextPath}/song/lastFM/${song.id}">
+                <button type="submit" class="btn btn-primary">Last FM</button></form></td>
+                <td><form method="get" action="${pageContext.request.contextPath}/song/youtube/${song.id}">
+                <button type="submit" class="btn btn-primary">YouTube</button></form></td>
             </tr>
         </c:forEach>
            

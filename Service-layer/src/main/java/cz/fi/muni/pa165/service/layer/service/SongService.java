@@ -26,4 +26,6 @@ public interface SongService {
     public List<Song> findAllSongsByAlbum(Long albumID);
     public List<Song> findAllSongsByAlbumOrdered(Long albumID, boolean ascending);
     public List<Song> findAllSongsByMusicianAndReleaseYearRange(Long musicianID, int fromYear, int toYear);
+    public String createLastFMSearchQuery(Long songID);
+    public String createYouTubeSearchQuery(Long songID);
 }

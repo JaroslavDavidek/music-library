@@ -223,4 +223,17 @@ public class MusicianController {
         model.addAttribute("allMusicians", musicianFacade.findAllMusiciansInYearRange(formBean.getFromYear(), formBean.getToYear()));
         return "musician/list";
     }
+    
+    @RequestMapping(value = {"/findOrdered"}, method = RequestMethod.POST)
+    public String findByYearRange(@ModelAttribute("searchDTO") MusicianSearchDTO formBean, BindingResult bindingResult,
+            Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("searchDTO", new MusicianSearchDTO());
+            return "musician/find";
+        }
+
+        model.addAttribute("allMusicians", musicianFacade.findAllMusiciansByDateOfBirthOrdered(formBean.isSortAscending()));
+        return "musician/list";
+    }
 }

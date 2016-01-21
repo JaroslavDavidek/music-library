@@ -72,7 +72,16 @@
         </div>
     </form:form>
 
-
+    <form:form method="POST" modelAttribute="searchDTO" acceptCharset="" 
+               action="${pageContext.request.contextPath}/musician/findOrdered">
+        <div class="col-md-12 form-group ${title_error?'has-error':''}">
+            <form:label path="sortASC" cssClass="col-sm-2 text-right control-label">Use ascending order</form:label>
+            <div class="col-sm-1">
+                <form:checkbox path="sortASC" cssClass="col-sm-1 form-control"/>
+            </div>
+            <button class="btn btn-primary " type="submit">Find</button>
+        </div>
+    </form:form>
 
 </jsp:attribute>
 </own:masterpage>

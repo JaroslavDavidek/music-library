@@ -256,7 +256,7 @@ public class GenreServiceImplementationTest extends AbstractTransactionalTestNGS
     
     @Test
     public void testFindAllGenresByYearOfOriginOrderedAscending(){
-        System.out.println("testFindAllGenresByYearOfOriginOrderedAscending");
+        System.out.println("findAllGenresByYearOfOriginOrderedAscending");
         
         List<Genre> expectedResult = new ArrayList<>(); 
         expectedResult.add(folkMetal);      // 1980                 
@@ -277,7 +277,7 @@ public class GenreServiceImplementationTest extends AbstractTransactionalTestNGS
     
     @Test
     public void testFindAllGenresByYearOfOriginOrderedDescending(){
-        System.out.println("testFindAllGenresByYearOfOriginOrderedDescending");
+        System.out.println("findAllGenresByYearOfOriginOrderedDescending");
         
         List<Genre> expectedResult = new ArrayList<>(); 
         expectedResult.add(rock);           // 1950

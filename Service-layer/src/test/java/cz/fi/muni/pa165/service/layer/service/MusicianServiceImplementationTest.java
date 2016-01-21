@@ -299,4 +299,48 @@ public class MusicianServiceImplementationTest extends AbstractTransactionalTest
         List<Musician> result = musicianService.findAllMusiciansInYearRange(1900, 1950);
         assertEquals(result.size(), 0);
     }
+    
+    @Test
+    public void testFindAllMusiciansByDateOfBirthOrderedAscending(){
+        System.out.println("findAllMusiciansByDateOfBirthOrderedAscending");
+        
+        List<Musician> expectedResult = new ArrayList<>(); 
+                 
+        expectedResult.add(madonna);           
+        expectedResult.add(prince);
+        List<Musician> orderedMusicians = musicianService.findAllMusiciansByDateOfBirthOrdered(true);
+
+        Assert.assertEquals(expectedResult.size(), orderedMusicians.size());
+        when(musicianDao.findAll()).thenReturn(expectedResult);
+
+        for(int i = 0; i < expectedResult.size() - 1; i++)
+        {
+            Date date1 = orderedMusicians.get(i).getDateOfBirth();
+            Date date2 = orderedMusicians.get(i + 1).getDateOfBirth();
+            int returnedValue = date2.compareTo(date1); //return value >= 0 if date2 is after the date1.
+            Assert.assertTrue(returnedValue >= 0);
+        }
+    }
+    
+    @Test
+    public void testFindAllMusiciansByDateOfBirthOrderedDescending(){
+        System.out.println("findAllMusiciansByDateOfBirthOrderedDescending");
+        
+        List<Musician> expectedResult = new ArrayList<>(); 
+        expectedResult.add(madonna);
+        expectedResult.add(prince);
+  
+        List<Musician> orderedMusicians = musicianService.findAllMusiciansByDateOfBirthOrdered(false);
+
+        Assert.assertEquals(expectedResult.size(), orderedMusicians.size());
+        when(musicianDao.findAll()).thenReturn(expectedResult);
+
+        for(int i = 0; i < expectedResult.size() - 1; i++)
+        {
+            Date date1 = orderedMusicians.get(i).getDateOfBirth();
+            Date date2 = orderedMusicians.get(i + 1).getDateOfBirth();
+            int returnedValue = date2.compareTo(date1); //return value >= 0 if date2 is after the date1.
+            Assert.assertTrue(returnedValue <= 0);
+        }
+    }
 }

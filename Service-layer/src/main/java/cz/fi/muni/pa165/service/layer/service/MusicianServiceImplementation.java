@@ -6,9 +6,13 @@ import cz.fi.muni.pa165.dao.SongDao;
 import cz.fi.muni.pa165.entity.Album;
 import cz.fi.muni.pa165.entity.Musician;
 import cz.fi.muni.pa165.entity.Song;
+import cz.fi.muni.pa165.service.layer.util.comparator.MusicianPositionASCComparator;
+import cz.fi.muni.pa165.service.layer.util.comparator.MusicianPositionDSCComparator;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
@@ -134,8 +138,19 @@ public class MusicianServiceImplementation implements MusicianService{
     }
     
     @Override
-    public List<Musician> findAllMusiciansByDateOfBirthOrdered(boolean ascending){
-        return null;
+    public List<Musician> findAllMusiciansByDateOfBirthOrdered(boolean ascending){    
+        List<Musician> allMusicians = this.findAll();
+        if(allMusicians.isEmpty()){
+            return new ArrayList<>();
+        }
+        Comparator comparator;
+        if(ascending){
+            comparator = new MusicianPositionASCComparator();
+        } else {
+            comparator = new MusicianPositionDSCComparator();
+        }
+        Collections.sort(allMusicians, comparator);
+        return allMusicians;
     }
     
 }

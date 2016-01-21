@@ -24,4 +24,5 @@ public interface MusicianFacade {
     public MusicianDTO findMusicianByArtistName(String artistName);
     public List<MusicianDTO> findAll();
     public List<MusicianDTO> findAllMusiciansInYearRange(int from, int to);
+    public List<MusicianDTO> findAllMusiciansByDateOfBirthOrdered(boolean ascending);
 }

@@ -80,4 +80,9 @@ public class MusicianFacadeImplementation implements MusicianFacade{
     public List<MusicianDTO> findAllMusiciansInYearRange(int from, int to){
         return mappingService.mapToCollectionEnforceID(musicianService.findAllMusiciansInYearRange(from, to), MusicianDTO.class);
     }
+    
+    @Override
+    public List<MusicianDTO> findAllMusiciansByDateOfBirthOrdered(boolean ascending) {
+        return mappingService.mapToCollectionEnforceID(musicianService.findAllMusiciansByDateOfBirthOrdered(ascending), MusicianDTO.class);
+    }
 }

@@ -4,6 +4,8 @@ import cz.fi.muni.pa165.dao.GenreDao;
 import cz.fi.muni.pa165.dao.SongDao;
 import cz.fi.muni.pa165.entity.Genre;
 import cz.fi.muni.pa165.entity.Song;
+import cz.fi.muni.pa165.service.layer.util.comparator.GenrePositionASCComparator;
+import cz.fi.muni.pa165.service.layer.util.comparator.GenrePositionDSCComparator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -98,23 +100,13 @@ public class GenreServiceImplementation implements GenreService{
         if(allGenres.isEmpty()){
             return new ArrayList<>();
         }
+        Comparator comparator;
         if(ascending){
-            Comparator<Genre> comparator = new Comparator<Genre>() {
-                @Override
-                public int compare(Genre g1, Genre g2) {
-                    return g1.getYearOfOrigin()- g2.getYearOfOrigin();
-                }
-            };
-            Collections.sort(allGenres, comparator);
+            comparator = new GenrePositionASCComparator();
         } else {
-            Comparator<Genre> comparator = new Comparator<Genre>() {
-                @Override
-                public int compare(Genre g1, Genre g2) {
-                    return g2.getYearOfOrigin()- g1.getYearOfOrigin();
-                }
-            };
-            Collections.sort(allGenres, comparator);
+            comparator = new GenrePositionDSCComparator();
         }
+        Collections.sort(allGenres, comparator);
         return allGenres;
     }
     

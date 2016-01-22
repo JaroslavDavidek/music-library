@@ -18,9 +18,9 @@
         <h1>Manage albums</h1>
     </div>
     
-    <div class="row">
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/album/new" role="button">Create album</a></p>
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/album/listAsAdmin" role="button">Manage albums</a></p>
+    <div class="btn-group btn-group-justified" role="group">
+        <a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/album/new" role="button">Create album</a>
+        <a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/album/listAsAdmin" role="button">Manage albums</a>
     </div>
 
 </jsp:attribute>

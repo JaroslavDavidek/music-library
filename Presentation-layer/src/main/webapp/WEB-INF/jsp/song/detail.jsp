@@ -18,45 +18,50 @@
         <h1>Song detail</h1>
     </div>
     
-        <div class="col-md-8 col-md-offset-2">
-             <jsp:text>ID: </jsp:text>
-             <c:out value="${song.id}"/>
-        </div>
-       
-        <div class="col-md-8 col-md-offset-2" >
-             <jsp:text>Title: </jsp:text>
-             <c:out value="${song.title}"/>
-        </div>
-        
-        <div class="col-md-8 col-md-offset-2" >
-             <jsp:text>Album: </jsp:text>
-             <c:out value="${song.album.title}"/>
-        </div>
-        
-        <div class="col-md-8 col-md-offset-2" >
-             <jsp:text>Artist: </jsp:text>
-             <c:out value="${song.musician.artistName}"/>
-        </div>
-        
-        <div class="col-md-8 col-md-offset-2" >
-             <jsp:text>Genre: </jsp:text>
-             <c:out value="${song.genre.title}"/>
-        </div>
-        
-        <div class="col-md-8 col-md-offset-2" >
-             <jsp:text>Album position: </jsp:text>
-             <c:out value="${song.albumPosition}"/>
-        </div>
-        
-        <div class="col-md-8 col-md-offset-2" >
-             <jsp:text>Bitrate: </jsp:text>
-             <c:out value="${song.bitrate}"/>
-        </div>
-        
-        <div class="col-md-8 col-md-offset-2" >
-             <jsp:text>Commentary: </jsp:text>
-             <c:out value="${song.commentary}"/>
-        </div>
+    <div class="row">
+        <table class="col-md-3">
+            <tbody>
+                <tr>
+                     <td><b><jsp:text>ID: </jsp:text></td>
+                     <td><c:out value="${song.id}"/></td>
+                </tr>
 
+                <tr>
+                     <td><b><jsp:text>Title: </jsp:text></td>
+                     <td><c:out value="${song.title}"/></td>
+                </tr>
+
+                <tr>
+                     <td><b><jsp:text>Album: </jsp:text></td>
+                     <td><c:out value="${song.album.title}"/></td>
+                </tr>
+
+                <tr>
+                     <td><b><jsp:text>Artist: </jsp:text></td>
+                     <td><c:out value="${song.musician.artistName}"/></td>
+                </tr>
+
+                <tr>
+                     <td><b><jsp:text>Genre: </jsp:text></td>
+                     <td><c:out value="${song.genre.title}"/></td>
+                </tr>
+
+                <tr>
+                     <td><b><jsp:text>Album position: </jsp:text></td>
+                     <td><c:out value="${song.albumPosition}"/></td>
+                </tr>
+
+                <tr>
+                     <td><b><jsp:text>Bitrate: </jsp:text></td>
+                     <td><c:out value="${song.bitrate}"/></td>
+                </tr>
+
+                <tr>
+                     <td><b><jsp:text>Commentary: </jsp:text></td>
+                     <td><c:out value="${song.commentary}"/></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </jsp:attribute>
 </own:masterpage>

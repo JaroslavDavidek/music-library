@@ -32,11 +32,14 @@
                         </div>
                     </c:if>
 
-                    <label for="inputEmail" class="sr-only">Email address</label>
-                    <input type="email" name="user" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-                    <label for="inputPassword" class="sr-only">Password</label>
-                    <input type="password" name="pass" id="inputPassword" class="form-control" placeholder="Password" required="">
-
+                    <div style="margin: 20px 0px 20px 0px;">
+                        <label for="inputEmail" class="sr-only">Email address</label>
+                        <input type="email" name="user" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+                    </div>
+                    <div style="margin: 20px 0px 20px 0px;">
+                        <label for="inputPassword" class="sr-only">Password</label>
+                        <input type="password" name="pass" id="inputPassword" class="form-control" placeholder="Password" required="">
+                    </div>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
                 </form:form>     
             </div>

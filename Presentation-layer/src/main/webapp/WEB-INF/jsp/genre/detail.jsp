@@ -17,21 +17,25 @@
         <div class="jumbotron">
             <h1>Genre detail</h1>
         </div>
+        <div class="row">
+            <table class="col-md-3">
+                <tbody>
+                    <tr>
+                        <td><b><jsp:text>ID: </jsp:text></b></td>
+                        <td><c:out value="${genre.id}"/></td>
+                    </tr>
 
-        <div class="col-md-8 col-md-offset-2">
-            <b><jsp:text>ID: </jsp:text></b>
-            <c:out value="${genre.id}"/>
+                    <tr>
+                        <td><b><jsp:text>Title: </jsp:text></b></td>
+                        <td><c:out value="${genre.title}"/></td>
+                    </tr>
+
+                    <tr>
+                        <td><b><jsp:text>Year of origin: </jsp:text></b></td>
+                        <td><c:out value="${genre.yearOfOrigin}"/></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
-        <div class="col-md-8 col-md-offset-2" >
-            <b><jsp:text>Title: </jsp:text></b>
-            <c:out value="${genre.title}"/>
-        </div>
-
-        <div class="col-md-8 col-md-offset-2" >
-            <b><jsp:text>Year of origin: </jsp:text></b>
-            <c:out value="${genre.yearOfOrigin}"/>
-        </div>
-
     </jsp:attribute>
 </own:masterpage>

@@ -18,9 +18,9 @@
         <h1>Albums section</h1>
     </div>
 
-    <div class="row">
-        <p><a class="btn btn-lg btn-primary"  href="${pageContext.request.contextPath}/album/list" role="button">View albums</a></p>
-        <p><a class="btn btn-lg btn-primary"  href="${pageContext.request.contextPath}/album/find" role="button">Find albums</a></p>
+    <div class="btn-group btn-group-justified" role="group">
+        <a class="btn btn-lg btn-primary"  href="${pageContext.request.contextPath}/album/list" role="button">View albums</a>
+        <a class="btn btn-lg btn-primary"  href="${pageContext.request.contextPath}/album/find" role="button">Find albums</a>
     </div>
 
 </jsp:attribute>

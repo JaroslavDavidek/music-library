@@ -18,9 +18,9 @@
         <h1>Manage genres</h1>
     </div>
     
-    <div class="row">
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/genre/new" role="button">Create genre</a></p>
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/genre/listAsAdmin" role="button">Manage genres</a></p>
+    <div class="btn-group btn-group-justified" role="group">
+        <a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/genre/new" role="button">Create genre</a>
+        <a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/genre/listAsAdmin" role="button">Manage genres</a>
     </div>
 
 </jsp:attribute>

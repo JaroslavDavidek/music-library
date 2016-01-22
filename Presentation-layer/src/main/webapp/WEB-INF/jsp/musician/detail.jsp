@@ -18,25 +18,30 @@
             <h1>Musician detail</h1>
         </div>
 
-        <div class="col-md-8 col-md-offset-2">
-            <b><jsp:text>ID: </jsp:text></b>
-            <c:out value="${musician.id}"/>
-        </div>
+        <div class="row">
+            <table class="col-md-3">
+                <tbody>
+                    <tr>
+                        <td><b><jsp:text>ID: </jsp:text></b></td>
+                        <td><c:out value="${musician.id}"/></td>
+                    </tr>
 
-        <div class="col-md-8 col-md-offset-2" >
-            <b><jsp:text>Artist name: </jsp:text></b>
-            <c:out value="${musician.artistName}"/>
-        </div>
+                    <tr>
+                        <td><b><jsp:text>Artist name: </jsp:text></b></td>
+                        <td><c:out value="${musician.artistName}"/></td>
+                    </tr>
 
-        <div class="col-md-8 col-md-offset-2" >
-            <b><jsp:text>Real name: </jsp:text></b>
-            <c:out value="${musician.realName}"/>
-        </div>
-        
-        <div class="col-md-8 col-md-offset-2" >
-            <b><jsp:text>Date of birth: </jsp:text></b>
-            <c:out value="${musician.dateOfBirth}"/>
-        </div>
+                    <tr>
+                        <td><b><jsp:text>Real name: </jsp:text></b></td>
+                        <td><c:out value="${musician.realName}"/></td>
+                    </tr>
 
+                    <tr>
+                        <td><b><jsp:text>Date of birth: </jsp:text></b></td>
+                        <td><c:out value="${musician.dateOfBirth}"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </jsp:attribute>
 </own:masterpage>

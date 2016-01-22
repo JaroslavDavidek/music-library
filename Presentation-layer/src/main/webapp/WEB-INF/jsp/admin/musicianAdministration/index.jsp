@@ -18,9 +18,9 @@
         <h1>Manage musicians</h1>
     </div>
     
-    <div class="row">
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/musician/new" role="button">Create musician</a></p>
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/musician/listAsAdmin" role="button">Manage musicians</a></p>
+    <div class="btn-group btn-group-justified" role="group">
+        <a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/musician/new" role="button">Create musician</a>
+        <a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/musician/listAsAdmin" role="button">Manage musicians</a>
     </div>
 
 </jsp:attribute>

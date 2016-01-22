@@ -18,9 +18,9 @@
         <h1>Manage songs</h1>
     </div>
     
-    <div class="row">
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/song/new" role="button">Create song</a></p>
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/song/listAsAdmin" role="button">Manage songs</a></p>
+    <div class="btn-group btn-group-justified" role="group">
+        <a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/song/new" role="button">Create song</a>
+        <a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/song/listAsAdmin" role="button">Manage songs</a>
     </div>
 
 </jsp:attribute>

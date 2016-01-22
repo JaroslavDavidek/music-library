@@ -18,9 +18,9 @@
         <h1>Genres section</h1>
     </div>
     
-    <div class="row">
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/genre/list" role="button">View genres</a></p>
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/genre/find" role="button">Find genres</a></p>
+    <div class="btn-group btn-group-justified" role="group">
+        <a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/genre/list" role="button">View genres</a>
+        <a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/genre/find" role="button">Find genres</a>
     </div>
 
 </jsp:attribute>

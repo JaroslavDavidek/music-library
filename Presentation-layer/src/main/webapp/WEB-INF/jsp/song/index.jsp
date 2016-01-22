@@ -18,9 +18,9 @@
         <h1>Songs section</h1>
     </div>
 
-    <div class="row">
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/song/list" role="button">View all songs</a></p>
-        <p><a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/song/find" role="button">Find songs</a></p>
+    <div class="btn-group btn-group-justified" role="group">
+        <a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/song/list" role="button">View all songs</a>
+        <a class="btn btn-lg btn-primary" href="${pageContext.request.contextPath}/song/find" role="button">Find songs</a>
     </div>
 
 </jsp:attribute>

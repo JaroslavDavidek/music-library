@@ -17,6 +17,7 @@
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/favicon-32x32.png" type="image/png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"  crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="<c:url value="/css/datepicker.css" />" />
     <jsp:invoke fragment="head"/>
 </head>
 <body>

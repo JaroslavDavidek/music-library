@@ -1,7 +1,6 @@
 package cz.fi.muni.pa165.presentation.layer.mvc.config;
 
 
-import cz.fi.muni.pa165.presentation.layer.mvc.controllers.SongController;
 import cz.fi.muni.pa165.sample.data.config.SampleDataSpringConfiguration;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -16,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import javax.validation.Validator;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 
 /**
@@ -24,9 +24,10 @@ import org.springframework.context.annotation.Import;
  */
 
 @EnableWebMvc
+@EnableAspectJAutoProxy
 @Configuration
 @Import({SampleDataSpringConfiguration.class, SecurityConfig.class})
-@ComponentScan(basePackages = "cz.fi.muni.pa165.presentation.layer.mvc.controllers")
+@ComponentScan(basePackages = {"cz.fi.muni.pa165.presentation.layer.mvc.controllers", "cz.fi.muni.pa165.presentation.layer.mvc.aspect"})
 public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
@@ -58,6 +59,5 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
     public Validator validator() {
         return new LocalValidatorFactoryBean();
     }
-
 
 }

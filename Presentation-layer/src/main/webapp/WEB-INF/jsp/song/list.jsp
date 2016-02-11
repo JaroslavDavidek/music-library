@@ -39,9 +39,9 @@
                 <td><form method="get" action="${pageContext.request.contextPath}/song/detail/${song.id}">
                 <button type="submit" class="btn btn-primary">View</button></form></td>
                 <td><form method="get" action="${pageContext.request.contextPath}/song/lastFM/${song.id}">
-                <button type="submit" class="btn btn-primary">Last FM</button></form></td>
+                        <input type="image" src="../img/last_fm-logo.png" class="img-rounded" width="90" height="30"/></form></td>
                 <td><form method="get" action="${pageContext.request.contextPath}/song/youtube/${song.id}">
-                <button type="submit" class="btn btn-primary">YouTube</button></form></td>
+                <input type="image" src="../img/YouTube-logo.png" class="img-rounded" width="90" height="30"/></form></td>
             </tr>
         </c:forEach>
            
